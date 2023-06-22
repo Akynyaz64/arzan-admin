@@ -6,13 +6,13 @@ import {ScrollToTop} from "./components";
 
 //ADMIN
 import AdminLayout from "./pages/admin/Layout";
-import {Admin, AdminBannerCreate, AdminBanners, AdminCategories, AdminCategoryCreate, AdminComments, AdminLogin, AdminNotifications, AdminPages, AdminPayments, AdminPhotoCreate, AdminPhotos, AdminPostCreate, AdminPosts, AdminSubCategories, AdminSubCategoryCreate, AdminUserCreate, AdminUsers, AdminVideoCategories, AdminVideoCategoryCreate, AdminVideoCreate, AdminVideos, AdminWelayats} from "./pages/admin";
+import {Admin, AdminBannerCreate, AdminBanners, AdminCategories, AdminCategoryCreate, AdminComments, AdminLogin, AdminNotifications, AdminPageCategories, AdminPageCategoryCreate, AdminPages, AdminPayments, AdminPhotoCreate, AdminPhotos, AdminPostCreate, AdminPosts, AdminSubCategories, AdminSubCategoryCreate, AdminUserCreate, AdminUsers, AdminVideoCreate, AdminVideos, AdminWelayats} from "./pages/admin";
 
 //OTHERS
 import {AuthProvider} from "./context/AuthContext";
 import ThemeContextProvider from "./context/ThemeContext";
 import NotFound from "./pages/NotFound";
-import "./Admin.css"
+import "./Admin.css";
 
 const App = () => {
     return (
@@ -23,7 +23,6 @@ const App = () => {
                         <ScrollToTop />
                         <Toaster />
                         <Routes>
-                            
                             <Route path="/admin" element={<AdminLayout />}>
                                 <Route path="" element={<Admin />} />
 
@@ -48,8 +47,8 @@ const App = () => {
 
                                 <Route path="videos" element={<AdminVideos />} />
                                 <Route path="videos/create" element={<AdminVideoCreate />} />
-                                <Route path="video_categories" element={<AdminVideoCategories />} />
-                                <Route path="video_categories/create" element={<AdminVideoCategoryCreate />} />
+                                <Route path="page_categories" element={<AdminPageCategories />} />
+                                <Route path="page_categories/create" element={<AdminPageCategoryCreate />} />
 
                                 <Route path="notifications" element={<AdminNotifications />} />
 
