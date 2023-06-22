@@ -51,13 +51,13 @@ const AdminLayout = () => {
                                 <li>
                                     <NavLink to={"categories"} className="svg-icon">
                                         <FontAwesomeIcon icon={faList} />
-                                        <span className="ml-4">Kategoriýalar</span>
+                                        <span className="ml-4">Post Kategoriýalar</span>
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink to={"subcategories"} className="svg-icon">
                                         <FontAwesomeIcon icon={faTh} />
-                                        <span className="ml-4">Sub kategoriýalar</span>
+                                        <span className="ml-4">Post Sub kategoriýalar</span>
                                     </NavLink>
                                 </li>
                                 <li>
@@ -79,9 +79,9 @@ const AdminLayout = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"video_categories"} className="svg-icon">
-                                        <FontAwesomeIcon icon={faVideo} />
-                                        <span className="ml-4">Wideo kategoriýalary</span>
+                                    <NavLink to={"page_categories"} className="svg-icon">
+                                        <FontAwesomeIcon icon={faList} />
+                                        <span className="ml-4">Page kategoriýalary</span>
                                     </NavLink>
                                 </li>
                                 <li>

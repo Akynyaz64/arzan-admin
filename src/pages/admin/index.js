@@ -23,8 +23,9 @@ export {default as AdminPhotoCreate} from "./photo/PhotoCreate";
 
 export {default as AdminVideos} from "./video/Videos";
 export {default as AdminVideoCreate} from "./video/VideoCreate";
-export {default as AdminVideoCategories} from "./video/VideoCategories";
-export {default as AdminVideoCategoryCreate} from "./video/VideoCategoryCreate";
+
+export {default as AdminPageCategories} from "./categories/PageCategories";
+export {default as AdminPageCategoryCreate} from "./categories/PageCategoryCreate";
 
 export {default as AdminNotifications} from "./notifications/Notifications";
 

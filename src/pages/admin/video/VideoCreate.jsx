@@ -153,9 +153,9 @@ const VideoCreate = () => {
                                 <button className="btn btn-green mb-1" disabled={isSubmitting}>
                                     {isSubmitting ? "Tassyklanýar..." : "Tassykla"}
                                 </button>
-                                <div className="progress">
+                                {/* <div className="progress">
                                     <div className="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={{width: "75%"}}></div>
-                                </div>
+                                </div> */}
                             </div>
                         </form>
                     </div>
