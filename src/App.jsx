@@ -1,11 +1,8 @@
-import {BrowserRouter as Router, Outlet, Route, Routes} from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import {Toaster} from "react-hot-toast";
 
 //COMPONENTS
-import {Footer, Navbar, ScrollToTop} from "./components";
-
-//USER INTERFACE
-import {Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Offical, OfficalExpired, OfficalFollow, OfficalSelf, PostAdd, Profile, ProfileBloked, ProfileWallet, TopList, Video} from "./pages/site";
+import {ScrollToTop} from "./components";
 
 //ADMIN
 import AdminLayout from "./pages/admin/Layout";
@@ -15,7 +12,7 @@ import {Admin, AdminBannerCreate, AdminBanners, AdminCategories, AdminCategoryCr
 import {AuthProvider} from "./context/AuthContext";
 import ThemeContextProvider from "./context/ThemeContext";
 import NotFound from "./pages/NotFound";
-import "./App.css";
+import "./Admin.css"
 
 const App = () => {
     return (
@@ -26,35 +23,7 @@ const App = () => {
                         <ScrollToTop />
                         <Toaster />
                         <Routes>
-                            <Route path="/" element={<HomeLayout />}>
-                                <Route path="/" element={<Home />} />
-
-                                <Route path="/foto" element={<Foto />} />
-                                <Route path="/foto/arzanTm" element={<FotoRead />} />
-
-                                <Route path="/video" element={<Video />} />
-
-                                <Route path="/top-list" element={<TopList />} />
-
-                                <Route path="/profile" element={<Profile />} />
-                                <Route path="/profile/wallet" element={<ProfileWallet />} />
-                                <Route path="/profile/bloked" element={<ProfileBloked />} />
-
-                                <Route path="/offical" element={<Offical />} />
-                                <Route path="/offical/follow" element={<OfficalFollow />} />
-                                <Route path="/offical/expired" element={<OfficalExpired />} />
-                                <Route path="/offical/self" element={<OfficalSelf />} />
-
-                                <Route path="/post-gosmak" element={<PostAdd />} />
-
-                                <Route path="/bildirisler" element={<Notifications />} />
-                                <Route path="/bildiris/:notificationId" element={<NotificationRead />} />
-
-                                <Route path="/habarnamalar" element={<Notices />} />
-                                <Route path="/habarnama/:noticeId" element={<NoticeRead />} />
-                                <Route path="/habarnama-gos" element={<NoticeCreate />} />
-                            </Route>
-
+                            
                             <Route path="/admin" element={<AdminLayout />}>
                                 <Route path="" element={<Admin />} />
 
@@ -99,18 +68,6 @@ const App = () => {
                     </Router>
                 </ThemeContextProvider>
             </AuthProvider>
-        </>
-    );
-};
-
-const HomeLayout = () => {
-    return (
-        <>
-            <Navbar />
-
-            <Outlet />
-
-            <Footer />
         </>
     );
 };
