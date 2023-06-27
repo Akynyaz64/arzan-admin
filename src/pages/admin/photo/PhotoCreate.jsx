@@ -20,6 +20,7 @@ const PhotoCreate = () => {
 
     const [file, setFile] = useState([]);
     const [previews, setPreviews] = useState([]);
+    const [pageCategory, setPageCategory] = useState([]);
     const [categories] = useFetch("/admin-api/page-category", "data", true);
     const [users] = useFetch("/admin-api/user", "data", true);
     // const user_id = useRef("");
@@ -34,6 +35,8 @@ const PhotoCreate = () => {
 
     useEffect(() => {
         console.log(categories);
+        const filteredPage = categories?.filter((e) => e.page.name.includes("PHOTO"));
+        setPageCategory(filteredPage);
     }, [categories]);
 
     useEffect(() => {
@@ -71,7 +74,7 @@ const PhotoCreate = () => {
             videoData.append("images", file[i]);
         }
 
-        const response = await fetch(`/admin-api/post`, {
+        const response = await fetch(`/admin-api/gallery`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("adACto")}`,
@@ -153,7 +156,7 @@ const PhotoCreate = () => {
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="category">Category</label>
                                     <select className="form-select" name="category" id="category" ref={selectedCategory}>
-                                        {categories?.map((category, index) => (
+                                        {pageCategory?.map((category, index) => (
                                             <option key={index} value={category.id}>
                                                 {category.category.name} / {category.page.name}
                                             </option>
