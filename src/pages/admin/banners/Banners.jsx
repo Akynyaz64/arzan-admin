@@ -1,11 +1,11 @@
+import {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faClose, faGlobe, faMobileAlt, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
-import {useState} from "react";
-import {useEffect} from "react";
-import useFetch from "../../../hooks/useFetch";
 import {toast} from "react-hot-toast";
 import Popup from "reactjs-popup";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faClose, faGlobe, faMobileAlt, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
+import useFetch from "../../../hooks/useFetch";
+import {Loader} from "../../../components";
 
 const Banners = () => {
     const [activeType, setActiveType] = useState();
@@ -14,8 +14,8 @@ const Banners = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const [locations] = useFetch("/api/v1/location/list", "data");
-    const [pages] = useFetch("/api/v1/page/list", "data");
-    const [platforms] = useFetch("/api/v1/platform/list", "data");
+    const [pages] = useFetch("/admin-api/page-category", "data", true);
+    // const [platforms] = useFetch("/api/v1/platform/list", "data");
 
     const fetchData = async (data) => {
         setIsLoading(true);
@@ -29,6 +29,7 @@ const Banners = () => {
 
         if (!response.ok) {
             setIsLoading(false);
+            toast.error("Error status: " + response.statusText);
             return null;
         }
         const resData = await response.json();
@@ -42,8 +43,8 @@ const Banners = () => {
     }, [urlParams]);
 
     useEffect(() => {
-        console.log(locations);
-    }, [locations]);
+        console.log(urlParams);
+    }, [urlParams]);
 
     const handleDelete = async (e, id) => {
         e.preventDefault();
@@ -81,7 +82,7 @@ const Banners = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="col-xl-8 mb-4">
+                    <div className="col-xl-6 mb-4">
                         <ul className="nav nav-pills" id="pills-tab" role="tablist">
                             <li className="nav-item" role="presentation">
                                 <button
@@ -119,7 +120,7 @@ const Banners = () => {
                             </li>
                         </ul>
                     </div>
-                    <div className="col-xl-2 mb-4">
+                    <div className="col-xl-3 mb-4">
                         <select
                             className="form-control"
                             name="page_id"
@@ -135,7 +136,7 @@ const Banners = () => {
                                 } else {
                                     setUrlParams({
                                         ...urlParams,
-                                        page: e.target.value,
+                                        page_category: Number(e.target.value),
                                     });
                                 }
                             }}
@@ -145,12 +146,12 @@ const Banners = () => {
                             </option>
                             {pages?.map((page, index) => (
                                 <option key={index} value={page.id}>
-                                    {page.name}
+                                    {page.page.name} / {page.category.name}
                                 </option>
                             ))}
                         </select>
                     </div>
-                    <div className="col-xl-2 mb-4">
+                    <div className="col-xl-3 mb-4">
                         <select
                             className="form-control"
                             name="location_id"
@@ -182,7 +183,7 @@ const Banners = () => {
                         </select>
                     </div>
                     {isLoading ? (
-                        <div>Loading...</div>
+                        <Loader />
                     ) : (
                         <div className="col-lg-12">
                             <div className="row">
@@ -190,9 +191,13 @@ const Banners = () => {
                                     banners?.map((banner, index) => (
                                         <div key={index} className="col-xl-3 col-sm-6 col-md-6">
                                             <div className="card">
-                                                <img src={banner.image} className="card-img-top" alt="Banner img" />
+                                                <Link to={`${banner.id}`}>
+                                                    <img src={"/" + banner.image.url} className="card-img-top" alt="Banner img" />
+                                                </Link>
                                                 <div className="card-body">
-                                                    <h4 className="card-title">{banner.title}</h4>
+                                                    <Link to={`${banner.id}`}>
+                                                        <h4 className="text-dark card-title">{banner.title}</h4>
+                                                    </Link>
                                                     <p className="card-text" dangerouslySetInnerHTML={{__html: banner.description.substring(0, 100) + "..."}}></p>
                                                     <ul className="list-unstyled">
                                                         <li>
@@ -205,29 +210,32 @@ const Banners = () => {
                                                         <b>Priority</b> - {banner.priority}
                                                     </li> */}
                                                         <li>
-                                                            <b>Start date</b> - {banner.start_date.slice(0, 10)}
+                                                            <b>Start date</b> - {banner.start_date?.slice(0, 10)}
                                                         </li>
                                                         <li>
-                                                            <b>End date</b> - {banner.end_date.slice(0, 10)}
+                                                            <b>End date</b> - {banner.end_date?.slice(0, 10)}
                                                         </li>
                                                         <li>
-                                                            <b>Type</b> - {platforms?.find((o) => o.id === banner.platform_id).name}
-                                                        </li>
-                                                        <li>
-                                                            <b>Welayat</b> -
-                                                            {banner.location_ids.map((id) => {
-                                                                return locations?.find((el) => el.id == id).name + " ";
+                                                            <b>Type</b> -{" "}
+                                                            {banner.platform.map((e) => {
+                                                                return e.name + " ";
                                                             })}
                                                         </li>
                                                         <li>
-                                                            <b>Pages</b> -
-                                                            {banner.page_ids.map((id) => {
-                                                                return pages?.find((el) => el.id == id).name + " ";
+                                                            <b>Welayat</b> -
+                                                            {banner.location.map((e) => {
+                                                                return e.display_name + " ";
+                                                            })}
+                                                        </li>
+                                                        <li>
+                                                            <b>Page Categories</b> -
+                                                            {banner.page_category?.map((e) => {
+                                                                return e?.page?.name + " / " + e.category?.name + " ";
                                                             })}
                                                         </li>
                                                     </ul>
                                                     <div className="d-flex justify-content-between align-items-center">
-                                                        <Link to="banners" className="btn btn-warning btn-sm">
+                                                        <Link to={`edit/${banner.id}`} className="btn btn-warning btn-sm">
                                                             <FontAwesomeIcon icon={faPen} className="" /> Üýtget
                                                         </Link>
 
@@ -257,7 +265,7 @@ const Banners = () => {
                                                                         <p>Siz hakykatdan hem pozmak isleýärsiňizmi?</p>
                                                                     </section>
                                                                     <footer className="modal-container-footer">
-                                                                        <button className="table-btn btn-delete" onClick={(e) => handleDelete(e, banner.id)}>
+                                                                        <button className="btn btn-danger" onClick={(e) => handleDelete(e, banner.id)}>
                                                                             Poz
                                                                         </button>
                                                                     </footer>
