@@ -11,21 +11,21 @@ export default defineConfig({
 
         proxy: {
             "/admin-api": {
-                target: "http://10.15.0.77:8080",
+                target: "http://95.85.126.113:8080",
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/admin-api/, "/admin"),
             },
             "/admin/static": {
-                target: "http://10.15.0.77:8080",
+                target: "http://95.85.126.113:8080",
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/admin\/static/, "/static"),
             },
             "/video": {
-                target: "http://10.15.0.77:8080",
+                target: "http://95.85.126.113:8080",
                 changeOrigin: true,
             },
             "/api/v1": {
-                target: "http://10.15.0.77:8080",
+                target: "http://95.85.126.113:8080",
                 changeOrigin: true,
             },
         },

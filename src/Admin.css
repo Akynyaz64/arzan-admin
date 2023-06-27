@@ -20622,11 +20622,23 @@ i {
     border-radius: 5px;
     padding: 5px 8px;
     margin: 0 8px 5px 0;
-    background-color: #13C347;
+    background-color: #13c347;
     color: #fff;
     cursor: pointer;
 }
 .tag span {
     margin-right: 8px;
     font-size: 18px;
+}
+.video-container {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #30618d;
+}
+.video-container video {
+    height: 100%;
 }
