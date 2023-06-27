@@ -1,25 +1,12 @@
-import {Link, NavLink, Navigate, Outlet} from "react-router-dom";
+import {useContext} from "react";
+import {Link, NavLink, Outlet} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBars, faBell, faFileText, faHome, faImage, faImages, faList, faMapLocationDot, faMessage, faSignOutAlt, faTags, faTh, faUsers, faVideo, faWallet} from "@fortawesome/free-solid-svg-icons";
-import {useAuth} from "../../context/AuthContext";
+import {faBars, faBell, faCog, faCoins, faFileText, faHome, faImage, faImages, faList, faMapLocationDot, faMessage, faSignOutAlt, faTags, faTh, faUsers, faVideo, faWallet} from "@fortawesome/free-solid-svg-icons";
+import AuthContext from "../../context/AuthContext";
 import "../../Admin.css";
 
 const AdminLayout = () => {
-    const {admin, setAdmin, isLoggedIn, setIsLoggedIn} = useAuth();
-
-    const logout = () => {
-        setIsLoggedIn(false);
-        setAdmin({
-            id: 0,
-            role: null,
-            status: false,
-        });
-        localStorage.removeItem("adACto");
-    };
-
-    if (admin.status === false || !isLoggedIn) {
-        return <Navigate to={"/admin/login"} />;
-    }
+    const {logout} = useContext(AuthContext);
 
     return (
         <>
@@ -46,6 +33,12 @@ const AdminLayout = () => {
                                     <NavLink to={"users"} className="svg-icon">
                                         <FontAwesomeIcon icon={faUsers} />
                                         <span className="ml-4">Ulanyjylar</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"posts"} className="svg-icon">
+                                        <FontAwesomeIcon icon={faTags} />
+                                        <span className="ml-4">Arzanladyşlar</span>
                                     </NavLink>
                                 </li>
                                 <li>
@@ -85,21 +78,15 @@ const AdminLayout = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"posts"} className="svg-icon">
-                                        <FontAwesomeIcon icon={faTags} />
-                                        <span className="ml-4">Arzanladyşlar</span>
+                                    <NavLink to={"coins"} className="svg-icon">
+                                        <FontAwesomeIcon icon={faCoins} />
+                                        <span className="ml-4">Coin packets</span>
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink to={"welayats"} className="svg-icon">
                                         <FontAwesomeIcon icon={faMapLocationDot} />
                                         <span className="ml-4">Welayatlar</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to={"payments"} className="svg-icon">
-                                        <FontAwesomeIcon icon={faWallet} />
-                                        <span className="ml-4">Tölegler</span>
                                     </NavLink>
                                 </li>
                                 <li>
@@ -118,6 +105,12 @@ const AdminLayout = () => {
                                     <NavLink to={"comments"} className="svg-icon">
                                         <FontAwesomeIcon icon={faMessage} />
                                         <span className="ml-4">Teswirler</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"publication_types"} className="svg-icon">
+                                        <FontAwesomeIcon icon={faCog} />
+                                        <span className="ml-4">Publication Types</span>
                                     </NavLink>
                                 </li>
                             </ul>
@@ -147,11 +140,11 @@ const AdminLayout = () => {
             </div>
             <footer className="iq-footer">
                 <div className="container-fluid">
-                    <div className="card border-0 mb-2">
+                    <div className="card">
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-lg-6">
-                                    <span className="mr-1">2023 ©</span>
+                                    <span className="mr-1">{new Date().getFullYear()} ©</span>
                                     <Link to={"/"}>Arzan TM</Link>.
                                 </div>
                                 <div className="col-lg-6 text-right">

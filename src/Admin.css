@@ -6734,6 +6734,7 @@ body {
 #sidebar-scrollbar,
 .data-scrollbar {
     height: 100vh;
+    overflow: auto;
 }
 .scroll-content div.p-3 {
     height: 100px;
@@ -7509,16 +7510,16 @@ body.sidebar-main .iq-top-navbar {
 }
 .iq-search-bar .search-input {
     width: 100%;
-    height: 40px;
-    padding: 5px 15px 5px 60px;
+    height: 100%;
+    padding: 5px 15px 5px 45px;
     border-radius: 10px;
     border: 1px solid #dcdfe8;
     background-color: #fff;
 }
 .iq-search-bar .search-link {
     position: absolute;
-    left: 32px;
-    top: 4px;
+    left: 17px;
+    top: 5px;
     color: #676e8a;
 }
 .iq-navbar-logo {
@@ -14897,19 +14898,19 @@ body.swal2-toast-column .swal2-toast .swal2-input {
     border-radius: 20px;
 }
 ::-webkit-scrollbar-thumb {
-    background: #01041b;
+    background: #cfcfcf;
     border-radius: 20px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #01041b;
+    background: #cfcfcf;
     border-radius: 20px;
 }
 ::-moz-scrollbar-thumb {
-    background: #01041b;
+    background: #cfcfcf;
     border-radius: 20px;
 }
 ::-moz-scrollbar-thumb:hover {
-    background: #01041b;
+    background: #cfcfcf;
     border-radius: 20px;
 }
 ::-webkit-scrollbar {
@@ -18189,7 +18190,6 @@ ul.todo-task-lists li.active-task {
     .iq-top-navbar .iq-search-bar {
         line-height: normal;
     }
-    .device-search,
     .lb-img,
     .profile-info:before,
     .rb-img {
@@ -20523,4 +20523,110 @@ i {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.modal-container {
+    max-height: 90vh;
+    width: 700px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.25);
+}
+@media (max-width: 600px) {
+    .modal-container {
+        width: 90%;
+    }
+}
+.modal-container-header {
+    padding: 16px 32px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.modal-container-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+}
+.modal-container-body {
+    padding: 24px 32px 51px;
+    overflow-y: auto;
+}
+.icon-button {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.15s ease;
+}
+.modal-container-footer {
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-top: 1px solid #ddd;
+    gap: 12px;
+    position: relative;
+}
+.modal-container-footer:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -51px;
+    left: 24px;
+    right: 24px;
+    height: 50px;
+    flex-shrink: 0;
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 0.75), transparent);
+    pointer-events: none;
+}
+.popup-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99999 !important;
+}
+.delete-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.delete-button button {
+    width: 50px;
+    height: 50px;
+    border-radius: 0 0 10px 0;
+}
+.delete-button button svg {
+    font-size: 24px;
+}
+.tags-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.tag {
+    border-radius: 5px;
+    padding: 5px 8px;
+    margin: 0 8px 5px 0;
+    background-color: #13C347;
+    color: #fff;
+    cursor: pointer;
+}
+.tag span {
+    margin-right: 8px;
+    font-size: 18px;
 }
