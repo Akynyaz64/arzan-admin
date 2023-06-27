@@ -20,6 +20,10 @@ export default defineConfig({
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/admin\/static/, "/static"),
             },
+            "/video": {
+                target: "http://10.15.0.77:8080",
+                changeOrigin: true,
+            },
             "/api/v1": {
                 target: "http://10.15.0.77:8080",
                 changeOrigin: true,
