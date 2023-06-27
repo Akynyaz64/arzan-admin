@@ -48,7 +48,7 @@ const CategoryView = () => {
                     <div className="col-lg-8 mt-3">
                         <div className="form-row">
                             <div className="col-xl-12 mb-4">
-                                <img alt="category" src={"/" + category?.image} className="img-fluid w-100 rounded" />
+                                <img alt="category" src={category?.image} className="img-fluid w-100 rounded" />
                             </div>
                             <div className="col-md-12 mb-3">
                                 <h3>Post kategoriyanyn ady:</h3>

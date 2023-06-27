@@ -96,7 +96,7 @@ const Categories = () => {
                                                     <td>{index + 1}</td>
                                                     <td>{category.id}</td>
                                                     <td>
-                                                        <img src={"/" + category.image} alt="category" style={{height: "65px"}} />
+                                                        <img src={category.image} alt="category" style={{height: "65px"}} />
                                                     </td>
                                                     <td>{category.name}</td>
                                                     <td>
