@@ -38,6 +38,34 @@ const Posts = () => {
         setIsLoading(false);
     };
 
+    const setSaylanan = async (id, status) => {
+        setIsLoading(true);
+        let type = null;
+        if (status === true) {
+            type = 3;
+        } else if (status === false) {
+            type = 1;
+        }
+        const response = await fetch(`/admin-api/post/publication-type`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("adACto")}`,
+            },
+            body: JSON.stringify({id: id, publication_type_id: type}),
+        });
+
+        if (!response.ok) {
+            setIsLoading(false);
+            toast.error("Error status: " + response.statusText);
+            return null;
+        }
+        const resData = await response.json();
+        toast.success(resData.message);
+        fetchData();
+        setIsLoading(false);
+    };
+
     const fetchData = async (data) => {
         setIsLoading(true);
         const response = await fetch(`/admin-api/post?` + new URLSearchParams(data), {
@@ -54,6 +82,7 @@ const Posts = () => {
             return null;
         }
         const resData = await response.json();
+        console.log(resData.data);
         setPosts(resData.data);
         setIsLoading(false);
     };
@@ -190,13 +219,13 @@ const Posts = () => {
                                             <th>№</th>
                                             <th>ID</th>
                                             <th>Image and Title</th>
-                                            <th>Description</th>
                                             <th>Price</th>
                                             <th>Discount</th>
                                             <th>Gorlen sany</th>
                                             <th>Approved status</th>
                                             <th>Waiting status</th>
                                             <th>Phone Number</th>
+                                            <th>Saýlanan</th>
                                             <th>Goslan wagty</th>
                                             <th>Actions</th>
                                         </tr>
@@ -215,16 +244,13 @@ const Posts = () => {
                                                             <div className="ms-4 small fw-bold">{post.title}</div>
                                                         </div>
                                                     </td>
-                                                    <td>
-                                                        <p dangerouslySetInnerHTML={{__html: post.description}}></p>
-                                                    </td>
                                                     <td>{post.price}</td>
                                                     <td>{post.discount}</td>
                                                     <td>{post.viewed_count}</td>
                                                     <td>
                                                         {post.approved ? (
                                                             <button
-                                                                className="btn btn-danger"
+                                                                className="btn btn-danger btn-sm"
                                                                 onClick={() => {
                                                                     approvePost(post.id, false);
                                                                 }}
@@ -234,7 +260,7 @@ const Posts = () => {
                                                         ) : (
                                                             <>
                                                                 <button
-                                                                    className="btn bg-success m-1"
+                                                                    className="btn bg-success btn-sm m-1"
                                                                     onClick={() => {
                                                                         approvePost(post.id, true);
                                                                     }}
@@ -242,7 +268,7 @@ const Posts = () => {
                                                                     Approve it
                                                                 </button>
                                                                 <button
-                                                                    className="btn btn-danger m-1"
+                                                                    className="btn btn-danger btn-sm m-1"
                                                                     onClick={() => {
                                                                         approvePost(post.id, false);
                                                                     }}
@@ -254,6 +280,39 @@ const Posts = () => {
                                                     </td>
                                                     <td>{post.waiting ? "Waiting" : "Not waiting"}</td>
                                                     <td>{post.phone}</td>
+                                                    <td>
+                                                        <ul className="nav nav-pills" id="pills-tab" role="tablist" style={{flexWrap: "nowrap"}}>
+                                                            <li className="nav-item" role="presentation">
+                                                                <button
+                                                                    style={{borderTopRightRadius: "0", borderEndEndRadius: "0", fontWeight: "500", textWrap: "nowrap"}}
+                                                                    className={post.publication_type.id === 3 ? "text-dark nav-link active p-1 bg-light" : "text-dark nav-link p-1 bg-light"}
+                                                                    type="button"
+                                                                    onClick={() => {
+                                                                        if (post.publication_type.id !== 3) {
+                                                                            console.log(1);
+                                                                            setSaylanan(post.id, true);
+                                                                        }
+                                                                    }}
+                                                                >
+                                                                    Saýlanan
+                                                                </button>
+                                                            </li>
+                                                            <li className="nav-item" role="presentation">
+                                                                <button
+                                                                    style={{borderTopLeftRadius: "0", borderBottomLeftRadius: "0", fontWeight: "500", textWrap: "nowrap"}}
+                                                                    className={post.publication_type.id !== 3 ? "text-white nav-link p-1 bg-danger" : "text-dark nav-link p-1 bg-light"}
+                                                                    type="button"
+                                                                    onClick={() => {
+                                                                        if (post.publication_type.id === 3) {
+                                                                            setSaylanan(post.id, false);
+                                                                        }
+                                                                    }}
+                                                                >
+                                                                    Saýlanan däl
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
                                                     <td>{moment(post.created_at).utc().format("yyyy-MM-DD")}</td>
                                                     <td>
                                                         <div className="d-flex align-items-center list-action">

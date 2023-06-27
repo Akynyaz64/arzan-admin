@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {toast} from "react-hot-toast";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import {faTimes} from "@fortawesome/free-solid-svg-icons";
+import {faTimes, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import useFetch from "../../../hooks/useFetch";
 import img_icon from "../../../assets/icons/img.svg";
@@ -18,7 +18,7 @@ const PostCreate = () => {
     const start_date = useRef("");
     const end_date = useRef("");
     const phone = useRef("");
-    const imagesRef = useRef(null);
+    // const imagesRef = useRef(null);
     const selectedCategory = useRef();
     const selectedSubCategory = useRef();
     const selectedUser = useRef();
@@ -27,8 +27,8 @@ const PostCreate = () => {
 
     const [description, setDescription] = useState();
 
-    const [file, setFile] = useState([]);
-    const [previews, setPreviews] = useState([]);
+    // const [file, setFile] = useState([]);
+    // const [previews, setPreviews] = useState([]);
 
     const [input, setInput] = useState("");
     const [tags, setTags] = useState([]);
@@ -71,13 +71,205 @@ const PostCreate = () => {
     const [users] = useFetch("/admin-api/user", "data", true);
     // const user_id = useRef("");
 
-    function uploadSingleFile(e) {
-        let previews = Object.entries(e.target.files).map((e) => URL.createObjectURL(e[1]));
-        let ImagesArray = e.target.files;
-        console.log(ImagesArray);
-        setFile([...file, ...ImagesArray]);
-        setPreviews([...previews]);
-    }
+    // function uploadSingleFile(e) {
+    //     let previews = Object.entries(e.target.files).map((e) => URL.createObjectURL(e[1]));
+    //     let ImagesArray = e.target.files;
+    //     console.log(ImagesArray);
+    //     setFile([...file, ...ImagesArray]);
+    //     setPreviews([...previews]);
+    // }
+
+    const [selectedFile1, setSelectedFile1] = useState();
+    const [preview1, setPreview1] = useState();
+
+    const [selectedFile2, setSelectedFile2] = useState();
+    const [preview2, setPreview2] = useState();
+
+    const [selectedFile3, setSelectedFile3] = useState();
+    const [preview3, setPreview3] = useState();
+
+    const [selectedFile4, setSelectedFile4] = useState();
+    const [preview4, setPreview4] = useState();
+
+    const [selectedFile5, setSelectedFile5] = useState();
+    const [preview5, setPreview5] = useState();
+
+    const [selectedFile6, setSelectedFile6] = useState();
+    const [preview6, setPreview6] = useState();
+
+    const [selectedFile7, setSelectedFile7] = useState();
+    const [preview7, setPreview7] = useState();
+
+    const [selectedFile8, setSelectedFile8] = useState();
+    const [preview8, setPreview8] = useState();
+
+    const [selectedFile9, setSelectedFile9] = useState();
+    const [preview9, setPreview9] = useState();
+
+    const [selectedFile10, setSelectedFile10] = useState();
+    const [preview10, setPreview10] = useState();
+
+    useEffect(() => {
+        if (!selectedFile1) {
+            setPreview1(undefined);
+            return;
+        }
+        const objectUrl = URL.createObjectURL(selectedFile1);
+        setPreview1(objectUrl);
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [selectedFile1]);
+    useEffect(() => {
+        if (!selectedFile2) {
+            setPreview2(undefined);
+            return;
+        }
+        const objectUrl = URL.createObjectURL(selectedFile2);
+        setPreview2(objectUrl);
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [selectedFile2]);
+    useEffect(() => {
+        if (!selectedFile3) {
+            setPreview3(undefined);
+            return;
+        }
+        const objectUrl = URL.createObjectURL(selectedFile3);
+        setPreview3(objectUrl);
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [selectedFile3]);
+    useEffect(() => {
+        if (!selectedFile4) {
+            setPreview4(undefined);
+            return;
+        }
+        const objectUrl = URL.createObjectURL(selectedFile4);
+        setPreview4(objectUrl);
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [selectedFile4]);
+    useEffect(() => {
+        if (!selectedFile5) {
+            setPreview5(undefined);
+            return;
+        }
+        const objectUrl = URL.createObjectURL(selectedFile5);
+        setPreview5(objectUrl);
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [selectedFile5]);
+    useEffect(() => {
+        if (!selectedFile6) {
+            setPreview6(undefined);
+            return;
+        }
+        const objectUrl = URL.createObjectURL(selectedFile6);
+        setPreview6(objectUrl);
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [selectedFile6]);
+    useEffect(() => {
+        if (!selectedFile7) {
+            setPreview7(undefined);
+            return;
+        }
+        const objectUrl = URL.createObjectURL(selectedFile7);
+        setPreview7(objectUrl);
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [selectedFile7]);
+    useEffect(() => {
+        if (!selectedFile8) {
+            setPreview8(undefined);
+            return;
+        }
+        const objectUrl = URL.createObjectURL(selectedFile8);
+        setPreview8(objectUrl);
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [selectedFile8]);
+    useEffect(() => {
+        if (!selectedFile9) {
+            setPreview9(undefined);
+            return;
+        }
+        const objectUrl = URL.createObjectURL(selectedFile9);
+        setPreview9(objectUrl);
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [selectedFile9]);
+    useEffect(() => {
+        if (!selectedFile10) {
+            setPreview10(undefined);
+            return;
+        }
+        const objectUrl = URL.createObjectURL(selectedFile10);
+        setPreview10(objectUrl);
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [selectedFile10]);
+
+    const onSelectFile1 = (e) => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile1(undefined);
+            return;
+        }
+        setSelectedFile1(e.target.files[0]);
+    };
+    const onSelectFile2 = (e) => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile2(undefined);
+            return;
+        }
+        setSelectedFile2(e.target.files[0]);
+    };
+    const onSelectFile3 = (e) => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile3(undefined);
+            return;
+        }
+        setSelectedFile3(e.target.files[0]);
+    };
+    const onSelectFile4 = (e) => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile4(undefined);
+            return;
+        }
+        setSelectedFile4(e.target.files[0]);
+    };
+    const onSelectFile5 = (e) => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile5(undefined);
+            return;
+        }
+        setSelectedFile5(e.target.files[0]);
+    };
+    const onSelectFile6 = (e) => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile6(undefined);
+            return;
+        }
+        setSelectedFile6(e.target.files[0]);
+    };
+    const onSelectFile7 = (e) => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile7(undefined);
+            return;
+        }
+        setSelectedFile7(e.target.files[0]);
+    };
+    const onSelectFile8 = (e) => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile8(undefined);
+            return;
+        }
+        setSelectedFile8(e.target.files[0]);
+    };
+    const onSelectFile9 = (e) => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile9(undefined);
+            return;
+        }
+        setSelectedFile9(e.target.files[0]);
+    };
+    const onSelectFile10 = (e) => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile10(undefined);
+            return;
+        }
+        setSelectedFile10(e.target.files[0]);
+    };
 
     const changeCat = (e) => {
         console.log(e.target.value);
@@ -105,10 +297,37 @@ const PostCreate = () => {
         postData.append("tags", JSON.stringify(tags));
         postData.append("user_id", selectedUser.current.value);
 
-        for (let i = 0; i < file.length; i++) {
-            postData.append("image", file[i]);
+        if (selectedFile1 !== undefined) {
+            postData.append("image", selectedFile1);
         }
-        console.log(tags);
+        if (selectedFile2 !== undefined) {
+            postData.append("image", selectedFile2);
+        }
+        if (selectedFile3 !== undefined) {
+            postData.append("image", selectedFile3);
+        }
+        if (selectedFile4 !== undefined) {
+            postData.append("image", selectedFile4);
+        }
+        if (selectedFile5 !== undefined) {
+            postData.append("image", selectedFile5);
+        }
+        if (selectedFile6 !== undefined) {
+            postData.append("image", selectedFile6);
+        }
+        if (selectedFile7 !== undefined) {
+            postData.append("image", selectedFile7);
+        }
+        if (selectedFile8 !== undefined) {
+            postData.append("image", selectedFile8);
+        }
+        if (selectedFile9 !== undefined) {
+            postData.append("image", selectedFile9);
+        }
+        if (selectedFile10 !== undefined) {
+            postData.append("image", selectedFile10);
+        }
+
         for (var pair of postData.entries()) {
             console.log(pair[0] + ", " + pair[1]);
         }
@@ -147,23 +366,216 @@ const PostCreate = () => {
                     <div className="col-lg-8 mt-3">
                         <form onSubmit={submitHandler} id="form" encType="multipart/form-data">
                             <div className="form-row">
-                                {file.length == 0 ? (
-                                    <div className="col-xl-12 mb-4">
-                                        <label className="label text-center d-flex justify-content-center align-items-center flex-column" htmlFor="images">
-                                            <img src={img_icon} alt="add" className="img-fluid mb-2" />
-                                            <div className="text-green">Suratlary goş</div>
-                                        </label>
+                                <div className="col-md-3">
+                                    {!selectedFile1 ? (
+                                        <>
+                                            <label className="label text-center d-flex justify-content-center align-items-center flex-column" htmlFor="image">
+                                                <img src={img_icon} alt="add" className="img-fluid mb-2" />
+                                                <div className="text-green">Surat goş</div>
+                                            </label>
 
-                                        <input type="file" disabled={file.length === 10} id="images" accept="image/*" multiple className="form-control" name="images" ref={imagesRef} onChange={uploadSingleFile} hidden />
-                                    </div>
-                                ) : (
-                                    previews.length > 0 &&
-                                    previews.map((item, index) => (
-                                        <div key={index} className="col-xl-3 mb-4">
-                                            <img src={item} alt="preview_photo" className="img-fluid mb-2" />
+                                            <input type="file" id="image" accept="image/*" className="form-control" name="image" onChange={onSelectFile1} hidden />
+                                        </>
+                                    ) : (
+                                        <div className="position-relative">
+                                            <img alt="preview" src={preview1} className="img-fluid w-100 rounded" />
+                                            <div className="delete-button">
+                                                <button className="btn btn-danger" onClick={() => setSelectedFile1(undefined)}>
+                                                    <FontAwesomeIcon icon={faTrash} className="" />
+                                                </button>
+                                            </div>
                                         </div>
-                                    ))
-                                )}
+                                    )}
+                                </div>
+                                <div className="col-md-3">
+                                    {!selectedFile2 ? (
+                                        <>
+                                            <label className="label text-center d-flex justify-content-center align-items-center flex-column" htmlFor="image">
+                                                <img src={img_icon} alt="add" className="img-fluid mb-2" />
+                                                <div className="text-green">Surat goş</div>
+                                            </label>
+
+                                            <input type="file" id="image" accept="image/*" className="form-control" name="image" onChange={onSelectFile2} hidden />
+                                        </>
+                                    ) : (
+                                        <div className="position-relative">
+                                            <img alt="preview" src={preview2} className="img-fluid w-100 rounded" />
+                                            <div className="delete-button">
+                                                <button className="btn btn-danger" onClick={() => setSelectedFile2(undefined)}>
+                                                    <FontAwesomeIcon icon={faTrash} className="" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="col-md-3">
+                                    {!selectedFile3 ? (
+                                        <>
+                                            <label className="label text-center d-flex justify-content-center align-items-center flex-column" htmlFor="image">
+                                                <img src={img_icon} alt="add" className="img-fluid mb-2" />
+                                                <div className="text-green">Surat goş</div>
+                                            </label>
+
+                                            <input type="file" id="image" accept="image/*" className="form-control" name="image" onChange={onSelectFile3} hidden />
+                                        </>
+                                    ) : (
+                                        <div className="position-relative">
+                                            <img alt="preview" src={preview3} className="img-fluid w-100 rounded" />
+                                            <div className="delete-button">
+                                                <button className="btn btn-danger" onClick={() => setSelectedFile3(undefined)}>
+                                                    <FontAwesomeIcon icon={faTrash} className="" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="col-md-3">
+                                    {!selectedFile4 ? (
+                                        <>
+                                            <label className="label text-center d-flex justify-content-center align-items-center flex-column" htmlFor="image">
+                                                <img src={img_icon} alt="add" className="img-fluid mb-2" />
+                                                <div className="text-green">Surat goş</div>
+                                            </label>
+
+                                            <input type="file" id="image" accept="image/*" className="form-control" name="image" onChange={onSelectFile4} hidden />
+                                        </>
+                                    ) : (
+                                        <div className="position-relative">
+                                            <img alt="preview" src={preview4} className="img-fluid w-100 rounded" />
+                                            <div className="delete-button">
+                                                <button className="btn btn-danger" onClick={() => setSelectedFile4(undefined)}>
+                                                    <FontAwesomeIcon icon={faTrash} className="" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="col-md-3">
+                                    {!selectedFile5 ? (
+                                        <>
+                                            <label className="label text-center d-flex justify-content-center align-items-center flex-column" htmlFor="image">
+                                                <img src={img_icon} alt="add" className="img-fluid mb-2" />
+                                                <div className="text-green">Surat goş</div>
+                                            </label>
+
+                                            <input type="file" id="image" accept="image/*" className="form-control" name="image" onChange={onSelectFile5} hidden />
+                                        </>
+                                    ) : (
+                                        <div className="position-relative">
+                                            <img alt="preview" src={preview5} className="img-fluid w-100 rounded" />
+                                            <div className="delete-button">
+                                                <button className="btn btn-danger" onClick={() => setSelectedFile5(undefined)}>
+                                                    <FontAwesomeIcon icon={faTrash} className="" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="col-md-3">
+                                    {!selectedFile6 ? (
+                                        <>
+                                            <label className="label text-center d-flex justify-content-center align-items-center flex-column" htmlFor="image">
+                                                <img src={img_icon} alt="add" className="img-fluid mb-2" />
+                                                <div className="text-green">Surat goş</div>
+                                            </label>
+
+                                            <input type="file" id="image" accept="image/*" className="form-control" name="image" onChange={onSelectFile6} hidden />
+                                        </>
+                                    ) : (
+                                        <div className="position-relative">
+                                            <img alt="preview" src={preview6} className="img-fluid w-100 rounded" />
+                                            <div className="delete-button">
+                                                <button className="btn btn-danger" onClick={() => setSelectedFile6(undefined)}>
+                                                    <FontAwesomeIcon icon={faTrash} className="" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="col-md-3">
+                                    {!selectedFile7 ? (
+                                        <>
+                                            <label className="label text-center d-flex justify-content-center align-items-center flex-column" htmlFor="image">
+                                                <img src={img_icon} alt="add" className="img-fluid mb-2" />
+                                                <div className="text-green">Surat goş</div>
+                                            </label>
+
+                                            <input type="file" id="image" accept="image/*" className="form-control" name="image" onChange={onSelectFile7} hidden />
+                                        </>
+                                    ) : (
+                                        <div className="position-relative">
+                                            <img alt="preview" src={preview7} className="img-fluid w-100 rounded" />
+                                            <div className="delete-button">
+                                                <button className="btn btn-danger" onClick={() => setSelectedFile7(undefined)}>
+                                                    <FontAwesomeIcon icon={faTrash} className="" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="col-md-3">
+                                    {!selectedFile8 ? (
+                                        <>
+                                            <label className="label text-center d-flex justify-content-center align-items-center flex-column" htmlFor="image">
+                                                <img src={img_icon} alt="add" className="img-fluid mb-2" />
+                                                <div className="text-green">Surat goş</div>
+                                            </label>
+
+                                            <input type="file" id="image" accept="image/*" className="form-control" name="image" onChange={onSelectFile8} hidden />
+                                        </>
+                                    ) : (
+                                        <div className="position-relative">
+                                            <img alt="preview" src={preview8} className="img-fluid w-100 rounded" />
+                                            <div className="delete-button">
+                                                <button className="btn btn-danger" onClick={() => setSelectedFile8(undefined)}>
+                                                    <FontAwesomeIcon icon={faTrash} className="" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="col-md-3">
+                                    {!selectedFile9 ? (
+                                        <>
+                                            <label className="label text-center d-flex justify-content-center align-items-center flex-column" htmlFor="image">
+                                                <img src={img_icon} alt="add" className="img-fluid mb-2" />
+                                                <div className="text-green">Surat goş</div>
+                                            </label>
+
+                                            <input type="file" id="image" accept="image/*" className="form-control" name="image" onChange={onSelectFile9} hidden />
+                                        </>
+                                    ) : (
+                                        <div className="position-relative">
+                                            <img alt="preview" src={preview9} className="img-fluid w-100 rounded" />
+                                            <div className="delete-button">
+                                                <button className="btn btn-danger" onClick={() => setSelectedFile9(undefined)}>
+                                                    <FontAwesomeIcon icon={faTrash} className="" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="col-md-3">
+                                    {!selectedFile10 ? (
+                                        <>
+                                            <label className="label text-center d-flex justify-content-center align-items-center flex-column" htmlFor="image">
+                                                <img src={img_icon} alt="add" className="img-fluid mb-2" />
+                                                <div className="text-green">Surat goş</div>
+                                            </label>
+
+                                            <input type="file" id="image" accept="image/*" className="form-control" name="image" onChange={onSelectFile10} hidden />
+                                        </>
+                                    ) : (
+                                        <div className="position-relative">
+                                            <img alt="preview" src={preview10} className="img-fluid w-100 rounded" />
+                                            <div className="delete-button">
+                                                <button className="btn btn-danger" onClick={() => setSelectedFile10(undefined)}>
+                                                    <FontAwesomeIcon icon={faTrash} className="" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
                                 <div className="col-md-12 mb-3">
                                     <label htmlFor="title">Title</label>
                                     <input type="text" className="form-control" id="title" name="title" ref={title} required />
