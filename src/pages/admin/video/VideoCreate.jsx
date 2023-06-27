@@ -14,9 +14,15 @@ const VideoCreate = () => {
     const [selectedFile, setSelectedFile] = useState();
     const [preview, setPreview] = useState();
     const selectedCategory = useRef();
+    const selectedUser = useRef();
 
-    const [categories] = useFetch("/admin-api/video/category", "data", true);
+    const [categories] = useFetch("/admin-api/page-category", "data", true);
+    const [users] = useFetch("/admin-api/user", "data", true);
     // const user_id = useRef("");
+
+    useEffect(() => {
+        console.log(categories);
+    }, [categories]);
 
     function previewFile(e) {
         const reader = new FileReader();
@@ -56,11 +62,13 @@ const VideoCreate = () => {
 
         const videoData = new FormData();
         videoData.append("title", title.current.value);
-        videoData.append("user_id", 1);
-        videoData.append("category", selectedCategory.current.value);
+        videoData.append("user_id", selectedUser.current.value);
+        videoData.append("page_category_ids", JSON.stringify([Number(selectedCategory.current.value)]));
         videoData.append("thumbnail", selectedFile);
         videoData.append("video", video);
-
+        for (var pair of videoData.entries()) {
+            console.log(pair[0] + ", " + pair[1]);
+        }
         const response = await fetch(`/admin-api/video`, {
             method: "POST",
             headers: {
@@ -99,15 +107,15 @@ const VideoCreate = () => {
                                     {!selectedFile ? (
                                         <>
                                             <label className="label text-center d-flex justify-content-center align-items-center flex-column" htmlFor="thumbnail">
-                                                <img src={img_icon} alt="" className="img-fluid mb-2" />
+                                                <img src={img_icon} alt="add" className="img-fluid mb-2" />
                                                 <div className="text-green">Surat goş</div>
                                             </label>
 
-                                            <input type="file" id="thumbnail" className="form-control" name="thumbnail" onChange={onSelectFile} hidden />
+                                            <input type="file" accept="image/*" id="thumbnail" className="form-control" name="thumbnail" onChange={onSelectFile} hidden />
                                         </>
                                     ) : (
                                         <>
-                                            <img alt="" src={preview} className="img-fluid" />
+                                            <img alt="preview" src={preview} className="img-fluid" />
                                         </>
                                     )}
                                 </div>
@@ -115,11 +123,11 @@ const VideoCreate = () => {
                                     {videoPreview === null ? (
                                         <>
                                             <label className="label text-center d-flex justify-content-center align-items-center flex-column" htmlFor="video">
-                                                <img src={img_icon} alt="" className="img-fluid mb-2" />
+                                                <img src={img_icon} alt="add" className="img-fluid mb-2" />
                                                 <div className="text-green">Video goş</div>
                                             </label>
 
-                                            <input type="file" id="video" className="form-control" name="video" ref={videoRef} onChange={previewFile} hidden />
+                                            <input type="file" id="video" accept="video/mp4,video/x-m4v,video/*" className="form-control" name="video" ref={videoRef} onChange={previewFile} hidden />
                                         </>
                                     ) : (
                                         <>{videoPreview != null && <video style={{width: "100%"}} controls src={videoPreview}></video>}</>
@@ -134,7 +142,17 @@ const VideoCreate = () => {
                                     <select className="form-select" name="category" id="category" ref={selectedCategory}>
                                         {categories?.map((category, index) => (
                                             <option key={index} value={category.id}>
-                                                {category.name}
+                                                {category.category.name} / {category.page.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="col-md-6 mb-3">
+                                    <label htmlFor="category">User</label>
+                                    <select className="form-select" name="category" id="category" ref={selectedUser}>
+                                        {users?.map((user, index) => (
+                                            <option key={index} value={user.id}>
+                                                {user.name}
                                             </option>
                                         ))}
                                     </select>

@@ -1,13 +1,45 @@
-import {faEye, faHeart, faPen, faPlus, faSearch, faTrash} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {useEffect} from "react";
-import {useState} from "react";
-import {toast} from "react-hot-toast";
+import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import {toast} from "react-hot-toast";
+import Popup from "reactjs-popup";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faClose, faEye, faHeart, faPen, faPlus, faSearch, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {Loader} from "../../../components";
 
 const Videos = () => {
     const [videos, setVideos] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [searchQ, setSearchQ] = useState();
+
+    const searchHandle = async () => {
+        if (searchQ === "" ) {
+            toast.error("Boş bolmaly däl!");
+            return 0;
+        }
+        setIsLoading(true);
+        const searchData = {
+            text: searchQ,
+        };
+        console.log(searchData);
+
+        const response = await fetch(`/admin-api/video/search`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("adACto")}`,
+            },
+            body: JSON.stringify(searchData),
+        });
+        if (!response.ok) {
+            setIsLoading(false);
+            toast.error("Error status: " + response.statusText);
+            return null;
+        }
+        const resData = await response.json();
+        console.log(resData);
+        setVideos(resData.data);
+        setIsLoading(false);
+    };
 
     const fetchData = async () => {
         setIsLoading(true);
@@ -21,6 +53,7 @@ const Videos = () => {
 
         if (!response.ok) {
             setIsLoading(false);
+            toast.error("Error status: " + response.statusText);
             return null;
         }
         const resData = await response.json();
@@ -70,14 +103,27 @@ const Videos = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="col-xl-4 mb-4">
-                        <div className="iq-search-bar device-search">
-                            <div className="searchbox w-100">
+                    <div className="col-xl-12 mb-4 d-flex">
+                        <div className="iq-search-bar device-search mr-2">
+                            <form
+                                className="searchbox w-100 h-100"
+                                onSubmit={(e) => {
+                                    e.preventDefault();
+                                    searchHandle();
+                                }}
+                            >
                                 <a className="search-link" style={{top: "9px"}}>
                                     <FontAwesomeIcon icon={faSearch} />
                                 </a>
-                                <input type="search" className="text search-input" placeholder="Search here..." />
-                                <input autoComplete="off" role="combobox" list="" id="input" name="browsers" placeholder="Select your fav browser" />
+                                <input
+                                    type="search"
+                                    className="text search-input"
+                                    placeholder="Search here..."
+                                    onChange={(e) => {
+                                        setSearchQ(e.target.value);
+                                    }}
+                                />
+                                {/* <input autoComplete="off" role="combobox" list="" id="input" name="browsers" placeholder="Select your fav browser" />
 
                                 <datalist id="browsers" role="listbox">
                                     <option value="Internet Explorer">Internet Explorer</option>
@@ -103,46 +149,48 @@ const Videos = () => {
                                     <option value="Firefox">Firefox</option>
                                     <option value="Microsoft Edge">Microsoft Edge</option>
                                     <option value="Firefox">Firefox</option>
-                                </datalist>
-                            </div>
+                                </datalist> */}
+                            </form>
                         </div>
                     </div>
-                    <div className="col-lg-12">
-                        <div className="table-responsive rounded mb-3">
-                            <table className="data-table table mb-0 tbl-server-info">
-                                <thead className="bg-white text-uppercase">
-                                    <tr className="ligth ligth-data">
-                                        <th>№</th>
-                                        <th>Thumbnail and Title</th>
-                                        <th>Gosan ulanyjy</th>
-                                        <th>Kategoriyalar</th>
-                                        <th>Likelary</th>
-                                        <th>Gorlen sany</th>
-                                        <th>Video</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                {isLoading ? (
-                                    <tbody>
-                                        <tr>
-                                            <td>Loading...</td>
+                    {isLoading ? (
+                        <Loader />
+                    ) : (
+                        <div className="col-lg-12">
+                            <div className="table-responsive rounded mb-3">
+                                <table className="data-table table mb-0 tbl-server-info">
+                                    <thead className="bg-white text-uppercase">
+                                        <tr className="ligth ligth-data">
+                                            <th>№</th>
+                                            <th>ID</th>
+                                            <th>Thumbnail and Title</th>
+                                            <th>Gosan ulanyjy</th>
+                                            <th>Page / Category</th>
+                                            <th>Likelary</th>
+                                            <th>Gorlen sany</th>
+                                            <th>Video</th>
+                                            <th>Actions</th>
                                         </tr>
-                                    </tbody>
-                                ) : (
+                                    </thead>
                                     <tbody className="ligth-body">
                                         {/* MAP ETMELI YERI */}
                                         {videos?.length > 0 ? (
                                             videos?.map((video, index) => (
                                                 <tr key={index}>
+                                                    <td>{index + 1}</td>
                                                     <td>{video.id}</td>
                                                     <td>
                                                         <div className="d-flex align-items-center">
-                                                            <img src={video.thumbnail.url} alt="" style={{height: "65px"}} />
+                                                            <img src={"/" + video.thumbnail.url} alt="video_thumbnail" style={{height: "65px"}} />
                                                             <div className="ms-4 small fw-bold">{video.title}</div>
                                                         </div>
                                                     </td>
-                                                    <td>{video.user_id}</td>
-                                                    <td>{video.categories.map((e) => e)}</td>
+                                                    <td>{video.user.name}</td>
+                                                    <td>
+                                                        {video?.page_category?.map((e) => {
+                                                            return e.page?.name + " / " + e.category?.name;
+                                                        })}
+                                                    </td>
                                                     <td>
                                                         <FontAwesomeIcon icon={faHeart} className="mr-1" style={{fontSize: "18px", color: "red"}} />
                                                         {video.likes_count}
@@ -153,18 +201,52 @@ const Videos = () => {
                                                     </td>
                                                     <td>
                                                         <a href={video.video.url}>Ýükle</a>
+                                                        {/* <video width="750" height="500" controls>
+                                                            <source src={"/" + video.video.url} type="video/mp4" />
+                                                        </video> */}
                                                     </td>
                                                     <td>
                                                         <div className="d-flex align-items-center list-action">
-                                                            <button className="badge badge-primary mr-2">
+                                                            <Link to={`${video.id}`} className="btn bg-primary btn-sm mr-2">
                                                                 <FontAwesomeIcon icon={faEye} className="mr-0" />
-                                                            </button>
-                                                            <button className="badge bg-warning mr-2">
+                                                            </Link>
+
+                                                            <Link to={`edit/${video.id}`} className="btn bg-warning btn-sm mr-2">
                                                                 <FontAwesomeIcon icon={faPen} className="mr-0" />
-                                                            </button>
-                                                            <button className="badge bg-danger mr-2" onClick={(e) => handleDelete(e, video.id)}>
-                                                                <FontAwesomeIcon icon={faTrash} className="mr-0" />
-                                                            </button>
+                                                            </Link>
+                                                            <Popup
+                                                                trigger={
+                                                                    <button className="btn btn-danger btn-sm">
+                                                                        <FontAwesomeIcon icon={faTrash} className="" />
+                                                                    </button>
+                                                                }
+                                                                modal
+                                                                nested
+                                                            >
+                                                                {(close) => (
+                                                                    <article className="modal-container">
+                                                                        <header className="modal-container-header">
+                                                                            <h3 className="modal-container-title">Üns beriň!</h3>
+                                                                            <button
+                                                                                className="close icon-button"
+                                                                                onClick={() => {
+                                                                                    close();
+                                                                                }}
+                                                                            >
+                                                                                <FontAwesomeIcon icon={faClose} />
+                                                                            </button>
+                                                                        </header>
+                                                                        <section className="modal-container-body">
+                                                                            <p>Siz hakykatdan hem pozmak isleýärsiňizmi?</p>
+                                                                        </section>
+                                                                        <footer className="modal-container-footer">
+                                                                            <button className="btn btn-danger" onClick={(e) => handleDelete(e, video.id)}>
+                                                                                Poz
+                                                                            </button>
+                                                                        </footer>
+                                                                    </article>
+                                                                )}
+                                                            </Popup>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -174,10 +256,10 @@ const Videos = () => {
                                         )}
                                         {/* MAP ETMELI YERI */}
                                     </tbody>
-                                )}
-                            </table>
+                                </table>
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
         </>
