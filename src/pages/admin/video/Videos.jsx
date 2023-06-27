@@ -43,7 +43,7 @@ const Videos = () => {
 
     const fetchData = async () => {
         setIsLoading(true);
-        const response = await fetch(`/admin-api/video?limit=5&offset=6`, {
+        const response = await fetch(`/admin-api/video`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
