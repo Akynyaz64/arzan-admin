@@ -1,8 +1,10 @@
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import Popup from "reactjs-popup";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEye, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faClose, faEye, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {toast} from "react-hot-toast";
+import {Loader} from "../../../components";
 
 const Categories = () => {
     const [categories, setCategories] = useState([]);
@@ -20,6 +22,7 @@ const Categories = () => {
 
         if (!response.ok) {
             setIsLoading(false);
+            toast.error("Error status: " + response.statusText);
             return null;
         }
         const resData = await response.json();
@@ -69,26 +72,22 @@ const Categories = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="col-lg-12">
-                        <div className="table-responsive rounded mb-3">
-                            <table className="data-table table mb-0 tbl-server-info">
-                                <thead className="bg-white text-uppercase">
-                                    <tr className="ligth ligth-data">
-                                        <th>№</th>
-                                        <th>ID</th>
-                                        <th>Image</th>
-                                        <th>Title</th>
-                                        {/* <th>Priority</th> */}
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                {isLoading ? (
-                                    <tbody>
-                                        <tr>
-                                            <td>Loading...</td>
+                    {isLoading ? (
+                        <Loader />
+                    ) : (
+                        <div className="col-lg-12">
+                            <div className="table-responsive rounded mb-3">
+                                <table className="data-table table mb-0 tbl-server-info">
+                                    <thead className="bg-white text-uppercase">
+                                        <tr className="ligth ligth-data">
+                                            <th>№</th>
+                                            <th>ID</th>
+                                            <th>Image</th>
+                                            <th>Title</th>
+                                            {/* <th>Priority</th> */}
+                                            <th>Actions</th>
                                         </tr>
-                                    </tbody>
-                                ) : (
+                                    </thead>
                                     <tbody className="ligth-body">
                                         {/* MAP ETMELI YERI */}
                                         {categories?.length > 0 ? (
@@ -97,20 +96,52 @@ const Categories = () => {
                                                     <td>{index + 1}</td>
                                                     <td>{category.id}</td>
                                                     <td>
-                                                        <img src={category.image} alt="" style={{height: "65px"}} />
+                                                        <img src={"/" + category.image} alt="category" style={{height: "65px"}} />
                                                     </td>
                                                     <td>{category.name}</td>
                                                     <td>
                                                         <div className="d-flex align-items-center list-action">
-                                                            <button className="badge badge-primary mr-2">
+                                                            <Link to={`${category.id}`} className="btn bg-primary btn-sm mr-2">
                                                                 <FontAwesomeIcon icon={faEye} className="mr-0" />
-                                                            </button>
-                                                            <button className="badge bg-warning mr-2">
+                                                            </Link>
+
+                                                            <Link to={`edit/${category.id}`} className="btn bg-warning btn-sm mr-2">
                                                                 <FontAwesomeIcon icon={faPen} className="mr-0" />
-                                                            </button>
-                                                            <button className="badge bg-danger mr-2" onClick={(e) => handleDelete(e, category.id)}>
-                                                                <FontAwesomeIcon icon={faTrash} className="mr-0" />
-                                                            </button>
+                                                            </Link>
+
+                                                            <Popup
+                                                                trigger={
+                                                                    <button className="btn btn-danger btn-sm">
+                                                                        <FontAwesomeIcon icon={faTrash} className="" />
+                                                                    </button>
+                                                                }
+                                                                modal
+                                                                nested
+                                                            >
+                                                                {(close) => (
+                                                                    <article className="modal-container">
+                                                                        <header className="modal-container-header">
+                                                                            <h3 className="modal-container-title">Üns beriň!</h3>
+                                                                            <button
+                                                                                className="close icon-button"
+                                                                                onClick={() => {
+                                                                                    close();
+                                                                                }}
+                                                                            >
+                                                                                <FontAwesomeIcon icon={faClose} />
+                                                                            </button>
+                                                                        </header>
+                                                                        <section className="modal-container-body">
+                                                                            <p>Siz hakykatdan hem pozmak isleýärsiňizmi?</p>
+                                                                        </section>
+                                                                        <footer className="modal-container-footer">
+                                                                            <button className="btn btn-danger" onClick={(e) => handleDelete(e, category.id)}>
+                                                                                Poz
+                                                                            </button>
+                                                                        </footer>
+                                                                    </article>
+                                                                )}
+                                                            </Popup>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -120,10 +151,10 @@ const Categories = () => {
                                         )}
                                         {/* MAP ETMELI YERI */}
                                     </tbody>
-                                )}
-                            </table>
+                                </table>
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
         </>

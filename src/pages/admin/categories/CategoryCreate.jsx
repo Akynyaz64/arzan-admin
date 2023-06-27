@@ -2,6 +2,8 @@ import {useEffect, useRef, useState} from "react";
 import img_icon from "../../../assets/icons/img.svg";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-hot-toast";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTrash} from "@fortawesome/free-solid-svg-icons";
 
 const CategoryCreate = () => {
     const navigate = useNavigate();
@@ -58,6 +60,7 @@ const CategoryCreate = () => {
         }
         setIsSubmitting(false);
     }
+
     return (
         <>
             <div className="container-fluid">
@@ -74,16 +77,21 @@ const CategoryCreate = () => {
                                     {!selectedFile ? (
                                         <>
                                             <label className="label text-center d-flex justify-content-center align-items-center flex-column" htmlFor="image">
-                                                <img src={img_icon} alt="" className="img-fluid mb-2" />
+                                                <img src={img_icon} alt="add" className="img-fluid mb-2" />
                                                 <div className="text-green">Surat goş</div>
                                             </label>
 
-                                            <input type="file" id="image" className="form-control" name="image" onChange={onSelectFile} hidden />
+                                            <input type="file" id="image" accept="image/*" className="form-control" name="image" onChange={onSelectFile} hidden />
                                         </>
                                     ) : (
-                                        <>
-                                            <img alt="" src={preview} className="img-fluid" />
-                                        </>
+                                        <div className="position-relative">
+                                            <img alt="preview" src={preview} className="img-fluid w-100 rounded" />
+                                            <div className="delete-button">
+                                                <button className="btn btn-danger" onClick={() => setSelectedFile(undefined)}>
+                                                    <FontAwesomeIcon icon={faTrash} className="" />
+                                                </button>
+                                            </div>
+                                        </div>
                                     )}
                                 </div>
                                 <div className="col-md-6 mb-3">
