@@ -1,16 +1,15 @@
-import {faEye, faPenAlt} from "@fortawesome/free-solid-svg-icons";
+import {faPenAlt} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import logo from "../../../assets/icons/logo-circle.svg";
 import {useEffect, useRef, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {toast} from "react-hot-toast";
 import useFetch from "../../../hooks/useFetch";
-import logo from "../../../assets/icons/logo-circle.svg";
-import not_see from "../../../assets/icons/not-see.svg";
 
-const UserCreate = () => {
+const UserEdit = () => {
     const navigate = useNavigate();
     const [isSubmitting, setIsSubmitting] = useState(false);
-
+    const {userId} = useParams();
     const name = useRef("");
     const password = useRef("");
     const confirm_pass = useRef("");
@@ -82,7 +81,7 @@ const UserCreate = () => {
         for (var pair of userData.entries()) {
             console.log(pair[0] + ", " + pair[1]);
         }
-        const response = await fetch(`/admin-api/user`, {
+        const response = await fetch(`/admin-api/user/edit/${userId}`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("adACto")}`,
@@ -103,17 +102,6 @@ const UserCreate = () => {
         }
         setIsSubmitting(false);
     }
-
-    //PASSWORD SHOW
-    const [isVisible, setVisible] = useState(false);
-    const [isVisible1, setVisible1] = useState(false);
-
-    const toggle1 = () => {
-        setVisible1(!isVisible1);
-    };
-    const toggle = () => {
-        setVisible(!isVisible);
-    };
 
     return (
         <>
@@ -149,22 +137,12 @@ const UserCreate = () => {
                                     <input type="text" className="form-control" id="phone" aria-describedby="phone_span" ref={phone} required />
                                 </div>
                                 <div className="col-xl-6 mb-4">
-                                    <label htmlFor="password">Parol</label>
-                                    <div className="floating-label form-group input-group">
-                                        <input className="floating-input form-control" type={!isVisible1 ? "password" : "text"} id="password" name="password" placeholder=" " ref={password} required />
-                                        <span className="input-group-text bg-white border-start-0" style={{cursor: "pointer"}} onClick={toggle1}>
-                                            {isVisible1 ? <FontAwesomeIcon icon={faEye} className="text-muted" /> : <img src={not_see} alt="icon" className="img-fluid" />}
-                                        </span>
-                                    </div>
+                                    <label htmlFor="password">Password</label>
+                                    <input type="password" className="form-control" id="password" name="password" ref={password} required />
                                 </div>
                                 <div className="col-xl-6 mb-4">
-                                    <label htmlFor="confirm">Confirm Parol</label>
-                                    <div className="floating-label input-group">
-                                        <input className="floating-input form-control" type={!isVisible ? "password" : "text"} id="confirm" name="confirm" placeholder=" " ref={confirm_pass} required />
-                                        <span className="input-group-text bg-white border-start-0" style={{cursor: "pointer"}} onClick={toggle}>
-                                            {isVisible ? <FontAwesomeIcon icon={faEye} className="text-muted" /> : <img src={not_see} alt="icon" className="img-fluid" />}
-                                        </span>
-                                    </div>
+                                    <label htmlFor="confirm">Confirm password</label>
+                                    <input type="password" className="form-control" id="confirm" name="confirm" ref={confirm_pass} required />
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="location_id">Welayats</label>
@@ -224,4 +202,4 @@ const UserCreate = () => {
     );
 };
 
-export default UserCreate;
+export default UserEdit;
