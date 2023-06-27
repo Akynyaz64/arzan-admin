@@ -16,12 +16,15 @@ const VideoCreate = () => {
     const selectedCategory = useRef();
     const selectedUser = useRef();
 
+    const [pageCategory, setPageCategory] = useState([]);
     const [categories] = useFetch("/admin-api/page-category", "data", true);
     const [users] = useFetch("/admin-api/user", "data", true);
     // const user_id = useRef("");
 
     useEffect(() => {
         console.log(categories);
+        const filteredPage = categories?.filter((e) => e.page.name.includes("VIDEO"));
+        setPageCategory(filteredPage);
     }, [categories]);
 
     function previewFile(e) {
@@ -140,7 +143,7 @@ const VideoCreate = () => {
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="category">Category</label>
                                     <select className="form-select" name="category" id="category" ref={selectedCategory}>
-                                        {categories?.map((category, index) => (
+                                        {pageCategory?.map((category, index) => (
                                             <option key={index} value={category.id}>
                                                 {category.category.name} / {category.page.name}
                                             </option>

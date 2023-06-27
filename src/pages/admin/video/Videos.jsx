@@ -12,7 +12,7 @@ const Videos = () => {
     const [searchQ, setSearchQ] = useState();
 
     const searchHandle = async () => {
-        if (searchQ === "" ) {
+        if (searchQ === "") {
             toast.error("Boş bolmaly däl!");
             return 0;
         }
@@ -43,7 +43,7 @@ const Videos = () => {
 
     const fetchData = async () => {
         setIsLoading(true);
-        const response = await fetch(`/admin-api/video`, {
+        const response = await fetch(`/admin-api/video?limit=5&offset=6`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

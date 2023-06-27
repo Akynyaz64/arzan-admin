@@ -1,4 +1,4 @@
-import {useState, useRef} from "react";
+import {useState, useRef, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-hot-toast";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
@@ -22,6 +22,8 @@ const PostCreate = () => {
     const selectedCategory = useRef();
     const selectedSubCategory = useRef();
     const selectedUser = useRef();
+
+    const [activeSubcategories, setActiveSubCategory] = useState([]);
 
     const [description, setDescription] = useState();
 
@@ -76,6 +78,14 @@ const PostCreate = () => {
         setFile([...file, ...ImagesArray]);
         setPreviews([...previews]);
     }
+
+    const changeCat = (e) => {
+        console.log(e.target.value);
+        console.log(subCategories);
+        const activeSub = subCategories?.filter((tt) => tt.category.id == e.target.value);
+        console.log(activeSub);
+        setActiveSubCategory(activeSub);
+    };
 
     async function submitHandler(event) {
         setIsSubmitting(true);
@@ -185,7 +195,7 @@ const PostCreate = () => {
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="category">Category</label>
-                                    <select className="form-select" name="category" id="category" ref={selectedCategory}>
+                                    <select className="form-select" name="category" id="category" ref={selectedCategory} onChange={(e) => changeCat(e)}>
                                         {categories?.map((category, index) => (
                                             <option key={index} value={category.id}>
                                                 {category.name}
@@ -196,7 +206,7 @@ const PostCreate = () => {
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="sub_category">Sub category</label>
                                     <select className="form-select" name="sub_category" id="sub_category" ref={selectedSubCategory}>
-                                        {subCategories?.map((subCategory, index) => (
+                                        {activeSubcategories?.map((subCategory, index) => (
                                             <option key={index} value={subCategory.id}>
                                                 {subCategory.name}
                                             </option>
