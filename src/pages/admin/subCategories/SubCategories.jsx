@@ -1,9 +1,10 @@
-import {faEye, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {useEffect} from "react";
-import {useState} from "react";
-import {toast} from "react-hot-toast";
+import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import Popup from "reactjs-popup";
+import {toast} from "react-hot-toast";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faClose, faEye, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {Loader} from "../../../components";
 
 const SubCategories = () => {
     const [subCategories, setSubCategories] = useState([]);
@@ -21,6 +22,7 @@ const SubCategories = () => {
 
         if (!response.ok) {
             setIsLoading(false);
+            toast.error("Error status: " + response.statusText);
             return null;
         }
         const resData = await response.json();
@@ -70,25 +72,21 @@ const SubCategories = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="col-lg-12">
-                        <div className="table-responsive rounded mb-3">
-                            <table className="data-table table mb-0 tbl-server-info">
-                                <thead className="bg-white text-uppercase">
-                                    <tr className="ligth ligth-data">
-                                        <th>№</th>
-                                        <th>Id</th>
-                                        <th>Title</th>
-                                        <th>Category</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                {isLoading ? (
-                                    <tbody>
-                                        <tr>
-                                            <td>Loading...</td>
+                    {isLoading ? (
+                        <Loader />
+                    ) : (
+                        <div className="col-lg-12">
+                            <div className="table-responsive rounded mb-3">
+                                <table className="data-table table mb-0 tbl-server-info">
+                                    <thead className="bg-white text-uppercase">
+                                        <tr className="ligth ligth-data">
+                                            <th>№</th>
+                                            <th>Id</th>
+                                            <th>Title</th>
+                                            <th>Category</th>
+                                            <th>Actions</th>
                                         </tr>
-                                    </tbody>
-                                ) : (
+                                    </thead>
                                     <tbody className="ligth-body">
                                         {/* MAP ETMELI YERI */}
                                         {subCategories?.length > 0 ? (
@@ -100,15 +98,46 @@ const SubCategories = () => {
                                                     <td>{subCategory.category.name}</td>
                                                     <td>
                                                         <div className="d-flex align-items-center list-action">
-                                                            <button className="badge badge-primary mr-2">
+                                                            <Link to={`${subCategory.id}`} className="btn bg-primary btn-sm mr-2">
                                                                 <FontAwesomeIcon icon={faEye} className="mr-0" />
-                                                            </button>
-                                                            <button className="badge bg-warning mr-2">
+                                                            </Link>
+
+                                                            <Link to={`edit/${subCategory.id}`} className="btn bg-warning btn-sm mr-2">
                                                                 <FontAwesomeIcon icon={faPen} className="mr-0" />
-                                                            </button>
-                                                            <button className="badge bg-danger mr-2" onClick={(e) => handleDelete(e, subCategory.id)}>
-                                                                <FontAwesomeIcon icon={faTrash} className="mr-0" />
-                                                            </button>
+                                                            </Link>
+                                                            <Popup
+                                                                trigger={
+                                                                    <button className="btn btn-danger btn-sm">
+                                                                        <FontAwesomeIcon icon={faTrash} className="" />
+                                                                    </button>
+                                                                }
+                                                                modal
+                                                                nested
+                                                            >
+                                                                {(close) => (
+                                                                    <article className="modal-container">
+                                                                        <header className="modal-container-header">
+                                                                            <h3 className="modal-container-title">Üns beriň!</h3>
+                                                                            <button
+                                                                                className="close icon-button"
+                                                                                onClick={() => {
+                                                                                    close();
+                                                                                }}
+                                                                            >
+                                                                                <FontAwesomeIcon icon={faClose} />
+                                                                            </button>
+                                                                        </header>
+                                                                        <section className="modal-container-body">
+                                                                            <p>Siz hakykatdan hem pozmak isleýärsiňizmi?</p>
+                                                                        </section>
+                                                                        <footer className="modal-container-footer">
+                                                                            <button className="btn btn-danger" onClick={(e) => handleDelete(e, subCategory.id)}>
+                                                                                Poz
+                                                                            </button>
+                                                                        </footer>
+                                                                    </article>
+                                                                )}
+                                                            </Popup>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -118,10 +147,10 @@ const SubCategories = () => {
                                         )}
                                         {/* MAP ETMELI YERI */}
                                     </tbody>
-                                )}
-                            </table>
+                                </table>
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
         </>
