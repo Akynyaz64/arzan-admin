@@ -6,15 +6,36 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClose, faEye, faPen, faPlus, faSearch, faStar, faTrash, faUserAlt, faUsers} from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../../../hooks/useFetch";
 import {Loader} from "../../../components";
+import ReactPaginate from "react-paginate";
 
 const Users = () => {
+    // const page = req.querypage ? parseInt(req.query.page) : 1;
+    // const limit = req.query.limit ? parseInt(req.query.limit) : 20;
+    // const offset = (page - 1) * limit;
+    // var before = offset > 0 ? page - 1 : 1;
+    // var next = page + 1;
     const search = useRef();
+    const table = useRef();
+
+    const [pages, setPages] = useState();
+    const [page, setPage] = useState(1);
     const [activeType, setActiveType] = useState();
-    const [urlParams, setUrlParams] = useState({});
+    const [urlParams, setUrlParams] = useState({
+        limit: 50,
+    });
     const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     const [locations] = useFetch("/api/v1/location/list", "data");
+
+    const changePage = ({selected}) => {
+        setPage(selected + 1);
+        setUrlParams({
+            ...urlParams,
+            offset: selected * urlParams.limit,
+        });
+        table.current.scrollIntoView({behavior: "smooth"});
+    };
 
     function formatDate(data) {
         let date = new Date(data);
@@ -47,7 +68,8 @@ const Users = () => {
             return null;
         }
         const resData = await response.json();
-        setUsers(resData.data);
+        setUsers(resData.data.users);
+        setPages(resData.data.total_count / urlParams.limit);
         setIsLoading(false);
     };
 
@@ -57,7 +79,9 @@ const Users = () => {
 
     useEffect(() => {
         console.log(users);
-    }, [users]);
+        console.log(urlParams);
+        console.log(pages);
+    }, [users, urlParams, pages]);
 
     const handleDelete = async (e, id) => {
         e.preventDefault();
@@ -103,8 +127,10 @@ const Users = () => {
                                 type="button"
                                 onClick={() => {
                                     setActiveType("OFFICIAL");
+
                                     setUrlParams({
                                         ...urlParams,
+                                        offset: 0,
                                         type: "OFFICIAL",
                                     });
                                 }}
@@ -122,6 +148,7 @@ const Users = () => {
                                     setActiveType("USER");
                                     setUrlParams({
                                         ...urlParams,
+                                        offset: 0,
                                         type: "USER",
                                     });
                                 }}
@@ -139,6 +166,7 @@ const Users = () => {
                                     setActiveType("TOP");
                                     setUrlParams({
                                         ...urlParams,
+                                        offset: 0,
                                         type: "TOP",
                                     });
                                 }}
@@ -157,6 +185,7 @@ const Users = () => {
                                 e.preventDefault();
                                 setUrlParams({
                                     ...urlParams,
+                                    offset: 0,
                                     name: search.current.value,
                                 });
                             }}
@@ -177,13 +206,14 @@ const Users = () => {
                         onChange={(e) => {
                             if (e.target.value === "Ählisi") {
                                 setUrlParams((current) => {
-                                    const copy = {...current};
+                                    const copy = {...current, offset: 0};
                                     delete copy["location_ids"];
                                     return copy;
                                 });
                             } else {
                                 setUrlParams({
                                     ...urlParams,
+                                    offset: 0,
                                     location_id: Number(e.target.value),
                                 });
                             }
@@ -199,12 +229,25 @@ const Users = () => {
                         ))}
                     </select>
                 </div>
+                {/* <div className="col-xl-1 mb-4">
+                    <button
+                        className="btn btn-light h-100"
+                        onClick={() => {
+                            setUrlParams({
+                                limit: 50,
+                                offset: 0,
+                            });
+                        }}
+                    >
+                        Reset All
+                    </button>
+                </div> */}
                 {isLoading ? (
                     <Loader />
                 ) : (
                     <div className="col-lg-12">
                         <div className="table-responsive rounded mb-3">
-                            <table className="data-table table mb-0 tbl-server-info">
+                            <table className="data-table table mb-0 tbl-server-info" ref={table}>
                                 <thead className="bg-white text-uppercase">
                                     <tr className="ligth ligth-data">
                                         <th>№</th>
@@ -214,6 +257,7 @@ const Users = () => {
                                         <th>Email</th>
                                         <th>Period</th>
                                         <th>Type</th>
+                                        <th>Balance</th>
                                         <th>Locations</th>
                                         <th>Action</th>
                                     </tr>
@@ -235,7 +279,8 @@ const Users = () => {
                                                 <td>{user.email ? user.email : "E-mail ýok"}</td>
                                                 <td>{user.start_date && user.expiry_date ? formatDate(user.start_date) + " - " + formatDate(user.expiry_date) : "Periody ýok"}</td>
                                                 <td>{user.type.type}</td>
-                                                <td>{user.locations.map((location) => location.name + " ")}</td>
+                                                <td>{user.balance === null ? "0" : user.balance}</td>
+                                                <td>{user.locations?.map((location) => location.name + " ")}</td>
                                                 <td>
                                                     <div className="d-flex align-items-center list-action">
                                                         <Link to={`${user.id}`} className="btn bg-primary btn-sm mr-2">
@@ -291,6 +336,10 @@ const Users = () => {
                         </div>
                     </div>
                 )}
+
+                <div className="col-12 d-flex text-center justify-content-center mt-20">
+                    <ReactPaginate previousLabel="←" nextLabel="→" pageCount={pages} onPageChange={changePage} containerClassName={"pagination"} pageLinkClassName={"page-link"} previousLinkClassName={"page-link"} nextLinkClassName={"page-link"} activeLinkClassName={"page-link current"} disabledLinkClassName={"page-link disabled"} />
+                </div>
             </div>
         </div>
     );

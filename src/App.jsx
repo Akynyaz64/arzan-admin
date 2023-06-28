@@ -6,7 +6,7 @@ import {ProtectedRoute, ScrollToTop} from "./components";
 
 //ADMIN
 import AdminLayout from "./pages/admin/Layout";
-import {Admin, AdminBannerCreate, AdminBannerEdit, AdminBannerView, AdminBanners, AdminCategories, AdminCategoryCreate, AdminCategoryEdit, AdminCategoryView, AdminCoins, AdminCoinsCreate, AdminCoinsEdit, AdminCoinsView, AdminComments, AdminLogin, AdminNotifications, AdminPageCategories, AdminPageCategoryCreate, AdminPageCategoryEdit, AdminPageCategoryView, AdminPages, AdminPhotoCreate, AdminPhotoView, AdminPhotos, AdminPostCreate, AdminPostView, AdminPosts, AdminPublicationTypes, AdminPublicationTypesCreate, AdminPublicationTypesEdit, AdminPublicationTypesView, AdminSubCategories, AdminSubCategoryCreate, AdminSubCategoryEdit, AdminSubCategoryView, AdminUserCreate, AdminUserView, AdminUsers, AdminVideoCreate, AdminVideoView, AdminVideos, AdminWelayatCreate, AdminWelayatEdit, AdminWelayats} from "./pages/admin";
+import {Admin, AdminBannerCreate, AdminBannerEdit, AdminBannerView, AdminBanners, AdminCategories, AdminCategoryCreate, AdminCategoryEdit, AdminCategoryView, AdminCoins, AdminCoinsCreate, AdminCoinsEdit, AdminCoinsView, AdminComments, AdminLogin, AdminNotifications, AdminPageCategories, AdminPageCategoryCreate, AdminPageCategoryEdit, AdminPageCategoryView, AdminPages, AdminPhotoCreate, AdminPhotoView, AdminPhotos, AdminPostCreate, AdminPostView, AdminPosts, AdminPublicationTypes, AdminPublicationTypesCreate, AdminPublicationTypesEdit, AdminPublicationTypesView, AdminSubCategories, AdminSubCategoryCreate, AdminSubCategoryEdit, AdminSubCategoryView, AdminUserCreate, AdminUserView, AdminUsers, AdminVideoCreate, AdminVideoView, AdminVideos, AdminWelayatCreate, AdminWelayatEdit, AdminWelayats, Test} from "./pages/admin";
 
 //OTHERS
 import {AuthContextProvider} from "./context/AuthContext";
@@ -92,6 +92,15 @@ const App = () => {
 
                                 <Route path="comments" element={<AdminComments />} />
                             </Route>
+
+                            <Route
+                                path="/admin/test"
+                                element={
+                                    <ProtectedRoute accessBy="non-admin">
+                                        <Test />
+                                    </ProtectedRoute>
+                                }
+                            ></Route>
 
                             <Route
                                 path="/admin/login"

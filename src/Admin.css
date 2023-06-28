@@ -2774,10 +2774,10 @@ div.sidebar-toggle {
 }
 .page-link:hover {
     z-index: 2;
-    color: #1393bc;
+    color: #fff;
     text-decoration: none;
-    background-color: #e9ecef;
-    border-color: #ccced2;
+    background-color: #165714;
+    border-color: #165714;
 }
 .page-link:focus {
     z-index: 3;
@@ -2793,13 +2793,13 @@ div.sidebar-toggle {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-.page-item.active .page-link {
+.page-link.current {
     z-index: 3;
     color: #fff;
-    background-color: #32bdea;
-    border-color: #32bdea;
+    background-color: #207f1d;
+    border-color: #207f1d;
 }
-.page-item.disabled .page-link {
+.page-link.disabled {
     color: #6c757d;
     pointer-events: none;
     cursor: auto;

@@ -58,3 +58,4 @@ export {default as AdminNotifications} from "./notifications/Notifications";
 export {default as AdminPages} from "./pages/Pages";
 
 export {default as AdminComments} from "./comments/Comments";
+export {default as Test} from "./Test";
