@@ -9,7 +9,9 @@ import useFetch from "../../../hooks/useFetch";
 
 const Posts = () => {
     const search = useRef();
-    const [urlParams, setUrlParams] = useState({});
+    const [urlParams, setUrlParams] = useState({
+        limit: 999,
+    });
     const [posts, setPosts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -285,10 +287,10 @@ const Posts = () => {
                                                             <li className="nav-item" role="presentation">
                                                                 <button
                                                                     style={{borderTopRightRadius: "0", borderEndEndRadius: "0", fontWeight: "500", textWrap: "nowrap"}}
-                                                                    className={post.publication_type.id === 3 ? "text-dark nav-link active p-1 bg-light" : "text-dark nav-link p-1 bg-light"}
+                                                                    className={post.publication_type?.id === 3 ? "text-dark nav-link active p-1 bg-light" : "text-dark nav-link p-1 bg-light"}
                                                                     type="button"
                                                                     onClick={() => {
-                                                                        if (post.publication_type.id !== 3) {
+                                                                        if (post.publication_type?.id !== 3 || post.publication_type === null) {
                                                                             console.log(1);
                                                                             setSaylanan(post.id, true);
                                                                         }
@@ -300,10 +302,10 @@ const Posts = () => {
                                                             <li className="nav-item" role="presentation">
                                                                 <button
                                                                     style={{borderTopLeftRadius: "0", borderBottomLeftRadius: "0", fontWeight: "500", textWrap: "nowrap"}}
-                                                                    className={post.publication_type.id !== 3 ? "text-white nav-link p-1 bg-danger" : "text-dark nav-link p-1 bg-light"}
+                                                                    className={post.publication_type?.id !== 3 ? "text-white nav-link p-1 bg-danger" : "text-dark nav-link p-1 bg-light"}
                                                                     type="button"
                                                                     onClick={() => {
-                                                                        if (post.publication_type.id === 3) {
+                                                                        if (post.publication_type?.id === 3 || post.publication_type === null) {
                                                                             setSaylanan(post.id, false);
                                                                         }
                                                                     }}
