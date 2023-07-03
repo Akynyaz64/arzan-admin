@@ -3,6 +3,7 @@ export {default as Admin} from "./main/Admin";
 export {default as AdminLogin} from "./auth/Login";
 
 export {default as AdminUsers} from "./users/Users";
+export {default as AdminUsersTop} from "./users/UsersTop";
 export {default as AdminUserView} from "./users/UserView";
 export {default as AdminUserCreate} from "./users/UserCreate";
 export {default as AdminUserEdit} from "./users/UserEdit";
@@ -52,6 +53,8 @@ export {default as AdminWelayatEdit} from "./welayats/WelayatEdit";
 export {default as AdminPosts} from "./posts/Posts";
 export {default as AdminPostCreate} from "./posts/PostCreate";
 export {default as AdminPostView} from "./posts/PostView";
+
+export {default as AdminPaymentHistory} from "./payment/PaymentHistory";
 
 export {default as AdminNotifications} from "./notifications/Notifications";
 

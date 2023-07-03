@@ -1,7 +1,7 @@
 import {useContext} from "react";
 import {Link, NavLink, Outlet} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBars, faBell, faCog, faCoins, faFileText, faHome, faImage, faImages, faList, faMapLocationDot, faMessage, faSignOutAlt, faTags, faTh, faUsers, faVideo} from "@fortawesome/free-solid-svg-icons";
+import {faBars, faBell, faCog, faCoins, faFileText, faHistory, faHome, faImage, faImages, faList, faMapLocationDot, faMessage, faSignOutAlt, faTags, faTh, faUserCheck, faUsers, faVideo} from "@fortawesome/free-solid-svg-icons";
 import AuthContext from "../../context/AuthContext";
 import "../../Admin.css";
 
@@ -30,9 +30,15 @@ const AdminLayout = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"users"} className="svg-icon">
+                                    <NavLink to={"users"} className="svg-icon" end>
                                         <FontAwesomeIcon icon={faUsers} />
                                         <span className="ml-4">Ulanyjylar</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"users/top"} className="svg-icon">
+                                        <FontAwesomeIcon icon={faUserCheck} />
+                                        <span className="ml-4">TOP Ulanyjylar</span>
                                     </NavLink>
                                 </li>
                                 <li>
@@ -75,6 +81,12 @@ const AdminLayout = () => {
                                     <NavLink to={"page_categories"} className="svg-icon">
                                         <FontAwesomeIcon icon={faList} />
                                         <span className="ml-4">Page kategoriýalary</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"payment_history"} className="svg-icon">
+                                        <FontAwesomeIcon icon={faHistory} />
+                                        <span className="ml-4">Payment history</span>
                                     </NavLink>
                                 </li>
                                 <li>

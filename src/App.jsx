@@ -6,7 +6,7 @@ import {ProtectedRoute, ScrollToTop} from "./components";
 
 //ADMIN
 import AdminLayout from "./pages/admin/Layout";
-import {Admin, AdminBannerCreate, AdminBannerEdit, AdminBannerView, AdminBanners, AdminCategories, AdminCategoryCreate, AdminCategoryEdit, AdminCategoryView, AdminCoins, AdminCoinsCreate, AdminCoinsEdit, AdminCoinsView, AdminComments, AdminLogin, AdminNotifications, AdminPageCategories, AdminPageCategoryCreate, AdminPageCategoryEdit, AdminPageCategoryView, AdminPages, AdminPhotoCreate, AdminPhotoView, AdminPhotos, AdminPostCreate, AdminPostView, AdminPosts, AdminPublicationTypes, AdminPublicationTypesCreate, AdminPublicationTypesEdit, AdminPublicationTypesView, AdminSubCategories, AdminSubCategoryCreate, AdminSubCategoryEdit, AdminSubCategoryView, AdminUserCreate, AdminUserView, AdminUsers, AdminVideoCreate, AdminVideoView, AdminVideos, AdminWelayatCreate, AdminWelayatEdit, AdminWelayats, Test} from "./pages/admin";
+import {Admin, AdminBannerCreate, AdminBannerEdit, AdminBannerView, AdminBanners, AdminCategories, AdminCategoryCreate, AdminCategoryEdit, AdminCategoryView, AdminCoins, AdminCoinsCreate, AdminCoinsEdit, AdminCoinsView, AdminComments, AdminLogin, AdminNotifications, AdminPageCategories, AdminPageCategoryCreate, AdminPageCategoryEdit, AdminPageCategoryView, AdminPages, AdminPaymentHistory, AdminPhotoCreate, AdminPhotoView, AdminPhotos, AdminPostCreate, AdminPostView, AdminPosts, AdminPublicationTypes, AdminPublicationTypesCreate, AdminPublicationTypesEdit, AdminPublicationTypesView, AdminSubCategories, AdminSubCategoryCreate, AdminSubCategoryEdit, AdminSubCategoryView, AdminUserCreate, AdminUserView, AdminUsers, AdminUsersTop, AdminVideoCreate, AdminVideoView, AdminVideos, AdminWelayatCreate, AdminWelayatEdit, AdminWelayats, Test} from "./pages/admin";
 
 //OTHERS
 import {AuthContextProvider} from "./context/AuthContext";
@@ -34,6 +34,7 @@ const App = () => {
                                 <Route path="" element={<Admin />} />
 
                                 <Route path="users" element={<AdminUsers />} />
+                                <Route path="users/top" element={<AdminUsersTop />} />
                                 <Route path="users/:userId" element={<AdminUserView />} />
                                 <Route path="users/create" element={<AdminUserCreate />} />
                                 {/* <Route path="users/edit/:userId" element={<AdminUserEdit />} /> */}
@@ -85,6 +86,8 @@ const App = () => {
                                 <Route path="publication_types/:typeId" element={<AdminPublicationTypesView />} />
                                 <Route path="publication_types/create" element={<AdminPublicationTypesCreate />} />
                                 <Route path="publication_types/edit/:typeId" element={<AdminPublicationTypesEdit />} />
+
+                                <Route path="payment_history" element={<AdminPaymentHistory />} />
 
                                 <Route path="notifications" element={<AdminNotifications />} />
 
