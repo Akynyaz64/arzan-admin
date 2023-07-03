@@ -95,7 +95,7 @@ const VideoView = () => {
                                 <ul>
                                     {video.page_category?.map((page_category, index) => (
                                         <li key={index}>
-                                            {page_category.page.name} / {page_category.category.name}
+                                            {page_category.page?.name} / {page_category.category?.name}
                                         </li>
                                     ))}
                                 </ul>

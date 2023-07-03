@@ -87,8 +87,16 @@ const PostView = () => {
                                 <p>{post.user?.name}</p>
                             </div>
                             <div className="col-md-4 mb-3">
+                                <h5>Like sany:</h5>
+                                <p>{post.likes_count}</p>
+                            </div>
+                            <div className="col-md-4 mb-3">
                                 <h5>Görlen sany:</h5>
                                 <p>{post.viewed_count}</p>
+                            </div>
+                            <div className="col-md-4 mb-3">
+                                <h5>Postuň görnüşi:</h5>
+                                <p>{post.publication_type?.type}</p>
                             </div>
                             <div className="col-md-4 mb-3">
                                 <h5>Tassyklanan:</h5>
