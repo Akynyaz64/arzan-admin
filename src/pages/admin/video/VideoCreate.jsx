@@ -3,12 +3,14 @@ import {useNavigate} from "react-router-dom";
 import {toast} from "react-hot-toast";
 import useFetch from "../../../hooks/useFetch";
 import img_icon from "../../../assets/icons/img.svg";
+import axios from "axios";
 
 const VideoCreate = () => {
     const navigate = useNavigate();
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const title = useRef("");
     const videoRef = useRef(null);
+    const [progress, setProgress] = useState();
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [video, setVideo] = useState();
     const [videoPreview, setVideoPreview] = useState(null);
     const [selectedFile, setSelectedFile] = useState();
@@ -18,7 +20,7 @@ const VideoCreate = () => {
 
     const [pageCategory, setPageCategory] = useState([]);
     const [categories] = useFetch("/admin-api/page-category", "data", true);
-    const [users] = useFetch("/admin-api/user", "data", true);
+    const [users] = useFetch("/admin-api/user?name=arzan", "data.users", true);
     // const user_id = useRef("");
 
     useEffect(() => {
@@ -60,8 +62,8 @@ const VideoCreate = () => {
     };
 
     async function submitHandler(event) {
-        setIsSubmitting(true);
         event.preventDefault();
+        setIsSubmitting(true);
 
         const videoData = new FormData();
         videoData.append("title", title.current.value);
@@ -72,26 +74,33 @@ const VideoCreate = () => {
         for (var pair of videoData.entries()) {
             console.log(pair[0] + ", " + pair[1]);
         }
-        const response = await fetch(`/admin-api/video`, {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("adACto")}`,
-            },
-            body: videoData,
-        });
-
-        const resData = await response.json();
-        console.log(resData);
-        if (resData.status === false) {
-            toast.error(resData.message);
-            setIsSubmitting(false);
-        }
-        if (resData.status === true) {
-            toast.success(resData.message);
-            setIsSubmitting(false);
-            return navigate(-1);
-        }
-        setIsSubmitting(false);
+        await axios
+            .post(`/admin-api/video`, videoData, {
+                onUploadProgress: ({loaded, total}) => {
+                    setProgress(Math.floor((loaded / total) * 100));
+                    if (Math.floor((loaded / total) * 100) == 100) {
+                        setProgress(99);
+                    }
+                },
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("adACto")}`,
+                },
+            })
+            .then((res) => {
+                toast.success(res.data.message);
+                setProgress(null);
+                setIsSubmitting(false);
+                navigate(-1);
+            })
+            .catch((res) => {
+                if (res.data) {
+                    toast.error(res.data.message);
+                } else {
+                    toast.error(res.response.statusText);
+                }
+                setProgress(null);
+                setIsSubmitting(false);
+            });
     }
 
     return (
@@ -171,12 +180,17 @@ const VideoCreate = () => {
                                 </div> */}
                             </div>
                             <div className="form-group d-grid mt-3 mb-5">
+                                {progress && (
+                                    <div>
+                                        <span className="mb-1">{progress}% ýüklendi </span>
+                                        <div className="progress mb-3">
+                                            <div className="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow={`${progress}`} aria-valuemin="0" aria-valuemax="100" style={{width: `${progress}%`}}></div>
+                                        </div>
+                                    </div>
+                                )}
                                 <button className="btn btn-green mb-1" disabled={isSubmitting}>
                                     {isSubmitting ? "Tassyklanýar..." : "Tassykla"}
                                 </button>
-                                {/* <div className="progress">
-                                    <div className="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={{width: "75%"}}></div>
-                                </div> */}
                             </div>
                         </form>
                     </div>
