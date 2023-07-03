@@ -27,7 +27,11 @@ const useFetch = (url, req, useToken) => {
                 setError(resData.message);
                 setLoading(false);
             }
-            setData(resData[req]);
+            if (req.includes(".")) {
+                setData(resData.data[req.slice(5)]);
+            } else {
+                setData(resData[req]);
+            }
             setLoading(false);
         };
 

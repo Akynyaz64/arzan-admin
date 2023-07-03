@@ -68,7 +68,8 @@ const PostCreate = () => {
 
     const [categories] = useFetch("/admin-api/category", "data", true);
     const [subCategories] = useFetch("/admin-api/sub-category", "data", true);
-    const [users] = useFetch("/admin-api/user", "data", true);
+    const [users] = useFetch("/admin-api/user?name=arzan", "data.users", true);
+
     // const user_id = useRef("");
 
     // function uploadSingleFile(e) {

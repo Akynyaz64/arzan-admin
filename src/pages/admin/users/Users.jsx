@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {toast} from "react-hot-toast";
 import Popup from "reactjs-popup";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faClose, faEye, faPen, faPlus, faSearch, faStar, faTrash, faUserAlt, faUsers} from "@fortawesome/free-solid-svg-icons";
+import {faClose, faEye, faPen, faPlus, faSearch, faStar, faTrash, faUserAlt} from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../../../hooks/useFetch";
 import {Loader} from "../../../components";
 import ReactPaginate from "react-paginate";
@@ -111,7 +111,7 @@ const Users = () => {
             <div className="row">
                 <div className="col-lg-12 mb-4">
                     <div className="d-flex flex-wrap align-items-center justify-content-between">
-                        <h3>Ulanyjylar</h3>
+                        <h3 className="mb-3">Ulanyjylar</h3>
                         <Link to="create" className="btn btn-primary add-list">
                             <FontAwesomeIcon icon={faPlus} className="mr-3" />
                             Ulanyjy goş
@@ -141,8 +141,8 @@ const Users = () => {
                         </li>
                         <li className="nav-item" role="presentation">
                             <button
-                                style={{fontWeight: "500"}}
-                                className={activeType === "USER" ? "text-dark nav-link active px-5 bg-light rounded-0" : "text-dark nav-link px-5 bg-light rounded-0"}
+                                style={{borderTopLeftRadius: "0", borderBottomLeftRadius: "0", fontWeight: "500"}}
+                                className={activeType === "USER" ? "text-dark nav-link active px-5 bg-light" : "text-dark nav-link px-5 bg-light"}
                                 type="button"
                                 onClick={() => {
                                     setActiveType("USER");
@@ -155,24 +155,6 @@ const Users = () => {
                             >
                                 <FontAwesomeIcon icon={faUserAlt} className="me-2" />
                                 Simple users
-                            </button>
-                        </li>
-                        <li className="nav-item" role="presentation">
-                            <button
-                                style={{borderTopLeftRadius: "0", borderBottomLeftRadius: "0", fontWeight: "500"}}
-                                className={activeType === "TOP" ? "text-dark nav-link active px-5 bg-light" : "text-dark nav-link px-5 bg-light"}
-                                type="button"
-                                onClick={() => {
-                                    setActiveType("TOP");
-                                    setUrlParams({
-                                        ...urlParams,
-                                        offset: 0,
-                                        type: "TOP",
-                                    });
-                                }}
-                            >
-                                <FontAwesomeIcon icon={faUsers} className="me-2" />
-                                Top users
                             </button>
                         </li>
                     </ul>

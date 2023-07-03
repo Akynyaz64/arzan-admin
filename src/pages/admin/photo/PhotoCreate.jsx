@@ -22,7 +22,7 @@ const PhotoCreate = () => {
     const [previews, setPreviews] = useState([]);
     const [pageCategory, setPageCategory] = useState([]);
     const [categories] = useFetch("/admin-api/page-category", "data", true);
-    const [users] = useFetch("/admin-api/user", "data", true);
+    const [users] = useFetch("/admin-api/user?name=arzan", "data.users", true);
     // const user_id = useRef("");
 
     function uploadSingleFile(e) {
