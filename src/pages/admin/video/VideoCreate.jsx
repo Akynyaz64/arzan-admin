@@ -1,9 +1,10 @@
 import {useState, useRef, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-hot-toast";
+import axios from "axios";
+import Select from "react-select";
 import useFetch from "../../../hooks/useFetch";
 import img_icon from "../../../assets/icons/img.svg";
-import axios from "axios";
 
 const VideoCreate = () => {
     const navigate = useNavigate();
@@ -16,12 +17,20 @@ const VideoCreate = () => {
     const [selectedFile, setSelectedFile] = useState();
     const [preview, setPreview] = useState();
     const selectedCategory = useRef();
-    const selectedUser = useRef();
+    const [selectedUser, setSelectedUser] = useState();
+    const [filteredUsers, setFilteredUsers] = useState();
 
     const [pageCategory, setPageCategory] = useState([]);
     const [categories] = useFetch("/admin-api/page-category", "data", true);
-    const [users] = useFetch("/admin-api/user?name=arzan", "data.users", true);
+    const [users] = useFetch("/admin-api/user?limit=999999&offset=0", "data.users", true);
     // const user_id = useRef("");
+    useEffect(() => {
+        setFilteredUsers(
+            users?.map((user) => {
+                return {label: user.name, value: user.id};
+            })
+        );
+    }, [users]);
 
     useEffect(() => {
         console.log(categories);
@@ -67,7 +76,7 @@ const VideoCreate = () => {
 
         const videoData = new FormData();
         videoData.append("title", title.current.value);
-        videoData.append("user_id", selectedUser.current.value);
+        videoData.append("user_id", selectedUser.selectValue.value);
         videoData.append("page_category_ids", JSON.stringify([Number(selectedCategory.current.value)]));
         videoData.append("thumbnail", selectedFile);
         videoData.append("video", video);
@@ -145,7 +154,7 @@ const VideoCreate = () => {
                                         <>{videoPreview != null && <video style={{width: "100%"}} controls src={videoPreview}></video>}</>
                                     )}
                                 </div>
-                                <div className="col-md-6 mb-3">
+                                <div className="col-md-12 mb-3">
                                     <label htmlFor="title">Title</label>
                                     <input type="text" className="form-control" id="title" name="title" ref={title} required />
                                 </div>
@@ -161,13 +170,17 @@ const VideoCreate = () => {
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="category">User</label>
-                                    <select className="form-select" name="category" id="category" ref={selectedUser}>
-                                        {users?.map((user, index) => (
-                                            <option key={index} value={user.id}>
-                                                {user.name}
-                                            </option>
-                                        ))}
-                                    </select>
+                                    <Select
+                                        name="user_id"
+                                        id="user_id"
+                                        options={filteredUsers}
+                                        onChange={(selectValue) => {
+                                            console.log({selectValue});
+                                            setSelectedUser({selectValue});
+                                        }}
+                                        value={selectedUser?.label}
+                                        placeholder="Ulanyjy saýlaň .."
+                                    />
                                 </div>
 
                                 {/* <div className="col-xl-12">

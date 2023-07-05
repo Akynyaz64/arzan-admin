@@ -1,12 +1,11 @@
-import {useState} from "react";
-import img_icon from "../../../assets/icons/img.svg";
+import {useState, useEffect, useRef} from "react";
 import {useNavigate} from "react-router-dom";
-import {useRef} from "react";
-import useFetch from "../../../hooks/useFetch";
-import {useEffect} from "react";
 import {toast} from "react-hot-toast";
+import Select from "react-select";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
+import useFetch from "../../../hooks/useFetch";
+import img_icon from "../../../assets/icons/img.svg";
 
 const PhotoCreate = () => {
     const navigate = useNavigate();
@@ -16,14 +15,22 @@ const PhotoCreate = () => {
     const [selectedFile, setSelectedFile] = useState();
     const [preview, setPreview] = useState();
     const selectedCategory = useRef();
-    const selectedUser = useRef();
+    const [selectedUser, setSelectedUser] = useState();
+    const [filteredUsers, setFilteredUsers] = useState();
 
     const [file, setFile] = useState([]);
     const [previews, setPreviews] = useState([]);
     const [pageCategory, setPageCategory] = useState([]);
     const [categories] = useFetch("/admin-api/page-category", "data", true);
-    const [users] = useFetch("/admin-api/user?name=arzan", "data.users", true);
+    const [users] = useFetch("/admin-api/user?limit=999999&offset=0", "data.users", true);
     // const user_id = useRef("");
+    useEffect(() => {
+        setFilteredUsers(
+            users?.map((user) => {
+                return {label: user.name, value: user.id};
+            })
+        );
+    }, [users]);
 
     function uploadSingleFile(e) {
         let previews = Object.entries(e.target.files).map((e) => URL.createObjectURL(e[1]));
@@ -65,7 +72,7 @@ const PhotoCreate = () => {
 
         const videoData = new FormData();
         videoData.append("title", title.current.value);
-        videoData.append("user_id", selectedUser.current.value);
+        videoData.append("user_id", selectedUser.selectValue.value);
         videoData.append("page_category_id", selectedCategory.current.value);
         videoData.append("avatar_image", selectedFile);
         // videoData.append("images", file);
@@ -165,13 +172,17 @@ const PhotoCreate = () => {
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="category">User</label>
-                                    <select className="form-select" name="category" id="category" ref={selectedUser}>
-                                        {users?.map((user, index) => (
-                                            <option key={index} value={user.id}>
-                                                {user.name}
-                                            </option>
-                                        ))}
-                                    </select>
+                                    <Select
+                                        name="user_id"
+                                        id="user_id"
+                                        options={filteredUsers}
+                                        onChange={(selectValue) => {
+                                            console.log({selectValue});
+                                            setSelectedUser({selectValue});
+                                        }}
+                                        value={selectedUser?.label}
+                                        placeholder="Ulanyjy saýlaň .."
+                                    />
                                 </div>
                                 {/* <div className="col-xl-12">
                                     <div className="form-check form-switch ms-3">
