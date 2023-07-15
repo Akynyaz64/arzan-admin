@@ -75,7 +75,10 @@ const PaymentHistory = () => {
                                     <thead className="bg-white text-uppercase">
                                         <tr className="ligth ligth-data">
                                             <th>ID</th>
-                                            {/* <th>Name</th> */}
+                                            <th>User</th>
+                                            <th>Töleg id</th>
+                                            <th>Möçberi</th>
+                                            <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -85,7 +88,10 @@ const PaymentHistory = () => {
                                             histories?.map((history, index) => (
                                                 <tr key={index}>
                                                     <td>{history.id}</td>
-                                                    {/* <td>{history.name}</td> */}
+                                                    <td>{history.user?.name}</td>
+                                                    <td>{history.order_id}</td>
+                                                    <td>{history.amount}</td>
+                                                    <td>{history.status === false ? "Tassyklanmadyk" : "Tassyklanan"}</td>
                                                     <td>
                                                         <div className="d-flex align-items-center list-action">
                                                             <Popup
