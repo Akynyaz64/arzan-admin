@@ -11,6 +11,9 @@ import img_icon from "../../../assets/icons/img.svg";
 const PostCreate = () => {
     const navigate = useNavigate();
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [activePrice, setActivePrice] = useState(true);
+    const [activeDiscount, setActiveDiscount] = useState(true);
+    const [activeDates, setActiveDates] = useState(true);
 
     const title = useRef("");
     const price = useRef("");
@@ -280,6 +283,10 @@ const PostCreate = () => {
         setActiveSubCategory(activeSub);
     };
 
+    useEffect(() => {
+        console.log(activePrice);
+    }, [activePrice]);
+
     async function submitHandler(event) {
         setIsSubmitting(true);
         event.preventDefault();
@@ -287,13 +294,15 @@ const PostCreate = () => {
         const postData = new FormData();
         postData.append("title", title.current.value);
         postData.append("description", description);
+
         postData.append("price", price.current.value);
         postData.append("discount", discount.current.value);
-        postData.append("category_id", selectedCategory.current.value);
-        postData.append("sub_category_id", selectedSubCategory.current.value);
+
         postData.append("start_date", start_date.current.value);
         postData.append("end_date", end_date.current.value);
 
+        postData.append("category_id", selectedCategory.current.value);
+        postData.append("sub_category_id", selectedSubCategory.current.value);
         postData.append("phone", phone.current.value);
         postData.append("tags", JSON.stringify(tags));
         postData.append("user_id", selectedUser.current.value);
@@ -628,19 +637,49 @@ const PostCreate = () => {
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="price">Price</label>
-                                    <input type="text" className="form-control" id="price" name="price" ref={price} required />
+                                    <div className="d-flex">
+                                        <input
+                                            type="checkbox"
+                                            className="mx-2"
+                                            checked={activePrice}
+                                            onChange={() => {
+                                                setActivePrice(!activePrice);
+                                            }}
+                                        />
+                                        <input type="text" className="form-control" id="price" name="price" ref={price} disabled={!activePrice} />
+                                    </div>
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="discount">Discount price</label>
-                                    <input type="text" className="form-control" id="discount" name="discount" ref={discount} required />
+                                    <div className="d-flex">
+                                        <input
+                                            type="checkbox"
+                                            className="mx-2"
+                                            checked={activeDiscount}
+                                            onChange={() => {
+                                                setActiveDiscount(!activeDiscount);
+                                            }}
+                                        />
+                                        <input type="text" className="form-control" id="discount" name="discount" ref={discount} disabled={!activeDiscount} />
+                                    </div>
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="start_date">Start Date</label>
-                                    <input type="date" className="form-control" id="start_date" name="start_date" ref={start_date} required />
+                                    <div className="d-flex">
+                                        <input
+                                            type="checkbox"
+                                            className="mx-2"
+                                            checked={activeDates}
+                                            onChange={() => {
+                                                setActiveDates(!activeDates);
+                                            }}
+                                        />
+                                        <input type="date" className="form-control" id="start_date" name="start_date" ref={start_date} disabled={!activeDates} />
+                                    </div>
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="end_date">End Date</label>
-                                    <input type="date" className="form-control" id="end_date" name="end_date" ref={end_date} required />
+                                    <input type="date" className="form-control" id="end_date" name="end_date" ref={end_date} disabled={!activeDates} />
                                 </div>
 
                                 <div className="col-md-6 mb-3">

@@ -224,7 +224,7 @@ const Banners = () => {
                                                         <li>
                                                             <b>Welayat</b> -
                                                             {banner.location.map((e) => {
-                                                                return e.display_name + " ";
+                                                                return e?.display_name + " ";
                                                             })}
                                                         </li>
                                                         <li>

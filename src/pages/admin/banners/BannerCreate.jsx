@@ -78,6 +78,44 @@ const BannerCreate = () => {
             return;
         }
 
+        if (selectedFile === undefined) {
+            toast.error("SURAT BOŞ BOLMALY DÄL!");
+            setIsSubmitting(false);
+            return;
+        } else if (title.current.value === "") {
+            toast.error("TITLE BOŞ BOLMALY DÄL!");
+            setIsSubmitting(false);
+            return;
+        } else if (description === undefined) {
+            toast.error("DESCRIPTION BOŞ BOLMALY DÄL!");
+            setIsSubmitting(false);
+            return;
+        } else if (start_date.current.value === "") {
+            toast.error("START DATE BOŞ BOLMALY DÄL!");
+            setIsSubmitting(false);
+            return;
+        } else if (end_date.current.value === "") {
+            toast.error("END DATE BOŞ BOLMALY DÄL!");
+            setIsSubmitting(false);
+            return;
+        } else if (platform_id.current.value === "") {
+            toast.error("PLATFORM BOŞ BOLMALY DÄL!");
+            setIsSubmitting(false);
+            return;
+        } else if (url.current.value === "") {
+            toast.error("URL BOŞ BOLMALY DÄL!");
+            setIsSubmitting(false);
+            return;
+        } else if (selectedLocations.length === 0) {
+            toast.error("LOCATION BOŞ BOLMALY DÄL!");
+            setIsSubmitting(false);
+            return;
+        } else if (selectedPageCategories.length === 0) {
+            toast.error("PAGE CATEOGORY BOŞ BOLMALY DÄL!");
+            setIsSubmitting(false);
+            return;
+        }
+
         const bannerData = new FormData();
         bannerData.append("title", title.current.value);
         bannerData.append("url", url.current.value);
@@ -146,7 +184,7 @@ const BannerCreate = () => {
                                 </div>
                                 <div className="col-md-12 mb-3">
                                     <label htmlFor="title">Title</label>
-                                    <input type="text" className="form-control" id="title" name="title" ref={title} required />
+                                    <input type="text" className="form-control" id="title" name="title" ref={title} />
                                 </div>
                                 <div className="col-md-12 mb-3">
                                     <label htmlFor="">Description</label>
@@ -165,11 +203,11 @@ const BannerCreate = () => {
                                 </div> */}
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="start_date">Start Date</label>
-                                    <input type="date" className="form-control" id="start_date" name="start_date" ref={start_date} required />
+                                    <input type="date" className="form-control" id="start_date" name="start_date" ref={start_date} />
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="end_date">End Date</label>
-                                    <input type="date" className="form-control" id="end_date" name="end_date" ref={end_date} required />
+                                    <input type="date" className="form-control" id="end_date" name="end_date" ref={end_date} />
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="platform_id">Platform</label>
@@ -183,7 +221,7 @@ const BannerCreate = () => {
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="url">Url</label>
-                                    <input type="text" className="form-control" id="url" name="url" ref={url} required />
+                                    <input type="text" className="form-control" id="url" name="url" ref={url} />
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="location_id">Welayats</label>
