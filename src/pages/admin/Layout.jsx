@@ -1,7 +1,7 @@
 import {useContext} from "react";
 import {Link, NavLink, Outlet} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBars, faBell, faCog, faCoins, faFileText, faHistory, faHome, faImage, faImages, faList, faMapLocationDot, faMessage, faSignOutAlt, faTags, faTh, faUserCheck, faUsers, faVideo} from "@fortawesome/free-solid-svg-icons";
+import {faAward, faBars, faBell, faCog, faCoins, faFileText, faHistory, faHome, faImage, faImages, faList, faMapLocationDot, faMessage, faSignOutAlt, faTags, faTh, faUserCheck, faUsers, faVideo} from "@fortawesome/free-solid-svg-icons";
 import AuthContext from "../../context/AuthContext";
 import "../../Admin.css";
 
@@ -36,9 +36,9 @@ const AdminLayout = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"users/top"} className="svg-icon">
+                                    <NavLink to={"top_list"} className="svg-icon">
                                         <FontAwesomeIcon icon={faUserCheck} />
-                                        <span className="ml-4">TOP Ulanyjylar</span>
+                                        <span className="ml-4">TOP List limits</span>
                                     </NavLink>
                                 </li>
                                 <li>
@@ -93,6 +93,12 @@ const AdminLayout = () => {
                                     <NavLink to={"coins"} className="svg-icon">
                                         <FontAwesomeIcon icon={faCoins} />
                                         <span className="ml-4">Coin packets</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"reward/follow"} className="svg-icon">
+                                        <FontAwesomeIcon icon={faAward} />
+                                        <span className="ml-4">Action Rewards</span>
                                     </NavLink>
                                 </li>
                                 <li>

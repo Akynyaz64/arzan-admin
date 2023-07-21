@@ -1,8 +1,5 @@
-
 const Comments = () => {
-    return (
-        <div>Comments</div>
-    )
-}
+    return <div>Comments</div>;
+};
 
-export default Comments
+export default Comments;

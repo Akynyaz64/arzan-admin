@@ -1,10 +1,10 @@
-import {faPenAlt} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import logo from "../../../assets/icons/logo-circle.svg";
 import {useEffect, useRef, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {toast} from "react-hot-toast";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPenAlt} from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../../../hooks/useFetch";
+import logo from "../../../assets/icons/logo-circle.svg";
 
 const UserEdit = () => {
     const navigate = useNavigate();

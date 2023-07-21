@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import {toast} from "react-hot-toast";
 import {Loader} from "../../../components";
-import { toast } from "react-hot-toast";
 
 const BannerView = () => {
     const {bannerId} = useParams();

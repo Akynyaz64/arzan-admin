@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {Loader} from "../../../components";
 import {toast} from "react-hot-toast";
+import {Loader} from "../../../components";
 
 const PublicationTypeView = () => {
     const {typeId} = useParams();

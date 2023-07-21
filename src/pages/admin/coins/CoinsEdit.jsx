@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {toast} from "react-hot-toast";
-import img_icon from "../../../assets/icons/img.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Loader} from "../../../components";
+import img_icon from "../../../assets/icons/img.svg";
 
 const CoinsEdit = () => {
     const navigate = useNavigate();

@@ -3,10 +3,12 @@ export {default as Admin} from "./main/Admin";
 export {default as AdminLogin} from "./auth/Login";
 
 export {default as AdminUsers} from "./users/Users";
-export {default as AdminUsersTop} from "./users/UsersTop";
 export {default as AdminUserView} from "./users/UserView";
 export {default as AdminUserCreate} from "./users/UserCreate";
 export {default as AdminUserEdit} from "./users/UserEdit";
+
+export {default as AdminTopList} from "./topList/TopList";
+export {default as AdminTopListCreate} from "./topList/TopListCreate";
 
 export {default as AdminBanners} from "./banners/Banners";
 export {default as AdminBannerView} from "./banners/BannerView";
@@ -40,6 +42,9 @@ export {default as AdminCoins} from "./coins/Coins";
 export {default as AdminCoinsCreate} from "./coins/CoinsCreate";
 export {default as AdminCoinsView} from "./coins/CoinsView";
 export {default as AdminCoinsEdit} from "./coins/CoinsEdit";
+
+export {default as AdminFollowRewards} from "./rewards/follow/FollowRewards";
+export {default as AdminFollowRewardsEdit} from "./rewards/follow/FollowRewardsEdit";
 
 export {default as AdminPublicationTypes} from "./publication/PublicationTypes";
 export {default as AdminPublicationTypesCreate} from "./publication/PublicationTypeCreate";

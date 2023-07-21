@@ -1,11 +1,11 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {toast} from "react-hot-toast";
-import img_icon from "../../../assets/icons/img.svg";
-import useFetch from "../../../hooks/useFetch";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Loader} from "../../../components";
+import useFetch from "../../../hooks/useFetch";
+import img_icon from "../../../assets/icons/img.svg";
 
 const PageCategoryEdit = () => {
     const navigate = useNavigate();

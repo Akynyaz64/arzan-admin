@@ -1,8 +1,7 @@
+import {useState, useRef} from "react";
 import {useNavigate} from "react-router-dom";
-import useFetch from "../../../hooks/useFetch";
-import {useState} from "react";
-import {useRef} from "react";
 import {toast} from "react-hot-toast";
+import useFetch from "../../../hooks/useFetch";
 
 const SubCategoryCreate = () => {
     const [categories] = useFetch("/admin-api/category", "data", true);
@@ -20,7 +19,7 @@ const SubCategoryCreate = () => {
             name: name.current.value,
             category_id: category_id.current.value,
         };
-        console.log(categoryData)
+        console.log(categoryData);
 
         const response = await fetch("/admin-api/sub-category", {
             method: "POST",

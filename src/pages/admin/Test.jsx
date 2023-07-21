@@ -43,11 +43,15 @@ const Test = () => {
     return (
         <div className="">
             <div className="another">
-                <button onClick={fetchBadge}>Fetch badge</button><br />
-                <h1>{count.count}</h1><br />
+                <button onClick={fetchBadge}>Fetch badge</button>
+                <br />
+                <h1>{count.count}</h1>
+                <br />
             </div>
-            <button onClick={fetchData}>Fetch videos</button><br />
-            <h1>{videos[0]?.items_full_count}</h1><br />
+            <button onClick={fetchData}>Fetch videos</button>
+            <br />
+            <h1>{videos[0]?.items_full_count}</h1>
+            <br />
         </div>
     );
 };

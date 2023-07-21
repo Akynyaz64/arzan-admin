@@ -2,11 +2,11 @@ import {useEffect, useRef, useState} from "react";
 import {Link} from "react-router-dom";
 import {toast} from "react-hot-toast";
 import Popup from "reactjs-popup";
+import ReactPaginate from "react-paginate";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClose, faEye, faPen, faPlus, faSearch, faStar, faTrash, faUserAlt} from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../../../hooks/useFetch";
 import {Loader} from "../../../components";
-import ReactPaginate from "react-paginate";
 
 const Users = () => {
     // const page = req.querypage ? parseInt(req.query.page) : 1;

@@ -5,7 +5,6 @@ import Popup from "reactjs-popup";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClose, faEye, faPen, faPlus, faSearch, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Loader} from "../../../components";
-// import Slider from "react-slick";
 
 const Photos = () => {
     const [galleries, setGalleries] = useState([]);
@@ -38,7 +37,7 @@ const Photos = () => {
         setGalleries(resData.data);
         setIsLoading(false);
     };
-    
+
     const fetchData = async () => {
         setIsLoading(true);
         const response = await fetch(`/admin-api/gallery`, {

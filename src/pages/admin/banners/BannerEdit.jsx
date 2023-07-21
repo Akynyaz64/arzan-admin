@@ -1,14 +1,14 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {toast} from "react-hot-toast";
+import moment from "moment";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import img_icon from "../../../assets/icons/img.svg";
-import useFetch from "../../../hooks/useFetch";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Loader} from "../../../components";
-import moment from "moment";
+import useFetch from "../../../hooks/useFetch";
+import img_icon from "../../../assets/icons/img.svg";
 
 const BannerEdit = () => {
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ const BannerEdit = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [banner, setBanner] = useState({
         title: "",
-        url: " ",
+        url: "",
         start_date: "",
         end_date: "",
         platform: [],

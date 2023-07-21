@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import {toast} from "react-hot-toast";
 import Popup from "reactjs-popup";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClose, faEye, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
-import {toast} from "react-hot-toast";
 import {Loader} from "../../../components";
 
 const Coins = () => {
@@ -96,7 +96,7 @@ const Coins = () => {
                                                     <td>{index + 1}</td>
                                                     <td>{coinPoket.id}</td>
                                                     <td>
-                                                        <img src={"/" + coinPoket.image.url} alt="coin" style={{height: "65px"}} />
+                                                        <img src={"/" + coinPoket.image} alt="coin" style={{height: "65px"}} />
                                                     </td>
                                                     <td>{coinPoket.amount}</td>
                                                     <td>{coinPoket.price}</td>

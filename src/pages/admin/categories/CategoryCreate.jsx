@@ -1,9 +1,9 @@
 import {useEffect, useRef, useState} from "react";
-import img_icon from "../../../assets/icons/img.svg";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-hot-toast";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
+import img_icon from "../../../assets/icons/img.svg";
 
 const CategoryCreate = () => {
     const navigate = useNavigate();

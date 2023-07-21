@@ -1,10 +1,10 @@
 import {useEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-hot-toast";
-import img_icon from "../../../assets/icons/img.svg";
-import useFetch from "../../../hooks/useFetch";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
+import useFetch from "../../../hooks/useFetch";
+import img_icon from "../../../assets/icons/img.svg";
 
 const PageCategoryCreate = () => {
     const navigate = useNavigate();

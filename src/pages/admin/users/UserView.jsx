@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import {toast} from "react-hot-toast";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Loader} from "../../../components";
 import {faClock, faEnvelope, faMapMarkerAlt, faPhone} from "@fortawesome/free-solid-svg-icons";
-import { toast } from "react-hot-toast";
+import {Loader} from "../../../components";
 
 const UserView = () => {
     const {userId} = useParams();
