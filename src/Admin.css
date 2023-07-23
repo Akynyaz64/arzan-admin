@@ -15294,7 +15294,7 @@ g[aria-describedby="id-22-description"] {
         left: -300px;
         top: 0;
     }
-    body.sidebar-main .iq-sidebar {
+    .iq-sidebar.left {
         width: 260px;
         left: 0;
         z-index: 999;

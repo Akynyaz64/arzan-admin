@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {Link, NavLink, Outlet} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAward, faBars, faBell, faCog, faCoins, faFileText, faHistory, faHome, faImage, faImages, faList, faMapLocationDot, faMessage, faSignOutAlt, faTags, faTh, faUserCheck, faUsers, faVideo} from "@fortawesome/free-solid-svg-icons";
@@ -7,16 +7,17 @@ import "../../Admin.css";
 
 const AdminLayout = () => {
     const {logout} = useContext(AuthContext);
+    const [isVisible, setIsVisible] = useState(false)
 
     return (
         <>
             <div className="wrapper">
-                <div className="iq-sidebar sidebar-default">
+                <div className={isVisible ? "iq-sidebar sidebar-default left":"iq-sidebar sidebar-default"}>
                     <div className="iq-sidebar-logo d-flex align-items-center justify-content-between">
                         <NavLink to={"/"} className="header-logo">
                             <h5 className="logo-title light-logo ml-3 text-green">ARZAN TM</h5>
                         </NavLink>
-                        <div className="iq-menu-bt-sidebar ml-0">
+                        <div className="iq-menu-bt-sidebar ml-0" onClick={()=>{setIsVisible(!isVisible)}}>
                             <FontAwesomeIcon className="wrapper-menu" icon={faBars} />
                         </div>
                     </div>
@@ -137,7 +138,10 @@ const AdminLayout = () => {
                 </div>
                 <div className="iq-top-navbar" style={{minHeight: "0"}}>
                     <div className="iq-navbar-custom">
-                        <nav className="navbar navbar-light py-3 justify-content-end">
+                        <nav className="navbar navbar-light py-3 justify-content-between">
+                            <div onClick={()=>{setIsVisible(!isVisible)}}>
+                                <FontAwesomeIcon className="wrapper-menu" icon={faBars} />                                
+                            </div>
                             <div className="d-flex align-items-center">
                                 <button
                                     className="btn btn-outline-green"
