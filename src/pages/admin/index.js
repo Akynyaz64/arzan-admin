@@ -45,6 +45,9 @@ export {default as AdminCoinsEdit} from "./coins/CoinsEdit";
 
 export {default as AdminFollowRewards} from "./rewards/follow/FollowRewards";
 export {default as AdminFollowRewardsEdit} from "./rewards/follow/FollowRewardsEdit";
+export {default as AdminStreakRewards} from "./rewards/streak/StreakRewards";
+export {default as AdminStreakRewardsCreate} from "./rewards/streak/StreakRewardsCreate";
+export {default as AdminStreakRewardsEdit} from "./rewards/streak/StreakRewardsEdit";
 
 export {default as AdminPublicationTypes} from "./publication/PublicationTypes";
 export {default as AdminPublicationTypesCreate} from "./publication/PublicationTypeCreate";

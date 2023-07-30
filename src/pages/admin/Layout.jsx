@@ -1,23 +1,29 @@
 import {useContext, useState} from "react";
 import {Link, NavLink, Outlet} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAward, faBars, faBell, faCog, faCoins, faFileText, faHistory, faHome, faImage, faImages, faList, faMapLocationDot, faMessage, faSignOutAlt, faTags, faTh, faUserCheck, faUsers, faVideo} from "@fortawesome/free-solid-svg-icons";
+import {faAward, faBars, faBell, faCalendarWeek, faChevronDown, faChevronUp, faCog, faCoins, faFileText, faHistory, faHome, faImage, faImages, faList, faMapLocationDot, faMessage, faSignOutAlt, faTags, faTh, faUserCheck, faUserPlus, faUsers, faVideo} from "@fortawesome/free-solid-svg-icons";
 import AuthContext from "../../context/AuthContext";
 import "../../Admin.css";
 
 const AdminLayout = () => {
     const {logout} = useContext(AuthContext);
-    const [isVisible, setIsVisible] = useState(false)
+    const [isVisible, setIsVisible] = useState(false);
+    const [isCollapsed, setIsCollapsed] = useState(true);
 
     return (
         <>
             <div className="wrapper">
-                <div className={isVisible ? "iq-sidebar sidebar-default left":"iq-sidebar sidebar-default"}>
+                <div className={isVisible ? "iq-sidebar sidebar-default left" : "iq-sidebar sidebar-default"}>
                     <div className="iq-sidebar-logo d-flex align-items-center justify-content-between">
                         <NavLink to={"/"} className="header-logo">
                             <h5 className="logo-title light-logo ml-3 text-green">ARZAN TM</h5>
                         </NavLink>
-                        <div className="iq-menu-bt-sidebar ml-0" onClick={()=>{setIsVisible(!isVisible)}}>
+                        <div
+                            className="iq-menu-bt-sidebar ml-0"
+                            onClick={() => {
+                                setIsVisible(!isVisible);
+                            }}
+                        >
                             <FontAwesomeIcon className="wrapper-menu" icon={faBars} />
                         </div>
                     </div>
@@ -97,10 +103,34 @@ const AdminLayout = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"reward/follow"} className="svg-icon">
-                                        <FontAwesomeIcon icon={faAward} />
-                                        <span className="ml-4">Action Rewards</span>
-                                    </NavLink>
+                                    <Link
+                                        className={isCollapsed ? "collapsed justify-content-between" : "justify-content-between"}
+                                        data-toggle="collapse"
+                                        aria-expanded="false"
+                                        onClick={() => {
+                                            setIsCollapsed(!isCollapsed);
+                                        }}
+                                    >
+                                        <div>
+                                            <FontAwesomeIcon icon={faAward} />
+                                            <span className="ml-4">Action rewards</span>
+                                        </div>
+                                        {isCollapsed ? <FontAwesomeIcon icon={faChevronDown} className="mr-0" /> : <FontAwesomeIcon icon={faChevronUp} className="mr-0" />}
+                                    </Link>
+                                    <ul id="category" className={isCollapsed ? "iq-submenu collapse" : "iq-submenu"} data-parent="#iq-sidebar-toggle">
+                                        <li>
+                                            <NavLink to={"reward/follow"} className="svg-icon">
+                                                <FontAwesomeIcon icon={faUserPlus} />
+                                                <span className="ml-3">Follow rewards</span>
+                                            </NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to={"reward/streak"} className="svg-icon">
+                                                <FontAwesomeIcon icon={faCalendarWeek} />
+                                                <span className="ml-4">Streak rewards</span>
+                                            </NavLink>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li>
                                     <NavLink to={"welayats"} className="svg-icon">
@@ -139,8 +169,12 @@ const AdminLayout = () => {
                 <div className="iq-top-navbar" style={{minHeight: "0"}}>
                     <div className="iq-navbar-custom">
                         <nav className="navbar navbar-light py-3 justify-content-between">
-                            <div onClick={()=>{setIsVisible(!isVisible)}}>
-                                <FontAwesomeIcon className="wrapper-menu" icon={faBars} />                                
+                            <div
+                                onClick={() => {
+                                    setIsVisible(!isVisible);
+                                }}
+                            >
+                                <FontAwesomeIcon className="wrapper-menu" icon={faBars} />
                             </div>
                             <div className="d-flex align-items-center">
                                 <button
