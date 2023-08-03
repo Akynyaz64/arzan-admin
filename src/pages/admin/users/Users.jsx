@@ -30,6 +30,7 @@ const Users = () => {
 
     const changePage = ({selected}) => {
         setPage(selected + 1);
+        console.log(page);
         setUrlParams({
             ...urlParams,
             offset: selected * urlParams.limit,
@@ -136,7 +137,7 @@ const Users = () => {
                                 }}
                             >
                                 <FontAwesomeIcon icon={faStar} className="me-2" />
-                                Offical users
+                                Official ulanyjylar
                             </button>
                         </li>
                         <li className="nav-item" role="presentation">
@@ -154,7 +155,7 @@ const Users = () => {
                                 }}
                             >
                                 <FontAwesomeIcon icon={faUserAlt} className="me-2" />
-                                Simple users
+                                Ýönekeý ulanyjylar
                             </button>
                         </li>
                     </ul>
@@ -175,13 +176,13 @@ const Users = () => {
                             <a className="search-link" style={{top: "9px"}}>
                                 <FontAwesomeIcon icon={faSearch} />
                             </a>
-                            <input type="search" className="text search-input" placeholder="Search here..." ref={search} />
+                            <input type="search" className="text search-input" placeholder="Gözleg..." ref={search} />
                         </form>
                     </div>
                 </div>
                 <div className="col-xl-2 mb-4">
                     <select
-                        className="form-control"
+                        className="custom-select"
                         name="location_id"
                         id="location_id"
                         value={urlParams.location_id}
@@ -189,7 +190,7 @@ const Users = () => {
                             if (e.target.value === "Ählisi") {
                                 setUrlParams((current) => {
                                     const copy = {...current, offset: 0};
-                                    delete copy["location_ids"];
+                                    delete copy["location_id"];
                                     return copy;
                                 });
                             } else {
@@ -234,14 +235,14 @@ const Users = () => {
                                     <tr className="ligth ligth-data">
                                         <th>№</th>
                                         <th>ID</th>
-                                        <th>Avatar / Username</th>
-                                        <th>Phone</th>
+                                        <th>Suraty / Ady</th>
+                                        <th>Telefon belgi</th>
                                         <th>Email</th>
                                         <th>Period</th>
-                                        <th>Type</th>
-                                        <th>Balance</th>
-                                        <th>Locations</th>
-                                        <th>Action</th>
+                                        <th>Görnüşi</th>
+                                        <th>Balans</th>
+                                        <th>Welaýatlar</th>
+                                        <th>Amallar</th>
                                     </tr>
                                 </thead>
                                 <tbody className="ligth-body">
@@ -310,7 +311,7 @@ const Users = () => {
                                             </tr>
                                         ))
                                     ) : (
-                                        <div>Maglumat yok</div>
+                                        <div>Maglumat ýok</div>
                                     )}
                                     {/* MAP ETMELI YERI */}
                                 </tbody>

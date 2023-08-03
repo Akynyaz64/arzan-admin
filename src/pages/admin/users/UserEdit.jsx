@@ -109,7 +109,7 @@ const UserEdit = () => {
                 <div className="row justify-content-center">
                     <div className="col-lg-8">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3>User Create</h3>
+                            <h3>Ulanyjyny üýtget</h3>
                         </div>
                     </div>
                     <div className="col-lg-8">
@@ -129,25 +129,25 @@ const UserEdit = () => {
                                     </div>
                                 </div>
                                 <div className="col-xl-6 mb-4">
-                                    <label htmlFor="name">Username</label>
+                                    <label htmlFor="name">Ady</label>
                                     <input type="text" className="form-control" id="name" name="name" ref={name} required />
                                 </div>
                                 <div className="col-xl-6 mb-4">
-                                    <label htmlFor="phone">Phone number</label>
+                                    <label htmlFor="phone">Telefon belgi</label>
                                     <input type="text" className="form-control" id="phone" aria-describedby="phone_span" ref={phone} required />
                                 </div>
                                 <div className="col-xl-6 mb-4">
-                                    <label htmlFor="password">Password</label>
+                                    <label htmlFor="password">Açar sözi</label>
                                     <input type="password" className="form-control" id="password" name="password" ref={password} required />
                                 </div>
                                 <div className="col-xl-6 mb-4">
-                                    <label htmlFor="confirm">Confirm password</label>
+                                    <label htmlFor="confirm">Açar sözi tassyklama</label>
                                     <input type="password" className="form-control" id="confirm" name="confirm" ref={confirm_pass} required />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="location_id">Welayats</label>
+                                    <label htmlFor="location_id">Welaýatlar</label>
                                     <select
-                                        className="form-select"
+                                        className="custom-select"
                                         name="location_id"
                                         id="location_id"
                                         multiple={true}
@@ -165,21 +165,21 @@ const UserEdit = () => {
                                     </select>
                                 </div>
                                 <div className="col-xl-6 mb-4">
-                                    <label htmlFor="type">Type</label>
-                                    <select className="form-control" id="type" required defaultValue={type} onChange={(e) => setType(e.target.value)}>
-                                        <option disabled>Type</option>
+                                    <label htmlFor="type">Görnüşi</label>
+                                    <select className="custom-select" id="type" required defaultValue={type} onChange={(e) => setType(e.target.value)}>
+                                        <option disabled>Görnüşi</option>
                                         <option value="USER">User</option>
-                                        <option value="OFFICIAL">Offical</option>
+                                        <option value="OFFICIAL">Official</option>
                                     </select>
                                 </div>
                                 {type === "OFFICIAL" && (
                                     <>
                                         <div className="col-xl-6 mb-3">
-                                            <label htmlFor="start_time">Start Date</label>
+                                            <label htmlFor="start_time">Başlangyç senesi</label>
                                             <input type="date" className="form-control" id="start_time" name="start_time" ref={start_time} />
                                         </div>
                                         <div className="col-xl-6 mb-3">
-                                            <label htmlFor="end_time">End Date</label>
+                                            <label htmlFor="end_time">Soňky senesi</label>
                                             <input type="date" className="form-control" id="end_time" name="end_time" ref={end_time} />
                                         </div>
                                         <div className="col-xl-6 mb-4">
