@@ -43,7 +43,7 @@ const ServiceEdit = () => {
             console.log(resData.data);
             setIsFetching(false);
             setService(resData.data[0]);
-            setPreview(resData.data[0].image);
+            setPreview("/" + resData.data[0].image);
         };
 
         fetchData();
