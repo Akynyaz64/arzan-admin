@@ -263,34 +263,34 @@ const PostEdit = () => {
                 })
             );
             if (resData.data.images[0].url) {
-                setPreview1(resData.data.images[0].url);
+                setPreview1("/" + resData.data.images[0].url);
             }
             if (resData.data.images[1]?.url) {
-                setPreview2(resData.data.images[1].url);
+                setPreview2("/" + resData.data.images[1].url);
             }
             if (resData.data.images[2]?.url) {
-                setPreview3(resData.data.images[2].url);
+                setPreview3("/" + resData.data.images[2].url);
             }
             if (resData.data.images[3]?.url) {
-                setPreview4(resData.data.images[3].url);
+                setPreview4("/" + resData.data.images[3].url);
             }
             if (resData.data.images[4]?.url) {
-                setPreview5(resData.data.images[4].url);
+                setPreview5("/" + resData.data.images[4].url);
             }
             if (resData.data.images[5]?.url) {
-                setPreview6(resData.data.images[5].url);
+                setPreview6("/" + resData.data.images[5].url);
             }
             if (resData.data.images[6]?.url) {
-                setPreview7(resData.data.images[6].url);
+                setPreview7("/" + resData.data.images[6].url);
             }
             if (resData.data.images[7]?.url) {
-                setPreview8(resData.data.images[7].url);
+                setPreview8("/" + resData.data.images[7].url);
             }
             if (resData.data.images[8]?.url) {
-                setPreview9(resData.data.images[8].url);
+                setPreview9("/" + resData.data.images[8].url);
             }
             if (resData.data.images[9]?.url) {
-                setPreview10(resData.data.images[9].url);
+                setPreview10("/" + resData.data.images[9].url);
             }
         };
 
@@ -438,9 +438,9 @@ const PostEdit = () => {
                                             <div className="position-relative">
                                                 <img alt="preview" src={preview1} className="img-fluid w-100 rounded" />
                                                 <div className="delete-button">
-                                                    <button className="btn btn-danger" onClick={() => setSelectedFile1(undefined)}>
+                                                    <span className="btn btn-danger" onClick={() => setSelectedFile1(undefined)}>
                                                         <FontAwesomeIcon icon={faTrash} className="" />
-                                                    </button>
+                                                    </span>
                                                 </div>
                                             </div>
                                         )}
@@ -459,9 +459,9 @@ const PostEdit = () => {
                                             <div className="position-relative">
                                                 <img alt="preview" src={preview2} className="img-fluid w-100 rounded" />
                                                 <div className="delete-button">
-                                                    <button className="btn btn-danger" onClick={() => setSelectedFile2(undefined)}>
+                                                    <span className="btn btn-danger" onClick={() => setSelectedFile2(undefined)}>
                                                         <FontAwesomeIcon icon={faTrash} className="" />
-                                                    </button>
+                                                    </span>
                                                 </div>
                                             </div>
                                         )}
@@ -480,9 +480,9 @@ const PostEdit = () => {
                                             <div className="position-relative">
                                                 <img alt="preview" src={preview3} className="img-fluid w-100 rounded" />
                                                 <div className="delete-button">
-                                                    <button className="btn btn-danger" onClick={() => setSelectedFile3(undefined)}>
+                                                    <span className="btn btn-danger" onClick={() => setSelectedFile3(undefined)}>
                                                         <FontAwesomeIcon icon={faTrash} className="" />
-                                                    </button>
+                                                    </span>
                                                 </div>
                                             </div>
                                         )}
@@ -501,9 +501,9 @@ const PostEdit = () => {
                                             <div className="position-relative">
                                                 <img alt="preview" src={preview4} className="img-fluid w-100 rounded" />
                                                 <div className="delete-button">
-                                                    <button className="btn btn-danger" onClick={() => setSelectedFile4(undefined)}>
+                                                    <span className="btn btn-danger" onClick={() => setSelectedFile4(undefined)}>
                                                         <FontAwesomeIcon icon={faTrash} className="" />
-                                                    </button>
+                                                    </span>
                                                 </div>
                                             </div>
                                         )}
@@ -522,9 +522,9 @@ const PostEdit = () => {
                                             <div className="position-relative">
                                                 <img alt="preview" src={preview5} className="img-fluid w-100 rounded" />
                                                 <div className="delete-button">
-                                                    <button className="btn btn-danger" onClick={() => setSelectedFile5(undefined)}>
+                                                    <span className="btn btn-danger" onClick={() => setSelectedFile5(undefined)}>
                                                         <FontAwesomeIcon icon={faTrash} className="" />
-                                                    </button>
+                                                    </span>
                                                 </div>
                                             </div>
                                         )}
@@ -543,9 +543,9 @@ const PostEdit = () => {
                                             <div className="position-relative">
                                                 <img alt="preview" src={preview6} className="img-fluid w-100 rounded" />
                                                 <div className="delete-button">
-                                                    <button className="btn btn-danger" onClick={() => setSelectedFile6(undefined)}>
+                                                    <span className="btn btn-danger" onClick={() => setSelectedFile6(undefined)}>
                                                         <FontAwesomeIcon icon={faTrash} className="" />
-                                                    </button>
+                                                    </span>
                                                 </div>
                                             </div>
                                         )}
@@ -564,9 +564,9 @@ const PostEdit = () => {
                                             <div className="position-relative">
                                                 <img alt="preview" src={preview7} className="img-fluid w-100 rounded" />
                                                 <div className="delete-button">
-                                                    <button className="btn btn-danger" onClick={() => setSelectedFile7(undefined)}>
+                                                    <span className="btn btn-danger" onClick={() => setSelectedFile7(undefined)}>
                                                         <FontAwesomeIcon icon={faTrash} className="" />
-                                                    </button>
+                                                    </span>
                                                 </div>
                                             </div>
                                         )}
@@ -585,9 +585,9 @@ const PostEdit = () => {
                                             <div className="position-relative">
                                                 <img alt="preview" src={preview8} className="img-fluid w-100 rounded" />
                                                 <div className="delete-button">
-                                                    <button className="btn btn-danger" onClick={() => setSelectedFile8(undefined)}>
+                                                    <span className="btn btn-danger" onClick={() => setSelectedFile8(undefined)}>
                                                         <FontAwesomeIcon icon={faTrash} className="" />
-                                                    </button>
+                                                    </span>
                                                 </div>
                                             </div>
                                         )}
@@ -606,9 +606,9 @@ const PostEdit = () => {
                                             <div className="position-relative">
                                                 <img alt="preview" src={preview9} className="img-fluid w-100 rounded" />
                                                 <div className="delete-button">
-                                                    <button className="btn btn-danger" onClick={() => setSelectedFile9(undefined)}>
+                                                    <span className="btn btn-danger" onClick={() => setSelectedFile9(undefined)}>
                                                         <FontAwesomeIcon icon={faTrash} className="" />
-                                                    </button>
+                                                    </span>
                                                 </div>
                                             </div>
                                         )}
@@ -627,9 +627,9 @@ const PostEdit = () => {
                                             <div className="position-relative">
                                                 <img alt="preview" src={preview10} className="img-fluid w-100 rounded" />
                                                 <div className="delete-button">
-                                                    <button className="btn btn-danger" onClick={() => setSelectedFile10(undefined)}>
+                                                    <span className="btn btn-danger" onClick={() => setSelectedFile10(undefined)}>
                                                         <FontAwesomeIcon icon={faTrash} className="" />
-                                                    </button>
+                                                    </span>
                                                 </div>
                                             </div>
                                         )}
@@ -716,7 +716,7 @@ const PostEdit = () => {
                                     </div>
                                 </div>
                                 <div className="form-group d-grid mt-3 mb-5">
-                                    <button className="btn btn-green mb-1" disabled={isSubmitting}>
+                                    <button type="submit" className="btn btn-green mb-1" disabled={isSubmitting}>
                                         {isSubmitting ? "Tassyklanýar..." : "Tassykla"}
                                     </button>
                                 </div>

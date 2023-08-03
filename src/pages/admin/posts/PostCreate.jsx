@@ -390,9 +390,9 @@ const PostCreate = () => {
                                         <div className="position-relative">
                                             <img alt="preview" src={preview1} className="img-fluid w-100 rounded" />
                                             <div className="delete-button">
-                                                <button className="btn btn-danger" onClick={() => setSelectedFile1(undefined)}>
+                                                <span className="btn btn-danger" onClick={() => setSelectedFile1(undefined)}>
                                                     <FontAwesomeIcon icon={faTrash} className="" />
-                                                </button>
+                                                </span>
                                             </div>
                                         </div>
                                     )}
@@ -411,9 +411,9 @@ const PostCreate = () => {
                                         <div className="position-relative">
                                             <img alt="preview" src={preview2} className="img-fluid w-100 rounded" />
                                             <div className="delete-button">
-                                                <button className="btn btn-danger" onClick={() => setSelectedFile2(undefined)}>
+                                                <span className="btn btn-danger" onClick={() => setSelectedFile2(undefined)}>
                                                     <FontAwesomeIcon icon={faTrash} className="" />
-                                                </button>
+                                                </span>
                                             </div>
                                         </div>
                                     )}
@@ -432,9 +432,9 @@ const PostCreate = () => {
                                         <div className="position-relative">
                                             <img alt="preview" src={preview3} className="img-fluid w-100 rounded" />
                                             <div className="delete-button">
-                                                <button className="btn btn-danger" onClick={() => setSelectedFile3(undefined)}>
+                                                <span className="btn btn-danger" onClick={() => setSelectedFile3(undefined)}>
                                                     <FontAwesomeIcon icon={faTrash} className="" />
-                                                </button>
+                                                </span>
                                             </div>
                                         </div>
                                     )}
@@ -453,9 +453,9 @@ const PostCreate = () => {
                                         <div className="position-relative">
                                             <img alt="preview" src={preview4} className="img-fluid w-100 rounded" />
                                             <div className="delete-button">
-                                                <button className="btn btn-danger" onClick={() => setSelectedFile4(undefined)}>
+                                                <span className="btn btn-danger" onClick={() => setSelectedFile4(undefined)}>
                                                     <FontAwesomeIcon icon={faTrash} className="" />
-                                                </button>
+                                                </span>
                                             </div>
                                         </div>
                                     )}
@@ -474,9 +474,9 @@ const PostCreate = () => {
                                         <div className="position-relative">
                                             <img alt="preview" src={preview5} className="img-fluid w-100 rounded" />
                                             <div className="delete-button">
-                                                <button className="btn btn-danger" onClick={() => setSelectedFile5(undefined)}>
+                                                <span className="btn btn-danger" onClick={() => setSelectedFile5(undefined)}>
                                                     <FontAwesomeIcon icon={faTrash} className="" />
-                                                </button>
+                                                </span>
                                             </div>
                                         </div>
                                     )}
@@ -495,9 +495,9 @@ const PostCreate = () => {
                                         <div className="position-relative">
                                             <img alt="preview" src={preview6} className="img-fluid w-100 rounded" />
                                             <div className="delete-button">
-                                                <button className="btn btn-danger" onClick={() => setSelectedFile6(undefined)}>
+                                                <span className="btn btn-danger" onClick={() => setSelectedFile6(undefined)}>
                                                     <FontAwesomeIcon icon={faTrash} className="" />
-                                                </button>
+                                                </span>
                                             </div>
                                         </div>
                                     )}
@@ -516,9 +516,9 @@ const PostCreate = () => {
                                         <div className="position-relative">
                                             <img alt="preview" src={preview7} className="img-fluid w-100 rounded" />
                                             <div className="delete-button">
-                                                <button className="btn btn-danger" onClick={() => setSelectedFile7(undefined)}>
+                                                <span className="btn btn-danger" onClick={() => setSelectedFile7(undefined)}>
                                                     <FontAwesomeIcon icon={faTrash} className="" />
-                                                </button>
+                                                </span>
                                             </div>
                                         </div>
                                     )}
@@ -537,9 +537,9 @@ const PostCreate = () => {
                                         <div className="position-relative">
                                             <img alt="preview" src={preview8} className="img-fluid w-100 rounded" />
                                             <div className="delete-button">
-                                                <button className="btn btn-danger" onClick={() => setSelectedFile8(undefined)}>
+                                                <span className="btn btn-danger" onClick={() => setSelectedFile8(undefined)}>
                                                     <FontAwesomeIcon icon={faTrash} className="" />
-                                                </button>
+                                                </span>
                                             </div>
                                         </div>
                                     )}
@@ -558,9 +558,9 @@ const PostCreate = () => {
                                         <div className="position-relative">
                                             <img alt="preview" src={preview9} className="img-fluid w-100 rounded" />
                                             <div className="delete-button">
-                                                <button className="btn btn-danger" onClick={() => setSelectedFile9(undefined)}>
+                                                <span className="btn btn-danger" onClick={() => setSelectedFile9(undefined)}>
                                                     <FontAwesomeIcon icon={faTrash} className="" />
-                                                </button>
+                                                </span>
                                             </div>
                                         </div>
                                     )}
@@ -579,9 +579,9 @@ const PostCreate = () => {
                                         <div className="position-relative">
                                             <img alt="preview" src={preview10} className="img-fluid w-100 rounded" />
                                             <div className="delete-button">
-                                                <button className="btn btn-danger" onClick={() => setSelectedFile10(undefined)}>
+                                                <span className="btn btn-danger" onClick={() => setSelectedFile10(undefined)}>
                                                     <FontAwesomeIcon icon={faTrash} className="" />
-                                                </button>
+                                                </span>
                                             </div>
                                         </div>
                                     )}
@@ -706,7 +706,7 @@ const PostCreate = () => {
                                 </div> */}
                             </div>
                             <div className="form-group d-grid mt-3 mb-5">
-                                <button className="btn btn-green mb-1" disabled={isSubmitting}>
+                                <button type="submit" className="btn btn-green mb-1" disabled={isSubmitting}>
                                     {isSubmitting ? "Tassyklanýar..." : "Tassykla"}
                                 </button>
                             </div>

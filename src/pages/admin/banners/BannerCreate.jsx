@@ -175,9 +175,9 @@ const BannerCreate = () => {
                                         <div className="position-relative">
                                             <img alt="preview" src={preview} className="img-fluid w-100 rounded" />
                                             <div className="delete-button">
-                                                <button className="btn btn-danger" onClick={() => setSelectedFile(undefined)}>
+                                                <span className="btn btn-danger" onClick={() => setSelectedFile(undefined)}>
                                                     <FontAwesomeIcon icon={faTrash} className="" />
-                                                </button>
+                                                </span>
                                             </div>
                                         </div>
                                     )}
@@ -263,7 +263,7 @@ const BannerCreate = () => {
                                 </div>
                             </div>
                             <div className="form-group d-grid mt-3 mb-5">
-                                <button className="btn btn-green" disabled={isSubmitting}>
+                                <button type="submit" className="btn btn-green" disabled={isSubmitting}>
                                     {isSubmitting ? "Tassyklanýar..." : "Tassykla"}
                                 </button>
                             </div>

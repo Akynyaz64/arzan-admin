@@ -278,7 +278,7 @@ const BannerEdit = () => {
                                     </div>
                                 </div>
                                 <div className="form-group d-grid mt-3 mb-5">
-                                    <button className="btn btn-green" disabled={isSubmitting}>
+                                    <button type="submit" className="btn btn-green" disabled={isSubmitting}>
                                         {isSubmitting ? "Tassyklanýar..." : "Tassykla"}
                                     </button>
                                 </div>

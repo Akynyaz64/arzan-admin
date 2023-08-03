@@ -201,7 +201,7 @@ const VideoCreate = () => {
                                         </div>
                                     </div>
                                 )}
-                                <button className="btn btn-green mb-1" disabled={isSubmitting}>
+                                <button type="submit" className="btn btn-green mb-1" disabled={isSubmitting}>
                                     {isSubmitting ? "Tassyklanýar..." : "Tassykla"}
                                 </button>
                             </div>

@@ -20604,12 +20604,12 @@ i {
     bottom: 0;
     right: 0;
 }
-.delete-button button {
+.delete-button span {
     width: 50px;
     height: 50px;
     border-radius: 0 0 10px 0;
 }
-.delete-button button svg {
+.delete-button span svg {
     font-size: 24px;
 }
 .tags-container {
