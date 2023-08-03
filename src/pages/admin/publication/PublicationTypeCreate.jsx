@@ -46,7 +46,7 @@ const PublicationTypeCreate = () => {
                 <div className="row justify-content-center">
                     <div className="col-lg-8">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Publication Type Create</h3>
+                            <h3 className="mb-3">Publication type goş</h3>
                         </div>
                     </div>
                     <div className="col-lg-8 mt-3">
@@ -57,7 +57,7 @@ const PublicationTypeCreate = () => {
                                     <input type="text" className="form-control" id="type" name="type" ref={type} required />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="like_amount">Amount</label>
+                                    <label htmlFor="like_amount">Coin mukdary</label>
                                     <input type="number" className="form-control" id="like_amount" name="like_amount" ref={like_amount} />
                                 </div>
                             </div>

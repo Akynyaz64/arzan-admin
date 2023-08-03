@@ -23,6 +23,11 @@ export const AuthContextProvider = ({children}) => {
             body: JSON.stringify(payload),
         });
         const resData = await apiResponse.json();
+        console.log(resData);
+        if (resData.status === false) {
+            toast.error(resData.message);
+            return;
+        }
         localStorage.setItem("adACto", resData.data.token);
         toast.success(resData.message);
         setAdmin(jwt_decode(resData.data.token));

@@ -6,7 +6,7 @@ import {ProtectedRoute, ScrollToTop} from "./components";
 
 //ADMIN
 import AdminLayout from "./pages/admin/Layout";
-import {Admin, AdminBannerCreate, AdminBannerEdit, AdminBannerView, AdminBanners, AdminCategories, AdminCategoryCreate, AdminCategoryEdit, AdminCategoryView, AdminCoins, AdminCoinsCreate, AdminCoinsEdit, AdminCoinsView, AdminComments, AdminFollowRewards, AdminFollowRewardsEdit, AdminLogin, AdminNotifications, AdminPageCategories, AdminPageCategoryCreate, AdminPageCategoryEdit, AdminPageCategoryView, AdminPages, AdminPaymentHistory, AdminPhotoCreate, AdminPhotoView, AdminPhotos, AdminPostCreate, AdminPostView, AdminPosts, AdminPublicationTypes, AdminPublicationTypesCreate, AdminPublicationTypesEdit, AdminPublicationTypesView, AdminStreakRewards, AdminStreakRewardsCreate, AdminStreakRewardsEdit, AdminSubCategories, AdminSubCategoryCreate, AdminSubCategoryEdit, AdminSubCategoryView, AdminTopList, AdminTopListCreate, AdminUserCreate, AdminUserView, AdminUsers, AdminVideoCreate, AdminVideoView, AdminVideos, AdminWelayatCreate, AdminWelayatEdit, AdminWelayats, Test} from "./pages/admin";
+import {Admin, AdminBannerCreate, AdminBannerEdit, AdminBannerView, AdminBanners, AdminCategories, AdminCategoryCreate, AdminCategoryEdit, AdminCategoryView, AdminCoinCreate, AdminCoinEdit, AdminCoinView, AdminCoins, AdminComments, AdminFollowRewardEdit, AdminFollowRewards, AdminLogin, AdminNotifications, AdminPageCategories, AdminPageCategoryCreate, AdminPageCategoryEdit, AdminPageCategoryView, AdminPages, AdminPaymentHistory, AdminPhotoCreate, AdminPhotoView, AdminPhotos, AdminPostCreate, AdminPostEdit, AdminPostView, AdminPosts, AdminPublicationTypeCreate, AdminPublicationTypeEdit, AdminPublicationTypeView, AdminPublicationTypes, AdminServiceCreate, AdminServiceEdit, AdminServiceView, AdminServices, AdminStreakRewardCreate, AdminStreakRewardEdit, AdminStreakRewards, AdminSubCategories, AdminSubCategoryCreate, AdminSubCategoryEdit, AdminSubCategoryView, AdminTopList, AdminTopListCreate, AdminUserCreate, AdminUserView, AdminUsers, AdminVideoCreate, AdminVideoView, AdminVideos, AdminWelayatCreate, AdminWelayatEdit, AdminWelayats} from "./pages/admin";
 
 //OTHERS
 import {AuthContextProvider} from "./context/AuthContext";
@@ -62,15 +62,20 @@ const App = () => {
                                 <Route path="page_categories/edit/:categoryId" element={<AdminPageCategoryEdit />} />
 
                                 <Route path="coins" element={<AdminCoins />} />
-                                <Route path="coins/:coinId" element={<AdminCoinsView />} />
-                                <Route path="coins/create" element={<AdminCoinsCreate />} />
-                                <Route path="coins/edit/:coinId" element={<AdminCoinsEdit />} />
+                                <Route path="coins/:coinId" element={<AdminCoinView />} />
+                                <Route path="coins/create" element={<AdminCoinCreate />} />
+                                <Route path="coins/edit/:coinId" element={<AdminCoinEdit />} />
+
+                                <Route path="services" element={<AdminServices />} />
+                                <Route path="services/:serviceId" element={<AdminServiceView />} />
+                                <Route path="services/create" element={<AdminServiceCreate />} />
+                                <Route path="services/edit/:serviceId" element={<AdminServiceEdit />} />
 
                                 <Route path="reward/follow" element={<AdminFollowRewards />} />
-                                <Route path="reward/follow/edit/:typeId/:locationId" element={<AdminFollowRewardsEdit />} />
+                                <Route path="reward/follow/edit/:typeId/:locationId" element={<AdminFollowRewardEdit />} />
                                 <Route path="reward/streak" element={<AdminStreakRewards />} />
-                                <Route path="reward/streak/create" element={<AdminStreakRewardsCreate />} />
-                                <Route path="reward/streak/edit/:streakId" element={<AdminStreakRewardsEdit />} />
+                                <Route path="reward/streak/create" element={<AdminStreakRewardCreate />} />
+                                <Route path="reward/streak/edit/:streakId" element={<AdminStreakRewardEdit />} />
 
                                 <Route path="welayats" element={<AdminWelayats />} />
                                 <Route path="welayats/create" element={<AdminWelayatCreate />} />
@@ -89,11 +94,12 @@ const App = () => {
                                 <Route path="posts" element={<AdminPosts />} />
                                 <Route path="posts/:postId" element={<AdminPostView />} />
                                 <Route path="posts/create" element={<AdminPostCreate />} />
+                                <Route path="posts/edit/:postId" element={<AdminPostEdit />} />
 
                                 <Route path="publication_types" element={<AdminPublicationTypes />} />
-                                <Route path="publication_types/:typeId" element={<AdminPublicationTypesView />} />
-                                <Route path="publication_types/create" element={<AdminPublicationTypesCreate />} />
-                                <Route path="publication_types/edit/:typeId" element={<AdminPublicationTypesEdit />} />
+                                <Route path="publication_types/:typeId" element={<AdminPublicationTypeView />} />
+                                <Route path="publication_types/create" element={<AdminPublicationTypeCreate />} />
+                                <Route path="publication_types/edit/:typeId" element={<AdminPublicationTypeEdit />} />
 
                                 <Route path="payment_history" element={<AdminPaymentHistory />} />
 
@@ -103,15 +109,6 @@ const App = () => {
 
                                 <Route path="comments" element={<AdminComments />} />
                             </Route>
-
-                            <Route
-                                path="/admin/test"
-                                element={
-                                    <ProtectedRoute accessBy="non-admin">
-                                        <Test />
-                                    </ProtectedRoute>
-                                }
-                            ></Route>
 
                             <Route
                                 path="/admin/login"

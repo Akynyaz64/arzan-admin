@@ -55,8 +55,8 @@ const TopListCreate = () => {
                         <form onSubmit={submitHandler} id="form">
                             <div className="form-row">
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="name">Category</label>
-                                    <select className="form-select" name="name" id="name" ref={name}>
+                                    <label htmlFor="name">Filteriň ady</label>
+                                    <select className="custom-select" name="name" id="name" ref={name}>
                                         {filterNames?.map((name, index) => (
                                             <option key={index} value={name.name}>
                                                 {name.value}

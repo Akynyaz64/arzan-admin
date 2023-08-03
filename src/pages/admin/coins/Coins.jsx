@@ -65,10 +65,10 @@ const Coins = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Coin packets</h3>
+                            <h3 className="mb-3">Coin paketler</h3>
                             <Link to="create" className="btn btn-primary add-list">
                                 <FontAwesomeIcon icon={faPlus} className="mr-3" />
-                                Coin packet goş
+                                Coin paket goş
                             </Link>
                         </div>
                     </div>
@@ -82,10 +82,10 @@ const Coins = () => {
                                         <tr className="ligth ligth-data">
                                             <th>№</th>
                                             <th>ID</th>
-                                            <th>Image</th>
-                                            <th>Amount</th>
-                                            <th>Price</th>
-                                            <th>Actions</th>
+                                            <th>Suraty</th>
+                                            <th>Mukdary</th>
+                                            <th>Bahasy</th>
+                                            <th>Amallar</th>
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
@@ -98,8 +98,8 @@ const Coins = () => {
                                                     <td>
                                                         <img src={"/" + coinPoket.image} alt="coin" style={{height: "65px"}} />
                                                     </td>
-                                                    <td>{coinPoket.amount}</td>
-                                                    <td>{coinPoket.price}</td>
+                                                    <td>{coinPoket.amount + " coin"}</td>
+                                                    <td>{coinPoket.price + " TMT"}</td>
                                                     <td>
                                                         <div className="d-flex align-items-center list-action">
                                                             <Link to={`${coinPoket.id}`} className="btn bg-primary btn-sm mr-2">
@@ -147,7 +147,7 @@ const Coins = () => {
                                                 </tr>
                                             ))
                                         ) : (
-                                            <div>Maglumat yok</div>
+                                            <div>Maglumat ýok</div>
                                         )}
                                         {/* MAP ETMELI YERI */}
                                     </tbody>

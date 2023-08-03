@@ -81,7 +81,7 @@ const WelayatEdit = () => {
                 <div className="row justify-content-center">
                     <div className="col-lg-8">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Welayat Edit</h3>
+                            <h3 className="mb-3">Welaýat üýtget</h3>
                         </div>
                     </div>
                     {isFetching ? (
@@ -91,7 +91,7 @@ const WelayatEdit = () => {
                             <form onSubmit={submitHandler} id="form" encType="multipart/form-data">
                                 <div className="form-row">
                                     <div className="col-md-12 mb-3">
-                                        <label htmlFor="name">Name</label>
+                                        <label htmlFor="name">Ady</label>
                                         <input type="text" className="form-control" id="name" name="name" defaultValue={welayat?.name} onChange={handleChange} required />
                                     </div>
                                 </div>

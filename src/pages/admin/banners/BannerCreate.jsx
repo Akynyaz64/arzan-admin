@@ -155,7 +155,7 @@ const BannerCreate = () => {
                 <div className="row justify-content-center">
                     <div className="col-lg-8">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Banner Create</h3>
+                            <h3 className="mb-3">Täze banner goş</h3>
                         </div>
                     </div>
                     <div className="col-lg-8 mt-3">
@@ -183,11 +183,11 @@ const BannerCreate = () => {
                                     )}
                                 </div>
                                 <div className="col-md-12 mb-3">
-                                    <label htmlFor="title">Title</label>
+                                    <label htmlFor="title">Ady</label>
                                     <input type="text" className="form-control" id="title" name="title" ref={title} />
                                 </div>
                                 <div className="col-md-12 mb-3">
-                                    <label htmlFor="">Description</label>
+                                    <label htmlFor="">Mazmuny</label>
                                     <CKEditor
                                         editor={ClassicEditor}
                                         data=""
@@ -202,16 +202,16 @@ const BannerCreate = () => {
                                     <input type="number" className="form-control" id="validationDefault02" required />
                                 </div> */}
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="start_date">Start Date</label>
+                                    <label htmlFor="start_date">Başlangyç senesi</label>
                                     <input type="date" className="form-control" id="start_date" name="start_date" ref={start_date} />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="end_date">End Date</label>
+                                    <label htmlFor="end_date">Soňky senesi</label>
                                     <input type="date" className="form-control" id="end_date" name="end_date" ref={end_date} />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="platform_id">Platform</label>
-                                    <select className="form-select" name="platform_id" id="platform_id" ref={platform_id}>
+                                    <label htmlFor="platform_id">Platforma</label>
+                                    <select className="custom-select" name="platform_id" id="platform_id" ref={platform_id}>
                                         {platforms?.map((platform, index) => (
                                             <option key={index} value={platform.id}>
                                                 {platform.name}
@@ -220,13 +220,13 @@ const BannerCreate = () => {
                                     </select>
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="url">Url</label>
+                                    <label htmlFor="url">Salgysy (url)</label>
                                     <input type="text" className="form-control" id="url" name="url" ref={url} />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="location_id">Welayats</label>
+                                    <label htmlFor="location_id">Welaýatlar</label>
                                     <select
-                                        className="form-select"
+                                        className="custom-select"
                                         name="location_id"
                                         id="location_id"
                                         multiple={true}
@@ -243,9 +243,9 @@ const BannerCreate = () => {
                                     </select>
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="page_id">Page / Category</label>
+                                    <label htmlFor="page_id">Page Category</label>
                                     <select
-                                        className="form-select"
+                                        className="custom-select"
                                         name="page_id"
                                         id="page_id"
                                         multiple={true}

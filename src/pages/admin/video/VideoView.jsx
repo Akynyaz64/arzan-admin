@@ -54,7 +54,7 @@ const VideoView = () => {
             <div className="row justify-content-center">
                 <div className="col-lg-8">
                     <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                        <h3 className="mb-3">About video</h3>
+                        <h3 className="mb-3">Wideo barada</h3>
                     </div>
                 </div>
                 {isLoading ? (
@@ -79,11 +79,11 @@ const VideoView = () => {
                                 <h2>{video.title}</h2>
                             </div>
                             <div className="col-md-4 mb-3">
-                                <h5>User:</h5>
+                                <h5>Ulanyjy:</h5>
                                 <p>{video.user?.name}</p>
                             </div>
                             <div className="col-md-4 mb-3">
-                                <h5>User role:</h5>
+                                <h5>Ulanyjy görnüşi:</h5>
                                 <p>{video.user?.role}</p>
                             </div>
                             <div className="col-md-4 mb-3">
@@ -91,7 +91,7 @@ const VideoView = () => {
                                 <p>{video.publication_type?.type}</p>
                             </div>
                             <div className="col-md-4 mb-3">
-                                <h5>Page / Category:</h5>
+                                <h5>Page / kategoriýa:</h5>
                                 <ul>
                                     {video.page_category?.map((page_category, index) => (
                                         <li key={index}>
@@ -105,7 +105,7 @@ const VideoView = () => {
                                 <p>{video.likes_count}</p>
                             </div>
                             <div className="col-md-4 mb-3">
-                                <h5>Gorlen sany:</h5>
+                                <h5>Görlen sany:</h5>
                                 <p>{video.viewed_count}</p>
                             </div>
                             <div className="col-md-4 mb-3">

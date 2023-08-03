@@ -54,7 +54,7 @@ const BannerView = () => {
             <div className="row justify-content-center">
                 <div className="col-lg-8">
                     <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                        <h3 className="mb-3">About banner</h3>
+                        <h3 className="mb-3">Banner barada maglumat</h3>
                     </div>
                 </div>
                 {isLoading ? (
@@ -70,7 +70,7 @@ const BannerView = () => {
                                 <p dangerouslySetInnerHTML={{__html: banner.description}}></p>
                             </div>
                             <div className="col-md-4 mb-3">
-                                <h5>Platform:</h5>
+                                <h5>Platforma:</h5>
                                 <p>
                                     {banner.platform?.map((platform, index) => (
                                         <span key={index}>{platform.name}</span>
@@ -78,11 +78,11 @@ const BannerView = () => {
                                 </p>
                             </div>
                             <div className="col-md-4 mb-3">
-                                <h5>Başlaýan wagty:</h5>
+                                <h5>Başlangyç senesi:</h5>
                                 <p>{formatDate(banner.start_date)}</p>
                             </div>
                             <div className="col-md-4 mb-3">
-                                <h5>Gutarýan wagty:</h5>
+                                <h5>Soňky senesi:</h5>
                                 <p>{formatDate(banner.end_date)}</p>
                             </div>
                             <div className="col-md-4 mb-3">
@@ -108,7 +108,7 @@ const BannerView = () => {
                                 </ul>
                             </div>
                             <div className="col-md-4 mb-3">
-                                <h5>URL:</h5>
+                                <h5>Salgysy (url):</h5>
                                 <p>{banner.url}</p>
                             </div>
                         </div>

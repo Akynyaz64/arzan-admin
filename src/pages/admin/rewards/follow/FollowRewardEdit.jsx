@@ -4,7 +4,7 @@ import {toast} from "react-hot-toast";
 import useFetch from "../../../../hooks/useFetch";
 import {userTypes} from "../../../../data/data";
 
-const FollowRewardsEdit = () => {
+const FollowRewardEdit = () => {
     const navigate = useNavigate();
     const {typeId} = useParams();
     const {locationId} = useParams();
@@ -61,14 +61,14 @@ const FollowRewardsEdit = () => {
                 <div className="row justify-content-center">
                     <div className="col-lg-8">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Follow Reward edit</h3>
+                            <h3 className="mb-3">Follow Reward üýtgetmek</h3>
                         </div>
                     </div>
                     <div className="col-lg-8 mt-3">
                         <form onSubmit={submitHandler} id="form" encType="multipart/form-data">
                             <div className="form-row">
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="subscription_type_id">User type</label>
+                                    <label htmlFor="subscription_type_id">Ulanyjy görnüşi</label>
                                     <input type="text" className="form-control" id="subscription_type_id" name="subscription_type_id" defaultValue={userTypes.find((x) => x.name === typeId).name} disabled />
                                 </div>
                                 <div className="col-md-6 mb-3">
@@ -93,4 +93,4 @@ const FollowRewardsEdit = () => {
     );
 };
 
-export default FollowRewardsEdit;
+export default FollowRewardEdit;

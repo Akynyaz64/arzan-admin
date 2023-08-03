@@ -39,7 +39,7 @@ const PageCategoryView = () => {
             <div className="row justify-content-center">
                 <div className="col-lg-8">
                     <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                        <h3 className="mb-3">About page category</h3>
+                        <h3 className="mb-3">Page kategoriýa barada</h3>
                     </div>
                 </div>
                 {isLoading ? (
@@ -47,16 +47,18 @@ const PageCategoryView = () => {
                 ) : (
                     <div className="col-lg-8 mt-3">
                         <div className="form-row">
-                            <div className="col-xl-12 mb-4">
+                            <div className="col-xl-7 mb-4">
                                 <img alt="page_category" src={"/" + pageCategory.image?.url} className="img-fluid w-100 rounded" />
                             </div>
-                            <div className="col-md-6 mb-3">
-                                <h3>Page kategoriýa:</h3>
-                                <h2>{pageCategory.category?.name}</h2>
-                            </div>
-                            <div className="col-md-6 mb-3">
-                                <h3>Degişli sahypasy:</h3>
-                                <h2>{pageCategory.page?.name}</h2>
+                            <div className="col-lg-5">
+                                <div className="col-md-12 mb-3">
+                                    <h4>Ady:</h4>
+                                    <h3>{pageCategory.category?.name}</h3>
+                                </div>
+                                <div className="col-md-12 mb-3">
+                                    <h4>Degişli sahypasy:</h4>
+                                    <h3>{pageCategory.page?.name}</h3>
+                                </div>
                             </div>
                         </div>
                     </div>

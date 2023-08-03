@@ -65,10 +65,10 @@ const Categories = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Categories</h3>
+                            <h3 className="mb-3">Arzanladyş kategoriýalary</h3>
                             <Link to="create" className="btn btn-primary add-list">
                                 <FontAwesomeIcon icon={faPlus} className="mr-3" />
-                                Category goş
+                                Arzanladyş kategoriýa goş
                             </Link>
                         </div>
                     </div>
@@ -82,10 +82,10 @@ const Categories = () => {
                                         <tr className="ligth ligth-data">
                                             <th>№</th>
                                             <th>ID</th>
-                                            <th>Image</th>
-                                            <th>Title</th>
+                                            <th>Suraty</th>
+                                            <th>Ady</th>
                                             {/* <th>Priority</th> */}
-                                            <th>Actions</th>
+                                            <th>Amallar</th>
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
@@ -147,7 +147,7 @@ const Categories = () => {
                                                 </tr>
                                             ))
                                         ) : (
-                                            <div>Maglumat yok</div>
+                                            <div>Maglumat ýok</div>
                                         )}
                                         {/* MAP ETMELI YERI */}
                                     </tbody>

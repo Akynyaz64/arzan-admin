@@ -114,7 +114,7 @@ const PageCategoryEdit = () => {
                 <div className="row justify-content-center">
                     <div className="col-lg-8">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Page Category Edit</h3>
+                            <h3 className="mb-3">Page kategoriýa üýtget</h3>
                         </div>
                     </div>
                     {isFetching ? (
@@ -145,13 +145,13 @@ const PageCategoryEdit = () => {
                                         )}
                                     </div>
                                     <div className="col-md-6 mb-3">
-                                        <label htmlFor="name">Name</label>
+                                        <label htmlFor="name">Ady</label>
                                         <input type="text" className="form-control" id="name" name="name" defaultValue={pageCategory.category?.name} onChange={handleChange} required />
                                     </div>
                                     <div className="col-md-6 mb-3">
-                                        <label htmlFor="page_id">Page</label>
+                                        <label htmlFor="page_id">Sahypa</label>
                                         <select
-                                            className="form-select"
+                                            className="custom-select"
                                             name="page_id"
                                             id="page_id"
                                             value={page.id}

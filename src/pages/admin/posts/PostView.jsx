@@ -39,7 +39,7 @@ const PostView = () => {
             <div className="row justify-content-center">
                 <div className="col-lg-8">
                     <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                        <h3 className="mb-3">About post</h3>
+                        <h3 className="mb-3">Arzanladyş barada</h3>
                     </div>
                 </div>
                 {isLoading ? (
@@ -71,11 +71,11 @@ const PostView = () => {
                                 <p>{post.phone}</p>
                             </div>
                             <div className="col-md-4 mb-3">
-                                <h5>Başlangyç wagty:</h5>
+                                <h5>Başlangyç senesi:</h5>
                                 <p>{post.start_date?.slice(0, 10)}</p>
                             </div>
                             <div className="col-md-4 mb-3">
-                                <h5>Soňky wagty:</h5>
+                                <h5>Soňky senesi:</h5>
                                 <p>{post.end_date?.slice(0, 10)}</p>
                             </div>
                             <div className="col-md-4 mb-3">
@@ -83,7 +83,7 @@ const PostView = () => {
                                 <p>{post.created_at?.slice(0, 10)}</p>
                             </div>
                             <div className="col-md-4 mb-3">
-                                <h5>User:</h5>
+                                <h5>Ulanyjy:</h5>
                                 <p>{post.user?.name}</p>
                             </div>
                             <div className="col-md-4 mb-3">
@@ -100,10 +100,10 @@ const PostView = () => {
                             </div>
                             <div className="col-md-4 mb-3">
                                 <h5>Tassyklanan:</h5>
-                                <p>{post.approved ? "Approved" : "Not approved"}</p>
+                                <p>{post.approved ? "Tassyklanan" : "Tassyklanmadyk"}</p>
                             </div>
                             <div className="col-md-12 mb-3">
-                                <h5>Hashtags:</h5>
+                                <h5>Tagler:</h5>
                                 <div className="tags-container mt-3">
                                     {post.tags?.map((e, index) => (
                                         <span className="tag" key={index}>

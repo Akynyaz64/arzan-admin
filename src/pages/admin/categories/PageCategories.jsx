@@ -65,10 +65,10 @@ const PageCategories = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Page Categories</h3>
+                            <h3 className="mb-3">Page kategoriýalary</h3>
                             <Link to="create" className="btn btn-primary add-list">
                                 <FontAwesomeIcon icon={faPlus} className="mr-3" />
-                                Page Category goş
+                                Page kategoriýa goş
                             </Link>
                         </div>
                     </div>
@@ -82,11 +82,11 @@ const PageCategories = () => {
                                         <tr className="ligth ligth-data">
                                             <th>№</th>
                                             <th>ID</th>
-                                            <th>Image</th>
-                                            <th>Title</th>
-                                            <th>Page</th>
+                                            <th>Suraty</th>
+                                            <th>Ady</th>
+                                            <th>Sahypa</th>
                                             {/* <th>Priority</th> */}
-                                            <th>Actions</th>
+                                            <th>Amallar</th>
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
@@ -149,7 +149,7 @@ const PageCategories = () => {
                                                 </tr>
                                             ))
                                         ) : (
-                                            <div>Maglumat yok</div>
+                                            <div>Maglumat ýok</div>
                                         )}
                                         {/* MAP ETMELI YERI */}
                                     </tbody>

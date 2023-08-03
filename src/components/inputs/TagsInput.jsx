@@ -26,7 +26,7 @@ function TagsInput() {
                     </span>
                 </div>
             ))}
-            <input onKeyDown={handleKeyDown} type="text" className="tags-input" placeholder="Type somthing" />
+            <input onKeyDown={handleKeyDown} type="text" className="tags-input" placeholder="Tags" />
         </div>
     );
 }

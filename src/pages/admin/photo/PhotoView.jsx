@@ -54,7 +54,7 @@ const PhotoView = () => {
             <div className="row justify-content-center">
                 <div className="col-lg-8">
                     <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                        <h3 className="mb-3">About photo</h3>
+                        <h3 className="mb-3">Galereýa barada</h3>
                     </div>
                 </div>
                 {isLoading ? (
@@ -74,11 +74,11 @@ const PhotoView = () => {
                                 <h2>{photo.title}</h2>
                             </div>
                             <div className="col-md-4 mb-3">
-                                <h5>User:</h5>
+                                <h5>Ulanyjy:</h5>
                                 <p>{photo.user?.name}</p>
                             </div>
                             <div className="col-md-4 mb-3">
-                                <h5>User role:</h5>
+                                <h5>Ulanyjy görnüşi:</h5>
                                 <p>{photo.user?.role}</p>
                             </div>
                             <div className="col-md-4 mb-3">

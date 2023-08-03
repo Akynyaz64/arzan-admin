@@ -33,26 +33,31 @@ export {default as AdminVideos} from "./video/Videos";
 export {default as AdminVideoCreate} from "./video/VideoCreate";
 export {default as AdminVideoView} from "./video/VideoView";
 
+export {default as AdminServices} from "./services/Services";
+export {default as AdminServiceCreate} from "./services/ServiceCreate";
+export {default as AdminServiceView} from "./services/ServiceView";
+export {default as AdminServiceEdit} from "./services/ServiceEdit";
+
 export {default as AdminPageCategories} from "./categories/PageCategories";
 export {default as AdminPageCategoryCreate} from "./categories/PageCategoryCreate";
 export {default as AdminPageCategoryView} from "./categories/PageCategoryView";
 export {default as AdminPageCategoryEdit} from "./categories/PageCategoryEdit";
 
 export {default as AdminCoins} from "./coins/Coins";
-export {default as AdminCoinsCreate} from "./coins/CoinsCreate";
-export {default as AdminCoinsView} from "./coins/CoinsView";
-export {default as AdminCoinsEdit} from "./coins/CoinsEdit";
+export {default as AdminCoinCreate} from "./coins/CoinCreate";
+export {default as AdminCoinView} from "./coins/CoinView";
+export {default as AdminCoinEdit} from "./coins/CoinEdit";
 
 export {default as AdminFollowRewards} from "./rewards/follow/FollowRewards";
-export {default as AdminFollowRewardsEdit} from "./rewards/follow/FollowRewardsEdit";
+export {default as AdminFollowRewardEdit} from "./rewards/follow/FollowRewardEdit";
 export {default as AdminStreakRewards} from "./rewards/streak/StreakRewards";
-export {default as AdminStreakRewardsCreate} from "./rewards/streak/StreakRewardsCreate";
-export {default as AdminStreakRewardsEdit} from "./rewards/streak/StreakRewardsEdit";
+export {default as AdminStreakRewardCreate} from "./rewards/streak/StreakRewardCreate";
+export {default as AdminStreakRewardEdit} from "./rewards/streak/StreakRewardEdit";
 
 export {default as AdminPublicationTypes} from "./publication/PublicationTypes";
-export {default as AdminPublicationTypesCreate} from "./publication/PublicationTypeCreate";
-export {default as AdminPublicationTypesView} from "./publication/PublicationTypeView";
-export {default as AdminPublicationTypesEdit} from "./publication/PublicationTypeEdit";
+export {default as AdminPublicationTypeCreate} from "./publication/PublicationTypeCreate";
+export {default as AdminPublicationTypeView} from "./publication/PublicationTypeView";
+export {default as AdminPublicationTypeEdit} from "./publication/PublicationTypeEdit";
 
 export {default as AdminWelayats} from "./welayats/Welayats";
 export {default as AdminWelayatCreate} from "./welayats/WelayatCreate";
@@ -61,6 +66,7 @@ export {default as AdminWelayatEdit} from "./welayats/WelayatEdit";
 export {default as AdminPosts} from "./posts/Posts";
 export {default as AdminPostCreate} from "./posts/PostCreate";
 export {default as AdminPostView} from "./posts/PostView";
+export {default as AdminPostEdit} from "./posts/PostEdit";
 
 export {default as AdminPaymentHistory} from "./payment/PaymentHistory";
 
@@ -69,4 +75,3 @@ export {default as AdminNotifications} from "./notifications/Notifications";
 export {default as AdminPages} from "./pages/Pages";
 
 export {default as AdminComments} from "./comments/Comments";
-export {default as Test} from "./Test";

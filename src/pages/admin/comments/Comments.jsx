@@ -1,5 +1,5 @@
 const Comments = () => {
-    return <div>Comments</div>;
+    return <div>Kommentariýalar</div>;
 };
 
 export default Comments;

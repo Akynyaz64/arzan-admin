@@ -39,7 +39,7 @@ const CategoryView = () => {
             <div className="row justify-content-center">
                 <div className="col-lg-8">
                     <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                        <h3 className="mb-3">About post category</h3>
+                        <h3 className="mb-3">Arzanladyş kategoriýa barada</h3>
                     </div>
                 </div>
                 {isLoading ? (
@@ -47,12 +47,12 @@ const CategoryView = () => {
                 ) : (
                     <div className="col-lg-8 mt-3">
                         <div className="form-row">
-                            <div className="col-xl-12 mb-4">
+                            <div className="col-xl-7 mb-4">
                                 <img alt="category" src={category?.image} className="img-fluid w-100 rounded" />
                             </div>
-                            <div className="col-md-12 mb-3">
-                                <h3>Post kategoriyanyn ady:</h3>
-                                <h2>{category.name}</h2>
+                            <div className="col-md-5 mb-3">
+                                <h4>Ady:</h4>
+                                <h3>{category.name}</h3>
                             </div>
                         </div>
                     </div>

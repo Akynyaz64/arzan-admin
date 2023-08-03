@@ -83,9 +83,9 @@ const PublicationTypes = () => {
                                             <th>№</th>
                                             <th>ID</th>
                                             <th>Type</th>
-                                            <th>Amount</th>
+                                            <th>Mukdary</th>
                                             {/* <th>Priority</th> */}
-                                            <th>Actions</th>
+                                            <th>Amallar</th>
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
@@ -145,7 +145,7 @@ const PublicationTypes = () => {
                                                 </tr>
                                             ))
                                         ) : (
-                                            <div>Maglumat yok</div>
+                                            <div>Maglumat ýok</div>
                                         )}
                                         {/* MAP ETMELI YERI */}
                                     </tbody>

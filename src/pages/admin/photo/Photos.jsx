@@ -1,46 +1,61 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 import {Link} from "react-router-dom";
 import {toast} from "react-hot-toast";
 import Popup from "reactjs-popup";
+import ReactPaginate from "react-paginate";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClose, faEye, faPen, faPlus, faSearch, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Loader} from "../../../components";
+import useFetch from "../../../hooks/useFetch";
 
 const Photos = () => {
+    const search = useRef();
+    const table = useRef();
+    const [pages, setPages] = useState();
+    const [page, setPage] = useState(1);
+    const [urlParams, setUrlParams] = useState({
+        limit: 100,
+    });
     const [galleries, setGalleries] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    const [searchQ, setSearchQ] = useState();
+    const [types] = useFetch("/admin-api/publication-type", "data", true);
 
-    const searchHandle = async () => {
+    const changePage = ({selected}) => {
+        setPage(selected + 1);
+        console.log(page);
+        setUrlParams({
+            ...urlParams,
+            offset: selected * urlParams.limit,
+        });
+        table.current.scrollIntoView({behavior: "smooth"});
+    };
+
+    const setType = async (id, value) => {
         setIsLoading(true);
-        const searchData = {
-            text: searchQ,
-        };
-        console.log(searchData);
-
-        const response = await fetch(`/admin-api/gallery/search`, {
+        const response = await fetch(`/admin-api/gallery/publication-type`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${localStorage.getItem("adACto")}`,
             },
-            body: JSON.stringify(searchData),
+            body: JSON.stringify({id: id, publication_type_id: value}),
         });
+
         if (!response.ok) {
             setIsLoading(false);
             toast.error("Error status: " + response.statusText);
             return null;
         }
         const resData = await response.json();
-        console.log(resData);
-        setGalleries(resData.data);
+        toast.success(resData.message);
+        fetchData(urlParams);
         setIsLoading(false);
     };
 
-    const fetchData = async () => {
+    const fetchData = async (data) => {
         setIsLoading(true);
-        const response = await fetch(`/admin-api/gallery`, {
+        const response = await fetch(`/admin-api/gallery?` + new URLSearchParams(data), {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -56,16 +71,13 @@ const Photos = () => {
         const resData = await response.json();
         console.log(resData);
         setGalleries(resData.data);
+        setPages(resData.data[0].items_full_count / urlParams.limit);
         setIsLoading(false);
     };
 
     useEffect(() => {
-        fetchData();
-    }, []);
-
-    useEffect(() => {
-        console.log(galleries);
-    }, [galleries]);
+        fetchData(urlParams);
+    }, [urlParams]);
 
     const handleDelete = async (e, id) => {
         e.preventDefault();
@@ -110,60 +122,37 @@ const Photos = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Photos</h3>
+                            <h3 className="mb-3">Galereýalar</h3>
                             <Link to="create" className="btn btn-primary add-list">
                                 <FontAwesomeIcon icon={faPlus} className="mr-3" />
-                                Photo goş
+                                Galereýa goş
                             </Link>
                         </div>
                     </div>
-                    <div className="col-xl-12 mb-4 d-flex">
-                        <div className="iq-search-bar device-search mr-2">
+                    <div className="col-xl-2 mb-4">
+                        <div className="iq-search-bar device-search h-100">
                             <form
                                 className="searchbox w-100 h-100"
                                 onSubmit={(e) => {
                                     e.preventDefault();
-                                    searchHandle();
+                                    if (search.current.value === "") {
+                                        setUrlParams((current) => {
+                                            const copy = {...current, offset: 0};
+                                            delete copy["query"];
+                                            return copy;
+                                        });
+                                    } else {
+                                        setUrlParams({
+                                            ...urlParams,
+                                            query: search.current.value,
+                                        });
+                                    }
                                 }}
                             >
                                 <a className="search-link" style={{top: "9px"}}>
                                     <FontAwesomeIcon icon={faSearch} />
                                 </a>
-                                <input
-                                    type="search"
-                                    className="text search-input"
-                                    placeholder="Search here..."
-                                    onChange={(e) => {
-                                        setSearchQ(e.target.value);
-                                    }}
-                                />
-                                {/* <input autoComplete="off" role="combobox" list="" id="input" name="browsers" placeholder="Select your fav browser" />
-
-                                <datalist id="browsers" role="listbox">
-                                    <option value="Internet Explorer">Internet Explorer</option>
-                                    <option value="Chrome">Chrome</option>
-                                    <option value="Safari">Safari</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                </datalist> */}
+                                <input type="search" className="text search-input" placeholder="Gözleg..." ref={search} />
                             </form>
                         </div>
                     </div>
@@ -172,16 +161,17 @@ const Photos = () => {
                     ) : (
                         <div className="col-lg-12">
                             <div className="table-responsive rounded mb-3">
-                                <table className="data-table table mb-0 tbl-server-info">
+                                <table className="data-table table mb-0 tbl-server-info" ref={table}>
                                     <thead className="bg-white text-uppercase">
                                         <tr className="ligth ligth-data">
                                             <th>№</th>
                                             <th>ID</th>
-                                            <th>Preview / Title</th>
-                                            <th>Gosan ulanyjy</th>
-                                            <th>Page / Category</th>
+                                            <th>Suraty / Ady</th>
+                                            <th>Goşan ulanyjy</th>
+                                            <th>Page / kategoriýa</th>
+                                            {/* <th>Görnüşi</th> */}
                                             {/* <th>Suratlar</th> */}
-                                            <th>Actions</th>
+                                            <th>Amallar</th>
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
@@ -209,6 +199,24 @@ const Photos = () => {
                                                                 <img key={e.id} src={e.url} alt="" style={{height: "65px"}} />
                                                             ))}
                                                         </Slider>
+                                                    </td> */}
+                                                    {/* <td>
+                                                        <select
+                                                            className="custom-select"
+                                                            name="publication_type_id"
+                                                            id="publication_type_id"
+                                                            style={{width: "110px"}}
+                                                            value={gallery.publication_type.id}
+                                                            onChange={(e) => {
+                                                                setType(gallery.id, Number(e.target.value));
+                                                            }}
+                                                        >
+                                                            {types?.map((type, index) => (
+                                                                <option key={index} value={type.id}>
+                                                                    {type.type}
+                                                                </option>
+                                                            ))}
+                                                        </select>
                                                     </td> */}
                                                     <td>
                                                         <div className="d-flex align-items-center list-action">
@@ -257,7 +265,7 @@ const Photos = () => {
                                                 </tr>
                                             ))
                                         ) : (
-                                            <div>Maglumat yok</div>
+                                            <div>Maglumat ýok</div>
                                         )}
                                         {/* MAP ETMELI YERI */}
                                     </tbody>
@@ -265,6 +273,9 @@ const Photos = () => {
                             </div>
                         </div>
                     )}
+                    <div className="col-12 d-flex text-center justify-content-center mt-20">
+                        <ReactPaginate previousLabel="←" nextLabel="→" pageCount={pages} onPageChange={changePage} containerClassName={"pagination"} pageLinkClassName={"page-link"} previousLinkClassName={"page-link"} nextLinkClassName={"page-link"} activeLinkClassName={"page-link current"} disabledLinkClassName={"page-link disabled"} />
+                    </div>
                 </div>
             </div>
         </>

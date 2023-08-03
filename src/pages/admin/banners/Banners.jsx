@@ -98,7 +98,7 @@ const Banners = () => {
                                     }}
                                 >
                                     <FontAwesomeIcon icon={faMobileAlt} className="me-2" />
-                                    App Banner
+                                    App bannerler
                                 </button>
                             </li>
                             <li className="nav-item" role="presentation">
@@ -115,22 +115,22 @@ const Banners = () => {
                                     }}
                                 >
                                     <FontAwesomeIcon icon={faGlobe} className="me-2" />
-                                    Web Banner
+                                    Web bannerler
                                 </button>
                             </li>
                         </ul>
                     </div>
                     <div className="col-xl-3 mb-4">
                         <select
-                            className="form-control"
-                            name="page_id"
-                            id="page_id"
+                            className="custom-select"
+                            name="page_category"
+                            id="page_category"
                             value={urlParams.page}
                             onChange={(e) => {
                                 if (e.target.value === "Ählisi") {
                                     setUrlParams((current) => {
                                         const copy = {...current};
-                                        delete copy["page"];
+                                        delete copy["page_category"];
                                         return copy;
                                     });
                                 } else {
@@ -153,9 +153,9 @@ const Banners = () => {
                     </div>
                     <div className="col-xl-3 mb-4">
                         <select
-                            className="form-control"
-                            name="location_id"
-                            id="location_id"
+                            className="custom-select"
+                            name="location"
+                            id="location"
                             value={urlParams.location}
                             onChange={(e) => {
                                 if (e.target.value === "Ählisi") {
@@ -201,7 +201,7 @@ const Banners = () => {
                                                     <p className="card-text" dangerouslySetInnerHTML={{__html: banner.description.substring(0, 100) + "..."}}></p>
                                                     <ul className="list-unstyled">
                                                         <li>
-                                                            <b>Url</b> -
+                                                            <b>Salgysy (url)</b> -
                                                             <Link to={banner.url} target="_blank" rel="noreferrer">
                                                                 {banner.url}
                                                             </Link>
@@ -210,19 +210,19 @@ const Banners = () => {
                                                         <b>Priority</b> - {banner.priority}
                                                     </li> */}
                                                         <li>
-                                                            <b>Start date</b> - {banner.start_date?.slice(0, 10)}
+                                                            <b>Başlangyç senesi</b> - {banner.start_date?.slice(0, 10)}
                                                         </li>
                                                         <li>
-                                                            <b>End date</b> - {banner.end_date?.slice(0, 10)}
+                                                            <b>Soňky senesi</b> - {banner.end_date?.slice(0, 10)}
                                                         </li>
                                                         <li>
-                                                            <b>Type</b> -{" "}
+                                                            <b>Platforma</b> -{" "}
                                                             {banner.platform.map((e) => {
                                                                 return e.name + " ";
                                                             })}
                                                         </li>
                                                         <li>
-                                                            <b>Welayat</b> -
+                                                            <b>Welaýatlar</b> -
                                                             {banner.location.map((e) => {
                                                                 return e?.display_name + " ";
                                                             })}
@@ -278,7 +278,7 @@ const Banners = () => {
                                         </div>
                                     ))
                                 ) : (
-                                    <div>Maglumat yok</div>
+                                    <div>Maglumat ýok</div>
                                 )}
                             </div>
                         </div>

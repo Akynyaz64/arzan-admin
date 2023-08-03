@@ -1,49 +1,61 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 import {Link} from "react-router-dom";
 import {toast} from "react-hot-toast";
 import Popup from "reactjs-popup";
+import ReactPaginate from "react-paginate";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClose, faEye, faHeart, faPen, faPlus, faSearch, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Loader} from "../../../components";
+import useFetch from "../../../hooks/useFetch";
 
 const Videos = () => {
+    const search = useRef();
+    const table = useRef();
+    const [pages, setPages] = useState();
+    const [page, setPage] = useState(1);
+    const [urlParams, setUrlParams] = useState({
+        limit: 100,
+    });
     const [videos, setVideos] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [searchQ, setSearchQ] = useState();
 
-    const searchHandle = async () => {
-        if (searchQ === "") {
-            toast.error("Boş bolmaly däl!");
-            return 0;
-        }
+    const [types] = useFetch("/admin-api/publication-type", "data", true);
+
+    const changePage = ({selected}) => {
+        setPage(selected + 1);
+        console.log(page);
+        setUrlParams({
+            ...urlParams,
+            offset: selected * urlParams.limit,
+        });
+        table.current.scrollIntoView({behavior: "smooth"});
+    };
+
+    const setType = async (id, value) => {
         setIsLoading(true);
-        const searchData = {
-            text: searchQ,
-        };
-        console.log(searchData);
-
-        const response = await fetch(`/admin-api/video/search`, {
+        const response = await fetch(`/admin-api/video/publication-type`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${localStorage.getItem("adACto")}`,
             },
-            body: JSON.stringify(searchData),
+            body: JSON.stringify({id: id, publication_type_id: value}),
         });
+
         if (!response.ok) {
             setIsLoading(false);
             toast.error("Error status: " + response.statusText);
             return null;
         }
         const resData = await response.json();
-        console.log(resData);
-        setVideos(resData.data);
+        toast.success(resData.message);
+        fetchData(urlParams);
         setIsLoading(false);
     };
 
-    const fetchData = async () => {
+    const fetchData = async (data) => {
         setIsLoading(true);
-        const response = await fetch(`/admin-api/video`, {
+        const response = await fetch(`/admin-api/video?` + new URLSearchParams(data), {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -59,12 +71,13 @@ const Videos = () => {
         const resData = await response.json();
         console.log(resData);
         setVideos(resData.data);
+        setPages(resData.data[0].items_full_count / urlParams.limit);
         setIsLoading(false);
     };
 
     useEffect(() => {
-        fetchData();
-    }, []);
+        fetchData(urlParams);
+    }, [urlParams]);
 
     const handleDelete = async (e, id) => {
         e.preventDefault();
@@ -96,60 +109,37 @@ const Videos = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Videos</h3>
+                            <h3 className="mb-3">Wideolar</h3>
                             <Link to="create" className="btn btn-primary add-list">
                                 <FontAwesomeIcon icon={faPlus} className="mr-3" />
-                                Video goş
+                                Wideo goş
                             </Link>
                         </div>
                     </div>
-                    <div className="col-xl-12 mb-4 d-flex">
-                        <div className="iq-search-bar device-search mr-2">
+                    <div className="col-xl-2 mb-4">
+                        <div className="iq-search-bar device-search h-100">
                             <form
                                 className="searchbox w-100 h-100"
                                 onSubmit={(e) => {
                                     e.preventDefault();
-                                    searchHandle();
+                                    if (search.current.value === "") {
+                                        setUrlParams((current) => {
+                                            const copy = {...current, offset: 0};
+                                            delete copy["query"];
+                                            return copy;
+                                        });
+                                    } else {
+                                        setUrlParams({
+                                            ...urlParams,
+                                            query: search.current.value,
+                                        });
+                                    }
                                 }}
                             >
                                 <a className="search-link" style={{top: "9px"}}>
                                     <FontAwesomeIcon icon={faSearch} />
                                 </a>
-                                <input
-                                    type="search"
-                                    className="text search-input"
-                                    placeholder="Search here..."
-                                    onChange={(e) => {
-                                        setSearchQ(e.target.value);
-                                    }}
-                                />
-                                {/* <input autoComplete="off" role="combobox" list="" id="input" name="browsers" placeholder="Select your fav browser" />
-
-                                <datalist id="browsers" role="listbox">
-                                    <option value="Internet Explorer">Internet Explorer</option>
-                                    <option value="Chrome">Chrome</option>
-                                    <option value="Safari">Safari</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                    <option value="Microsoft Edge">Microsoft Edge</option>
-                                    <option value="Firefox">Firefox</option>
-                                </datalist> */}
+                                <input type="search" className="text search-input" placeholder="Gözleg..." ref={search} />
                             </form>
                         </div>
                     </div>
@@ -158,18 +148,19 @@ const Videos = () => {
                     ) : (
                         <div className="col-lg-12">
                             <div className="table-responsive rounded mb-3">
-                                <table className="data-table table mb-0 tbl-server-info">
+                                <table className="data-table table mb-0 tbl-server-info" ref={table}>
                                     <thead className="bg-white text-uppercase">
                                         <tr className="ligth ligth-data">
                                             <th>№</th>
                                             <th>ID</th>
-                                            <th>Thumbnail and Title</th>
-                                            <th>Gosan ulanyjy</th>
-                                            <th>Page / Category</th>
+                                            <th>Suraty we ady</th>
+                                            <th>Goşan ulanyjy</th>
+                                            <th>Page / kategoriýa</th>
+                                            <th>Görnüşi</th>
                                             <th>Likelary</th>
-                                            <th>Gorlen sany</th>
-                                            <th>Video</th>
-                                            <th>Actions</th>
+                                            <th>Görlen sany</th>
+                                            <th>Wideo</th>
+                                            <th>Amallar</th>
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
@@ -190,6 +181,24 @@ const Videos = () => {
                                                         {video?.page_category?.map((e) => {
                                                             return e.page?.name + " / " + e.category?.name;
                                                         })}
+                                                    </td>
+                                                    <td>
+                                                        <select
+                                                            className="custom-select"
+                                                            name="publication_type_id"
+                                                            id="publication_type_id"
+                                                            style={{width: "110px"}}
+                                                            value={video.publication_type.id}
+                                                            onChange={(e) => {
+                                                                setType(video.id, Number(e.target.value));
+                                                            }}
+                                                        >
+                                                            {types?.map((type, index) => (
+                                                                <option key={index} value={type.id}>
+                                                                    {type.type}
+                                                                </option>
+                                                            ))}
+                                                        </select>
                                                     </td>
                                                     <td>
                                                         <FontAwesomeIcon icon={faHeart} className="mr-1" style={{fontSize: "18px", color: "red"}} />
@@ -260,6 +269,9 @@ const Videos = () => {
                             </div>
                         </div>
                     )}
+                    <div className="col-12 d-flex text-center justify-content-center mt-20">
+                        <ReactPaginate previousLabel="←" nextLabel="→" pageCount={pages} onPageChange={changePage} containerClassName={"pagination"} pageLinkClassName={"page-link"} previousLinkClassName={"page-link"} nextLinkClassName={"page-link"} activeLinkClassName={"page-link current"} disabledLinkClassName={"page-link disabled"} />
+                    </div>
                 </div>
             </div>
         </>

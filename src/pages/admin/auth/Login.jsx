@@ -38,9 +38,12 @@ const Login = () => {
                 <div className="container">
                     <div className="row align-items-center justify-content-center height-self-center">
                         <div className="col-lg-8">
-                            <div className="card auth-card shadow-sm">
+                            <div className="card auth-card shadow">
                                 <div className="d-flex align-items-center auth-content">
-                                    <div className="col-xl-7 align-self-center">
+                                    <div className="col-xl-12 align-self-center">
+                                        <div className="col-12 text-center align-self-center mb-2">
+                                            <img src={login_img} alt="login" className="img-fluid" />
+                                        </div>
                                         <div className="p-3">
                                             <h2 className="fw-bold">Ulgama gir</h2>
                                             <p className="my-4 text-secondary">Administrator paneline girmek.</p>
@@ -54,22 +57,21 @@ const Login = () => {
                                                     </div>
                                                     <div className="col-lg-12">
                                                         <div className="floating-label form-group input-group">
-                                                            <input className="floating-input form-control " type={!isVisible1 ? "password" : "text"} id="password" name="password" placeholder=" " ref={password} required />
-                                                            <label className="top-0 px-2 bg-white">Parol</label>
+                                                            <input className="floating-input form-control " type={!isVisible1 ? "password" : "text"} id="password" name="password" placeholder="" ref={password} required />
+                                                            <label style={{zIndex: "5"}}>Açar sözi</label>
                                                             <span className="input-group-text bg-white border-start-0" style={{cursor: "pointer"}} onClick={toggle1}>
                                                                 {isVisible1 ? <FontAwesomeIcon icon={faEye} className="text-muted" /> : <img src={not_see} alt="icon" className="img-fluid" />}
                                                             </span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button type="submit" className="btn btn-primary rounded-3 " disabled={isSubmitting}>
-                                                    {isSubmitting ? "Tassyklanýar..." : "Tassykla"}
-                                                </button>
+                                                <div className="text-center">
+                                                    <button type="submit" className="btn btn-success btn-lg rounded-3 text-center" disabled={isSubmitting}>
+                                                        {isSubmitting ? "Tassyklanýar..." : "Tassykla"}
+                                                    </button>
+                                                </div>
                                             </form>
                                         </div>
-                                    </div>
-                                    <div className="col-xl-5">
-                                        <img src={login_img} alt="login" className="img-fluid" />
                                     </div>
                                 </div>
                             </div>

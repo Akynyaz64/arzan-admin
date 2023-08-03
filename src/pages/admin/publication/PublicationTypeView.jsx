@@ -39,7 +39,7 @@ const PublicationTypeView = () => {
             <div className="row justify-content-center">
                 <div className="col-lg-8">
                     <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                        <h3 className="mb-3">About publication type</h3>
+                        <h3 className="mb-3">Publication type barada</h3>
                     </div>
                 </div>
                 {isLoading ? (
@@ -48,12 +48,12 @@ const PublicationTypeView = () => {
                     <div className="col-lg-8 mt-3">
                         <div className="form-row">
                             <div className="col-md-6 mb-3">
-                                <h3>Publication type:</h3>
-                                <h2>{publicationType.type}</h2>
+                                <h4>Publication type:</h4>
+                                <h3>{publicationType.type}</h3>
                             </div>
                             <div className="col-md-6 mb-3">
-                                <h3>Amount:</h3>
-                                <h2>{publicationType.like_amount?.amount}</h2>
+                                <h4>Mukdary:</h4>
+                                <h3>{publicationType.like_amount?.amount}</h3>
                             </div>
                         </div>
                     </div>

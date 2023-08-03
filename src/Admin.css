@@ -6717,7 +6717,7 @@ body {
     position: fixed;
     z-index: 1000;
     top: 0;
-    width: 260px;
+    width: 300px;
     height: 100%;
     background: #fff;
     -webkit-transition: 0.6s ease-in-out;
@@ -15083,7 +15083,7 @@ g[aria-describedby="id-22-description"] {
 }
 .content-page {
     overflow: hidden;
-    margin-left: 260px;
+    margin-left: 300px;
     padding: 105px 15px 0;
     min-height: 100vh;
     transition: 0.3s ease-in-out;
@@ -15295,7 +15295,7 @@ g[aria-describedby="id-22-description"] {
         top: 0;
     }
     .iq-sidebar.left {
-        width: 260px;
+        width: 290px;
         left: 0;
         z-index: 999;
     }
@@ -18245,7 +18245,7 @@ ul.todo-task-lists li.active-task {
         padding: 0;
     }
     .content-page {
-        padding: 90px 0 0;
+        padding: 110px 0 0;
     }
     #top-tab-list li a {
         margin: 0 5px;

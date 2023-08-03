@@ -43,14 +43,14 @@ const WelayatCreate = () => {
                 <div className="row justify-content-center">
                     <div className="col-lg-8">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Welayat Create</h3>
+                            <h3 className="mb-3">Welaýat goş</h3>
                         </div>
                     </div>
                     <div className="col-lg-8 mt-3">
                         <form onSubmit={submitHandler} id="form">
                             <div className="form-row">
                                 <div className="col-md-12 mb-3">
-                                    <label htmlFor="name">Name</label>
+                                    <label htmlFor="name">Ady</label>
                                     <input type="text" className="form-control" id="name" name="name" ref={name} required />
                                 </div>
                             </div>

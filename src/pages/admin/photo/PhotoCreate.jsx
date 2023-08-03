@@ -109,7 +109,7 @@ const PhotoCreate = () => {
                 <div className="row justify-content-center">
                     <div className="col-lg-8">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Photo Create</h3>
+                            <h3 className="mb-3">Täze galereýa goş</h3>
                         </div>
                     </div>
                     <div className="col-lg-8 mt-3">
@@ -157,12 +157,12 @@ const PhotoCreate = () => {
                                     ))
                                 )}
                                 <div className="col-md-12 mb-3">
-                                    <label htmlFor="title">Title</label>
+                                    <label htmlFor="title">Ady</label>
                                     <input type="text" className="form-control" id="title" name="title" ref={title} required />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="category">Category</label>
-                                    <select className="form-select" name="category" id="category" ref={selectedCategory}>
+                                    <label htmlFor="category">Kategoriýasy</label>
+                                    <select className="custom-select" name="category" id="category" ref={selectedCategory}>
                                         {pageCategory?.map((category, index) => (
                                             <option key={index} value={category.id}>
                                                 {category.category.name} / {category.page.name}
@@ -171,7 +171,7 @@ const PhotoCreate = () => {
                                     </select>
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="category">User</label>
+                                    <label htmlFor="category">Ulanyjy</label>
                                     <Select
                                         name="user_id"
                                         id="user_id"

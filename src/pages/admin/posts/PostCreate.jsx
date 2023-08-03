@@ -370,7 +370,7 @@ const PostCreate = () => {
                 <div className="row justify-content-center">
                     <div className="col-lg-8">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Post Create</h3>
+                            <h3 className="mb-3">Täze arzanladyş goşmak</h3>
                         </div>
                     </div>
                     <div className="col-lg-8 mt-3">
@@ -587,11 +587,11 @@ const PostCreate = () => {
                                     )}
                                 </div>
                                 <div className="col-md-12 mb-3">
-                                    <label htmlFor="title">Title</label>
+                                    <label htmlFor="title">Ady</label>
                                     <input type="text" className="form-control" id="title" name="title" ref={title} required />
                                 </div>
                                 <div className="col-md-12 mb-3">
-                                    <label htmlFor="">Description</label>
+                                    <label htmlFor="">Mazmuny</label>
                                     <CKEditor
                                         editor={ClassicEditor}
                                         data=""
@@ -602,7 +602,7 @@ const PostCreate = () => {
                                     />
                                 </div>
                                 <div className="col-md-12 mb-3">
-                                    <label htmlFor="tags">Tags</label>
+                                    <label htmlFor="tags">Tagler</label>
                                     <input type="text" className="form-control" id="title" name="title" value={input} onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} />
                                     <div className="tags-container mt-3">
                                         {tags.map((tag, index) => (
@@ -616,8 +616,8 @@ const PostCreate = () => {
                                     </div>
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="category">Category</label>
-                                    <select className="form-select" name="category" id="category" ref={selectedCategory} onChange={(e) => changeCat(e)}>
+                                    <label htmlFor="category">Kategoriýa</label>
+                                    <select className="custom-select" name="category" id="category" ref={selectedCategory} onChange={(e) => changeCat(e)}>
                                         {categories?.map((category, index) => (
                                             <option key={index} value={category.id}>
                                                 {category.name}
@@ -626,8 +626,8 @@ const PostCreate = () => {
                                     </select>
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="sub_category">Sub category</label>
-                                    <select className="form-select" name="sub_category" id="sub_category" ref={selectedSubCategory}>
+                                    <label htmlFor="sub_category">Sub kategoriýa</label>
+                                    <select className="custom-select" name="sub_category" id="sub_category" ref={selectedSubCategory}>
                                         {activeSubcategories?.map((subCategory, index) => (
                                             <option key={index} value={subCategory.id}>
                                                 {subCategory.name}
@@ -636,7 +636,7 @@ const PostCreate = () => {
                                     </select>
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="price">Price</label>
+                                    <label htmlFor="price">Bahasy</label>
                                     <div className="d-flex">
                                         <input
                                             type="checkbox"
@@ -650,7 +650,7 @@ const PostCreate = () => {
                                     </div>
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="discount">Discount price</label>
+                                    <label htmlFor="discount">Arzanladyş</label>
                                     <div className="d-flex">
                                         <input
                                             type="checkbox"
@@ -664,7 +664,7 @@ const PostCreate = () => {
                                     </div>
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="start_date">Start Date</label>
+                                    <label htmlFor="start_date">Başlangyç senesi</label>
                                     <div className="d-flex">
                                         <input
                                             type="checkbox"
@@ -678,17 +678,17 @@ const PostCreate = () => {
                                     </div>
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="end_date">End Date</label>
+                                    <label htmlFor="end_date">Soňky senesi</label>
                                     <input type="date" className="form-control" id="end_date" name="end_date" ref={end_date} disabled={!activeDates} />
                                 </div>
 
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="phone">Phone</label>
+                                    <label htmlFor="phone">Telefon belgi</label>
                                     <input type="text" className="form-control" id="phone" name="phone" ref={phone} required />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="category">User</label>
-                                    <select className="form-select" name="category" id="category" ref={selectedUser}>
+                                    <label htmlFor="category">Ulanyjy</label>
+                                    <select className="custom-select" name="category" id="category" ref={selectedUser}>
                                         {users?.map((user, index) => (
                                             <option key={index} value={user.id}>
                                                 {user.name}

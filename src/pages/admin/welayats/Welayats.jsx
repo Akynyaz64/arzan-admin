@@ -42,10 +42,10 @@ const Welayats = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Welayats</h3>
+                            <h3 className="mb-3">Welaýatlar</h3>
                             <Link to="create" className="btn btn-primary add-list">
                                 <FontAwesomeIcon icon={faPlus} className="mr-3" />
-                                Welayat goş
+                                Welaýat goş
                             </Link>
                         </div>
                     </div>
@@ -58,8 +58,8 @@ const Welayats = () => {
                                     <thead className="bg-white text-uppercase">
                                         <tr className="ligth ligth-data">
                                             <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Actions</th>
+                                            <th>Ady</th>
+                                            <th>Amallar</th>
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
@@ -112,7 +112,7 @@ const Welayats = () => {
                                                 </tr>
                                             ))
                                         ) : (
-                                            <div>Maglumat yok</div>
+                                            <div>Maglumat ýok</div>
                                         )}
                                         {/* MAP ETMELI YERI */}
                                     </tbody>

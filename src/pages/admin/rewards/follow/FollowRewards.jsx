@@ -2,7 +2,8 @@ import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {toast} from "react-hot-toast";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPen, faStar, faUserAlt} from "@fortawesome/free-solid-svg-icons";
+import {faPen, faStar, faUserAlt, faUserTimes} from "@fortawesome/free-solid-svg-icons";
+import {Loader} from "../../../../components";
 
 const FollowRewards = () => {
     const [activeType, setActiveType] = useState();
@@ -46,7 +47,7 @@ const FollowRewards = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Follow rewards list</h3>
+                            <h3 className="mb-3">Follow rewards</h3>
                         </div>
                     </div>
                     <div className="col-xl-8 mb-4">
@@ -61,7 +62,7 @@ const FollowRewards = () => {
                                     }}
                                 >
                                     <FontAwesomeIcon icon={faStar} className="me-2" />
-                                    Offical users
+                                    Official ulanyjylar
                                 </button>
                             </li>
                             <li className="nav-item" role="presentation">
@@ -72,8 +73,8 @@ const FollowRewards = () => {
                                         setActiveType("EXPIRED");
                                     }}
                                 >
-                                    <FontAwesomeIcon icon={faStar} className="me-2" />
-                                    Offical users
+                                    <FontAwesomeIcon icon={faUserTimes} className="me-2" />
+                                    Expired ulanyjylar
                                 </button>
                             </li>
                             <li className="nav-item" role="presentation">
@@ -86,13 +87,13 @@ const FollowRewards = () => {
                                     }}
                                 >
                                     <FontAwesomeIcon icon={faUserAlt} className="me-2" />
-                                    Simple users
+                                    Ýönekeý ulanyjylar
                                 </button>
                             </li>
                         </ul>
                     </div>
                     {isLoading ? (
-                        <span>Loading...</span>
+                        <Loader />
                     ) : (
                         <div className="col-lg-12">
                             <div className="table-responsive rounded mb-3">
@@ -103,7 +104,7 @@ const FollowRewards = () => {
                                             <th>ID</th>
                                             <th>Welaýat</th>
                                             <th>Coin mukdary</th>
-                                            <th>Actions</th>
+                                            <th>Amallar</th>
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
@@ -125,7 +126,7 @@ const FollowRewards = () => {
                                                 </tr>
                                             ))
                                         ) : (
-                                            <div>Maglumat yok</div>
+                                            <div>Maglumat ýok</div>
                                         )}
                                         {/* MAP ETMELI YERI */}
                                     </tbody>

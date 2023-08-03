@@ -167,7 +167,7 @@ const BannerEdit = () => {
                 <div className="row justify-content-center">
                     <div className="col-lg-8">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Banner Edit</h3>
+                            <h3 className="mb-3">Banneri üýtget</h3>
                         </div>
                     </div>
                     {isFetching ? (
@@ -198,11 +198,11 @@ const BannerEdit = () => {
                                         )}
                                     </div>
                                     <div className="col-md-12 mb-3">
-                                        <label htmlFor="title">Title</label>
+                                        <label htmlFor="title">Ady</label>
                                         <input type="text" className="form-control" id="title" name="title" defaultValue={banner.title} onChange={handleChange} required />
                                     </div>
                                     <div className="col-md-12 mb-3">
-                                        <label htmlFor="">Description</label>
+                                        <label htmlFor="">Mazmuny</label>
                                         <CKEditor
                                             editor={ClassicEditor}
                                             data={banner.description}
@@ -217,16 +217,16 @@ const BannerEdit = () => {
                             <input type="number" className="form-control" id="validationDefault02" required />
                         </div> */}
                                     <div className="col-md-6 mb-3">
-                                        <label htmlFor="start_date">Start Date</label>
+                                        <label htmlFor="start_date">Başlangyç senesi</label>
                                         <input type="date" className="form-control" id="start_date" name="start_date" defaultValue={banner.start_date} onChange={handleChange} required />
                                     </div>
                                     <div className="col-md-6 mb-3">
-                                        <label htmlFor="end_date">End Date</label>
+                                        <label htmlFor="end_date">Soňky senesi</label>
                                         <input type="date" className="form-control" id="end_date" name="end_date" defaultValue={banner.end_date} onChange={handleChange} required />
                                     </div>
                                     <div className="col-md-6 mb-3">
-                                        <label htmlFor="platform_id">Platform</label>
-                                        <select className="form-select" name="platform_id" value={banner?.platform[0]?.id} onChange={handleChange} id="platform_id">
+                                        <label htmlFor="platform_id">Platforma</label>
+                                        <select className="custom-select" name="platform_id" value={banner?.platform[0]?.id} onChange={handleChange} id="platform_id">
                                             {platforms?.map((platform, index) => (
                                                 <option key={index} value={platform.id}>
                                                     {platform.name}
@@ -235,13 +235,13 @@ const BannerEdit = () => {
                                         </select>
                                     </div>
                                     <div className="col-md-6 mb-3">
-                                        <label htmlFor="url">Url</label>
+                                        <label htmlFor="url">Salgysy (url)</label>
                                         <input type="text" className="form-control" id="url" name="url" defaultValue={banner.url} onChange={handleChange} required />
                                     </div>
                                     <div className="col-md-6 mb-3">
-                                        <label htmlFor="location_id">Welayats</label>
+                                        <label htmlFor="location_id">Welaýatlar</label>
                                         <select
-                                            className="form-select"
+                                            className="custom-select"
                                             name="location_id"
                                             id="location_id"
                                             multiple={true}
@@ -260,7 +260,7 @@ const BannerEdit = () => {
                                     <div className="col-md-6 mb-3">
                                         <label htmlFor="page_id">Page / Category</label>
                                         <select
-                                            className="form-select"
+                                            className="custom-select"
                                             name="page_id"
                                             id="page_id"
                                             multiple={true}

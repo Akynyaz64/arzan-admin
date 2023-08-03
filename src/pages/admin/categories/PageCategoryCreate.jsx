@@ -76,7 +76,7 @@ const PageCategoryCreate = () => {
                 <div className="row justify-content-center">
                     <div className="col-lg-8">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Page Category Create</h3>
+                            <h3 className="mb-3">Täze page kategoriýa goş</h3>
                         </div>
                     </div>
                     <div className="col-lg-8 mt-3">
@@ -104,12 +104,12 @@ const PageCategoryCreate = () => {
                                     )}
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="category_name">Name</label>
+                                    <label htmlFor="category_name">Ady</label>
                                     <input type="text" className="form-control" id="category_name" name="category_name" ref={category_name} required />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="platform_id">Page</label>
-                                    <select className="form-select" name="platform_id" id="platform_id" ref={page_id}>
+                                    <label htmlFor="platform_id">Sahypa</label>
+                                    <select className="custom-select" name="platform_id" id="platform_id" ref={page_id}>
                                         {pages?.map((page, index) => (
                                             <option key={index} value={page.id}>
                                                 {page.name}
