@@ -3,20 +3,36 @@ import {Link} from "react-router-dom";
 import {toast} from "react-hot-toast";
 import moment from "moment";
 import Popup from "reactjs-popup";
+import ReactPaginate from "react-paginate";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClose, faEye, faPen, faPlus, faSearch, faTrash} from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../../../hooks/useFetch";
+import {Loader} from "../../../components";
 
 const Posts = () => {
     const search = useRef();
+    const table = useRef();
+    const [pages, setPages] = useState();
+    const [page, setPage] = useState(1);
     const [urlParams, setUrlParams] = useState({
-        limit: 999,
+        limit: 100,
     });
     const [posts, setPosts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     const [categories] = useFetch("/admin-api/category", "data", true);
+    const [types] = useFetch("/admin-api/publication-type", "data", true);
     const [subCategories] = useFetch("/admin-api/sub-category", "data", true);
+
+    const changePage = ({selected}) => {
+        setPage(selected + 1);
+        console.log(page);
+        setUrlParams({
+            ...urlParams,
+            offset: selected * urlParams.limit,
+        });
+        table.current.scrollIntoView({behavior: "smooth"});
+    };
 
     const approvePost = async (id, status) => {
         setIsLoading(true);
@@ -36,25 +52,19 @@ const Posts = () => {
         }
         const resData = await response.json();
         toast.success(resData.message);
-        fetchData();
+        fetchData(urlParams);
         setIsLoading(false);
     };
 
-    const setSaylanan = async (id, status) => {
+    const setType = async (id, value) => {
         setIsLoading(true);
-        let type = null;
-        if (status === true) {
-            type = 3;
-        } else if (status === false) {
-            type = 1;
-        }
         const response = await fetch(`/admin-api/post/publication-type`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${localStorage.getItem("adACto")}`,
             },
-            body: JSON.stringify({id: id, publication_type_id: type}),
+            body: JSON.stringify({id: id, publication_type_id: value}),
         });
 
         if (!response.ok) {
@@ -64,7 +74,7 @@ const Posts = () => {
         }
         const resData = await response.json();
         toast.success(resData.message);
-        fetchData();
+        fetchData(urlParams);
         setIsLoading(false);
     };
 
@@ -84,8 +94,9 @@ const Posts = () => {
             return null;
         }
         const resData = await response.json();
-        console.log(resData.data);
+        console.log(resData);
         setPosts(resData.data);
+        setPages(resData.data[0].items_full_count / urlParams.limit);
         setIsLoading(false);
     };
 
@@ -122,10 +133,10 @@ const Posts = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Posts</h3>
+                            <h3 className="mb-3">Arzanladyşlar</h3>
                             <Link to="create" className="btn btn-primary add-list">
                                 <FontAwesomeIcon icon={faPlus} className="mr-3" />
-                                Post goş
+                                Arzanladyş goş
                             </Link>
                         </div>
                     </div>
@@ -135,22 +146,30 @@ const Posts = () => {
                                 className="searchbox w-100 h-100"
                                 onSubmit={(e) => {
                                     e.preventDefault();
-                                    setUrlParams({
-                                        ...urlParams,
-                                        title: search.current.value,
-                                    });
+                                    if (search.current.value === "") {
+                                        setUrlParams((current) => {
+                                            const copy = {...current, offset: 0};
+                                            delete copy["title"];
+                                            return copy;
+                                        });
+                                    } else {
+                                        setUrlParams({
+                                            ...urlParams,
+                                            title: search.current.value,
+                                        });
+                                    }
                                 }}
                             >
                                 <a className="search-link" style={{top: "9px"}}>
                                     <FontAwesomeIcon icon={faSearch} />
                                 </a>
-                                <input type="search" className="text search-input" placeholder="Search here..." ref={search} />
+                                <input type="search" className="text search-input" placeholder="Gözleg..." ref={search} />
                             </form>
                         </div>
                     </div>
                     <div className="col-xl-2 mb-4">
                         <select
-                            className="form-control"
+                            className="custom-select"
                             name="category_id"
                             id="category_id"
                             value={urlParams.location_id}
@@ -181,7 +200,7 @@ const Posts = () => {
                     </div>
                     <div className="col-xl-2 mb-4">
                         <select
-                            className="form-control"
+                            className="custom-select"
                             name="sub_category_id"
                             id="sub_category_id"
                             value={urlParams.location_id}
@@ -210,26 +229,57 @@ const Posts = () => {
                             ))}
                         </select>
                     </div>
+                    <div className="col-xl-2 mb-4">
+                        <select
+                            className="custom-select"
+                            name="publication_type_id"
+                            id="publication_type_id"
+                            value={urlParams.location_id}
+                            onChange={(e) => {
+                                if (e.target.value === "Ählisi") {
+                                    setUrlParams((current) => {
+                                        const copy = {...current};
+                                        delete copy["publication_type_id"];
+                                        return copy;
+                                    });
+                                } else {
+                                    setUrlParams({
+                                        ...urlParams,
+                                        publication_type_id: Number(e.target.value),
+                                    });
+                                }
+                            }}
+                        >
+                            <option value={null} selected>
+                                Ählisi
+                            </option>
+                            {types?.map((type, index) => (
+                                <option key={index} value={type.id}>
+                                    {type.type}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                     {isLoading ? (
-                        <span>Loading...</span>
+                        <Loader />
                     ) : (
                         <div className="col-lg-12">
                             <div className="table-responsive rounded mb-3">
-                                <table className="data-table table mb-0 tbl-server-info">
+                                <table className="data-table table mb-0 tbl-server-info" ref={table}>
                                     <thead className="bg-white text-uppercase">
                                         <tr className="ligth ligth-data">
                                             <th>№</th>
                                             <th>ID</th>
-                                            <th>Image and Title</th>
-                                            <th>Price</th>
-                                            <th>Discount</th>
-                                            <th>Gorlen sany</th>
-                                            <th>Approved status</th>
-                                            <th>Waiting status</th>
-                                            <th>Phone Number</th>
-                                            <th>Saýlanan</th>
-                                            <th>Goslan wagty</th>
-                                            <th>Actions</th>
+                                            <th>Suraty we ady</th>
+                                            <th>Bahasy</th>
+                                            <th>Arzanladyş</th>
+                                            <th>Görlen sany</th>
+                                            <th>Tassyklama statusy</th>
+                                            <th>Garaşylýan statusy</th>
+                                            <th>Telefon belgi</th>
+                                            <th>Görnüşi</th>
+                                            <th>Goşulan wagty</th>
+                                            <th>Amallar</th>
                                         </tr>
                                     </thead>
 
@@ -257,7 +307,7 @@ const Posts = () => {
                                                                     approvePost(post.id, false);
                                                                 }}
                                                             >
-                                                                Decline it
+                                                                Ret etmek
                                                             </button>
                                                         ) : (
                                                             <>
@@ -267,53 +317,30 @@ const Posts = () => {
                                                                         approvePost(post.id, true);
                                                                     }}
                                                                 >
-                                                                    Approve it
-                                                                </button>
-                                                                <button
-                                                                    className="btn btn-danger btn-sm m-1"
-                                                                    onClick={() => {
-                                                                        approvePost(post.id, false);
-                                                                    }}
-                                                                >
-                                                                    Decline it
+                                                                    Tassyklamak
                                                                 </button>
                                                             </>
                                                         )}
                                                     </td>
-                                                    <td>{post.waiting ? "Waiting" : "Not waiting"}</td>
+                                                    <td>{post.waiting ? "Garaşylýar" : "Garaşylmaýar"}</td>
                                                     <td>{post.phone}</td>
                                                     <td>
-                                                        <ul className="nav nav-pills" id="pills-tab" role="tablist" style={{flexWrap: "nowrap"}}>
-                                                            <li className="nav-item" role="presentation">
-                                                                <button
-                                                                    style={{borderTopRightRadius: "0", borderEndEndRadius: "0", fontWeight: "500", textWrap: "nowrap"}}
-                                                                    className={post.publication_type?.id === 3 ? "text-dark nav-link active p-1 bg-light" : "text-dark nav-link p-1 bg-light"}
-                                                                    type="button"
-                                                                    onClick={() => {
-                                                                        if (post.publication_type?.id !== 3 || post.publication_type === null) {
-                                                                            console.log(1);
-                                                                            setSaylanan(post.id, true);
-                                                                        }
-                                                                    }}
-                                                                >
-                                                                    Saýlanan
-                                                                </button>
-                                                            </li>
-                                                            <li className="nav-item" role="presentation">
-                                                                <button
-                                                                    style={{borderTopLeftRadius: "0", borderBottomLeftRadius: "0", fontWeight: "500", textWrap: "nowrap"}}
-                                                                    className={post.publication_type?.id !== 3 ? "text-white nav-link p-1 bg-danger" : "text-dark nav-link p-1 bg-light"}
-                                                                    type="button"
-                                                                    onClick={() => {
-                                                                        if (post.publication_type?.id === 3 || post.publication_type === null) {
-                                                                            setSaylanan(post.id, false);
-                                                                        }
-                                                                    }}
-                                                                >
-                                                                    Saýlanan däl
-                                                                </button>
-                                                            </li>
-                                                        </ul>
+                                                        <select
+                                                            className="custom-select"
+                                                            name="publication_type_id"
+                                                            id="publication_type_id"
+                                                            style={{width: "110px"}}
+                                                            value={post.publication_type.id}
+                                                            onChange={(e) => {
+                                                                setType(post.id, Number(e.target.value));
+                                                            }}
+                                                        >
+                                                            {types?.map((type, index) => (
+                                                                <option key={index} value={type.id}>
+                                                                    {type.type}
+                                                                </option>
+                                                            ))}
+                                                        </select>
                                                     </td>
                                                     <td>{moment(post.created_at).utc().format("yyyy-MM-DD")}</td>
                                                     <td>
@@ -363,7 +390,7 @@ const Posts = () => {
                                                 </tr>
                                             ))
                                         ) : (
-                                            <div>Maglumat yok</div>
+                                            <div>Maglumat ýok</div>
                                         )}
                                         {/* MAP ETMELI YERI */}
                                     </tbody>
@@ -371,6 +398,9 @@ const Posts = () => {
                             </div>
                         </div>
                     )}
+                    <div className="col-12 d-flex text-center justify-content-center mt-20">
+                        <ReactPaginate previousLabel="←" nextLabel="→" pageCount={pages} onPageChange={changePage} containerClassName={"pagination"} pageLinkClassName={"page-link"} previousLinkClassName={"page-link"} nextLinkClassName={"page-link"} activeLinkClassName={"page-link current"} disabledLinkClassName={"page-link disabled"} />
+                    </div>
                 </div>
             </div>
         </>
