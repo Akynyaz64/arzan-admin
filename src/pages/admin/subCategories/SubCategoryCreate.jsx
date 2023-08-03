@@ -49,19 +49,19 @@ const SubCategoryCreate = () => {
                 <div className="row justify-content-center">
                     <div className="col-lg-8">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Sub Category Create</h3>
+                            <h3 className="mb-3">Täze sub kategoriýa goş</h3>
                         </div>
                     </div>
                     <div className="col-lg-8 mt-3">
                         <form onSubmit={submitHandler} id="form">
                             <div className="form-row">
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="name">Name</label>
+                                    <label htmlFor="name">Ady</label>
                                     <input type="text" className="form-control" id="name" name="name" ref={name} required />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="category_id">Category</label>
-                                    <select className="form-select" name="category_id" id="category_id" ref={category_id}>
+                                    <label htmlFor="category_id">Degişli kategoriýasy</label>
+                                    <select className="custom-select" name="category_id" id="category_id" ref={category_id}>
                                         {categories?.map((category, index) => (
                                             <option key={index} value={category.id}>
                                                 {category.name}

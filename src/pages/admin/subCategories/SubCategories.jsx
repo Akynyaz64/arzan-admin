@@ -5,14 +5,18 @@ import {toast} from "react-hot-toast";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClose, faEye, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Loader} from "../../../components";
+import useFetch from "../../../hooks/useFetch";
 
 const SubCategories = () => {
+    const [urlParams, setUrlParams] = useState({});
     const [subCategories, setSubCategories] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    const fetchData = async () => {
+    const [categories] = useFetch("/admin-api/category", "data", true);
+
+    const fetchData = async (data) => {
         setIsLoading(true);
-        const response = await fetch(`/admin-api/sub-category`, {
+        const response = await fetch(`/admin-api/sub-category?` + new URLSearchParams(data), {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -32,8 +36,8 @@ const SubCategories = () => {
     };
 
     useEffect(() => {
-        fetchData();
-    }, []);
+        fetchData(urlParams);
+    }, [urlParams]);
 
     const handleDelete = async (e, id) => {
         e.preventDefault();
@@ -65,12 +69,43 @@ const SubCategories = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Sub Category</h3>
+                            <h3 className="mb-3">Sub kategoriýalar</h3>
                             <Link to="create" className="btn btn-primary add-list">
                                 <FontAwesomeIcon icon={faPlus} className="mr-3" />
-                                Sub Category goş
+                                Sub kategoriýa goş
                             </Link>
                         </div>
+                    </div>
+                    <div className="col-xl-3 mb-4">
+                        <select
+                            className="custom-select"
+                            name="category_id"
+                            id="category_id"
+                            value={urlParams.page}
+                            onChange={(e) => {
+                                if (e.target.value === "Ählisi") {
+                                    setUrlParams((current) => {
+                                        const copy = {...current};
+                                        delete copy["category_id"];
+                                        return copy;
+                                    });
+                                } else {
+                                    setUrlParams({
+                                        ...urlParams,
+                                        category_id: Number(e.target.value),
+                                    });
+                                }
+                            }}
+                        >
+                            <option value={null} selected>
+                                Ählisi
+                            </option>
+                            {categories?.map((category, index) => (
+                                <option key={index} value={category.id}>
+                                    {category.name}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                     {isLoading ? (
                         <Loader />
@@ -82,9 +117,9 @@ const SubCategories = () => {
                                         <tr className="ligth ligth-data">
                                             <th>№</th>
                                             <th>Id</th>
-                                            <th>Title</th>
-                                            <th>Category</th>
-                                            <th>Actions</th>
+                                            <th>Ady</th>
+                                            <th>Degişli kategoriýasy</th>
+                                            <th>Amallar</th>
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
@@ -143,7 +178,7 @@ const SubCategories = () => {
                                                 </tr>
                                             ))
                                         ) : (
-                                            <div>Maglumat yok</div>
+                                            <div>Maglumat ýok</div>
                                         )}
                                         {/* MAP ETMELI YERI */}
                                     </tbody>

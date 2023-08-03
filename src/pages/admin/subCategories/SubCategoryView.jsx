@@ -39,7 +39,7 @@ const SubCategoryView = () => {
             <div className="row justify-content-center">
                 <div className="col-lg-8">
                     <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                        <h3 className="mb-3">About post sub category</h3>
+                        <h3 className="mb-3">Sub kategoriýa barada</h3>
                     </div>
                 </div>
                 {isLoading ? (
@@ -48,12 +48,12 @@ const SubCategoryView = () => {
                     <div className="col-lg-8 mt-3">
                         <div className="form-row">
                             <div className="col-md-6 mb-3">
-                                <h3>Post sub kategoriýa:</h3>
-                                <h2>{subCategory.name}</h2>
+                                <h4>Ady:</h4>
+                                <h3>{subCategory.name}</h3>
                             </div>
                             <div className="col-md-6 mb-3">
-                                <h3>Degişli post kategoriýasy:</h3>
-                                <h2>{subCategory.category?.name}</h2>
+                                <h4>Degişli kategoriýasy:</h4>
+                                <h3>{subCategory.category?.name}</h3>
                             </div>
                         </div>
                     </div>
