@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {toast} from "react-hot-toast";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPen, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {Loader} from "../../../../components";
 
 const StreakRewards = () => {
     const [streakRewards, setStreakRewards] = useState([]);
@@ -39,7 +40,7 @@ const StreakRewards = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Streak rewards list</h3>
+                            <h3 className="mb-3">Streak rewards</h3>
                             <Link to="create" className="btn btn-primary add-list">
                                 <FontAwesomeIcon icon={faPlus} className="mr-3" />
                                 Streak reward goş
@@ -47,7 +48,7 @@ const StreakRewards = () => {
                         </div>
                     </div>
                     {isLoading ? (
-                        <span>Loading...</span>
+                        <Loader />
                     ) : (
                         <div className="col-lg-12">
                             <div className="table-responsive rounded mb-3">
@@ -57,7 +58,7 @@ const StreakRewards = () => {
                                             <th>№</th>
                                             <th>Gün belgi</th>
                                             <th>Coin mukdary</th>
-                                            <th>Actions</th>
+                                            <th>Amallar</th>
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
@@ -78,7 +79,7 @@ const StreakRewards = () => {
                                                 </tr>
                                             ))
                                         ) : (
-                                            <div>Maglumat yok</div>
+                                            <div>Maglumat ýok</div>
                                         )}
                                         {/* MAP ETMELI YERI */}
                                     </tbody>
