@@ -40,7 +40,6 @@ const BannerEdit = () => {
             });
 
             const resData = await response.json();
-            console.log(resData);
             if (resData.status === false) {
                 toast.error(resData.message);
                 setIsFetching(false);
@@ -50,7 +49,6 @@ const BannerEdit = () => {
                 setIsFetching(false);
             }
 
-            console.log(resData.data);
             setIsFetching(false);
             resData.data.start_date = moment(resData.data.start_date).utc().format("yyyy-MM-DD");
             resData.data.end_date = moment(resData.data.end_date).utc().format("yyyy-MM-DD");
@@ -65,9 +63,10 @@ const BannerEdit = () => {
                     return e.id;
                 }),
             ];
-            setSelectedPageCategories(page_categories);
-            setSelectedLocations(locations);
-            setPreview(resData.data.image.url);
+            setDescription(resData.data.description);
+            setSelectedPageCategories(page_categories[0]);
+            setSelectedLocations(locations[0]);
+            setPreview("/" + resData.data.image.url);
         };
 
         fetchData();
@@ -107,7 +106,6 @@ const BannerEdit = () => {
 
     const handleSelectLocations = function (selectedItems) {
         const pages = [];
-        console.log(typeof Number(selectedItems[0].value));
         for (let i = 0; i < selectedItems.length; i++) {
             pages.push(Number(selectedItems[i].value));
         }
@@ -129,18 +127,22 @@ const BannerEdit = () => {
         }
 
         const bannerData = new FormData();
+        bannerData.append("id", banner.id);
         bannerData.append("title", banner.title);
         bannerData.append("url", banner.url);
+        bannerData.append("description", description);
         bannerData.append("start_date", banner.start_date);
         bannerData.append("end_date", banner.end_date);
         bannerData.append("page_category_ids", JSON.stringify(selectedPageCategories));
         bannerData.append("location_ids", JSON.stringify(selectedLocations));
-        bannerData.append("description", description);
-        bannerData.append("platform_id", banner.platform_id);
-        bannerData.append("image", selectedFile);
+        bannerData.append("platform_id", banner.platform[0].id);
 
-        const response = await fetch(`/admin-api/banner/edit/${bannerId}`, {
-            method: "POST",
+        if (selectedFile !== undefined) {
+            bannerData.append("image", selectedFile);
+        }
+
+        const response = await fetch(`/admin-api/banner/`, {
+            method: "PUT",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("adACto")}`,
             },
@@ -148,7 +150,6 @@ const BannerEdit = () => {
         });
 
         const resData = await response.json();
-        console.log(resData);
         if (resData.status === false) {
             toast.error(resData.message);
             setIsSubmitting(false);
@@ -226,7 +227,15 @@ const BannerEdit = () => {
                                     </div>
                                     <div className="col-md-6 mb-3">
                                         <label htmlFor="platform_id">Platforma</label>
-                                        <select className="custom-select" name="platform_id" value={banner?.platform[0]?.id} onChange={handleChange} id="platform_id">
+                                        <select
+                                            className="custom-select"
+                                            name="platform_id"
+                                            defaultValue={banner?.platform[0]?.id}
+                                            onChange={(e) => {
+                                                setBanner((prev) => ({...prev, platform: [{id: e.target.value}]}));
+                                            }}
+                                            id="platform_id"
+                                        >
                                             {platforms?.map((platform, index) => (
                                                 <option key={index} value={platform.id}>
                                                     {platform.name}

@@ -81,7 +81,9 @@ const PageCategoryEdit = () => {
         categoryData.append("page_category_id", pageCategory.id);
         categoryData.append("page_id", Number(page.id));
         categoryData.append("category_name", pageCategory.category.name);
-        categoryData.append("image", selectedFile);
+        if (selectedFile !== undefined) {
+            categoryData.append("image", selectedFile);
+        }
 
         const response = await fetch(`/admin-api/page-category/`, {
             method: "PUT",
