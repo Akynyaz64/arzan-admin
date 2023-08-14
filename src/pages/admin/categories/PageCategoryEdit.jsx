@@ -22,10 +22,6 @@ const PageCategoryEdit = () => {
     const [preview, setPreview] = useState();
 
     useEffect(() => {
-        console.log(page);
-    }, [page]);
-
-    useEffect(() => {
         if (!selectedFile) {
             setPreview(undefined);
             return;
@@ -62,33 +58,34 @@ const PageCategoryEdit = () => {
                 toast.success(resData.message);
                 setIsFetching(false);
             }
-
+            console.log(resData);
             setIsFetching(false);
             setPageCategory(resData.data);
             setPage(resData.data.page);
-            setPreview(resData.data.image.url);
+            setPreview("/" + resData.data.image.url);
         };
 
         fetchData();
     }, [categoryId]);
 
     const handleChange = (e) => {
-        setPageCategory((prev) => ({...prev, [e.target.name]: e.target.value}));
+        setPageCategory((prev) => ({...prev, category: {name: e.target.value}}));
     };
 
     async function submitHandler(event) {
         setIsSubmitting(true);
         event.preventDefault();
+        console.log(pageCategory.category.name);
 
         const categoryData = new FormData();
-        categoryData.append("page_id", page.page.id);
+        categoryData.append("page_category_id", pageCategory.id);
+        categoryData.append("page_id", Number(page.id));
         categoryData.append("category_name", pageCategory.category.name);
         categoryData.append("image", selectedFile);
 
-        const response = await fetch(`/admin-api/page-category/edit/${categoryId}`, {
-            method: "POST",
+        const response = await fetch(`/admin-api/page-category/`, {
+            method: "PUT",
             headers: {
-                "Content-Type": "application/json",
                 Authorization: `Bearer ${localStorage.getItem("adACto")}`,
             },
             body: categoryData,
@@ -154,9 +151,9 @@ const PageCategoryEdit = () => {
                                             className="custom-select"
                                             name="page_id"
                                             id="page_id"
-                                            value={page.id}
+                                            defaultValue={page.id}
                                             onChange={(e) => {
-                                                setPage(e.target.value);
+                                                setPage({id: e.target.value});
                                             }}
                                         >
                                             {pages?.map((page, index) => (
