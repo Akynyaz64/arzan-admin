@@ -11,21 +11,21 @@ export default defineConfig({
 
         proxy: {
             "/admin-api": {
-                target: "http://95.85.126.113:8080",
+                target: "https://beta2.arzan.info",
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/admin-api/, "/admin"),
             },
             "/admin/static": {
-                target: "http://95.85.126.113:8080",
+                target: "https://beta2.arzan.info",
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/admin\/static/, "/static"),
             },
             "/video": {
-                target: "http://95.85.126.113:8080",
+                target: "https://beta2.arzan.info",
                 changeOrigin: true,
             },
             "/api/v1": {
-                target: "http://95.85.126.113:8080",
+                target: "https://beta2.arzan.info",
                 changeOrigin: true,
             },
         },

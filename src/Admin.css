@@ -9770,8 +9770,8 @@ body.sidebar-main .iq-top-navbar {
 }
 .iq-footer {
     padding: 0 15px;
-    margin-left: 260px;
-    width: calc(100vw - 264px);
+    margin-left: 300px;
+    width: calc(100vw - 304px);
     background: #fff;
     box-shadow: none;
     transition: 0.3s ease-in-out;
@@ -20641,4 +20641,43 @@ i {
 }
 .video-container video {
     height: 100%;
+}
+.image-check {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-family: system-ui, sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1.1;
+    display: grid;
+    grid-template-columns: 1em auto;
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.5em;
+    height: 1.5em;
+    border: 0.1em solid currentColor;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+}
+.image-check::before {
+    content: "";
+    width: 1em;
+    height: 1em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em #00e676;
+    transform-origin: bottom left;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+.image-check:checked::before {
+    transform: scale(1);
+}
+.opacity-low {
+    opacity: 0.8;
 }

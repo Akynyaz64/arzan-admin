@@ -6,7 +6,7 @@ import {ProtectedRoute, ScrollToTop} from "./components";
 
 //ADMIN
 import AdminLayout from "./pages/admin/Layout";
-import {Admin, AdminBannerCreate, AdminBannerEdit, AdminBannerView, AdminBanners, AdminCategories, AdminCategoryCreate, AdminCategoryEdit, AdminCategoryView, AdminCoinCreate, AdminCoinEdit, AdminCoinView, AdminCoins, AdminComments, AdminFollowRewardEdit, AdminFollowRewards, AdminLogin, AdminNotifications, AdminPageCategories, AdminPageCategoryCreate, AdminPageCategoryEdit, AdminPageCategoryView, AdminPages, AdminPaymentHistory, AdminPhotoCreate, AdminPhotoView, AdminPhotos, AdminPostCreate, AdminPostEdit, AdminPostView, AdminPosts, AdminPublicationTypeCreate, AdminPublicationTypeEdit, AdminPublicationTypeView, AdminPublicationTypes, AdminServiceCreate, AdminServiceEdit, AdminServiceView, AdminServices, AdminStreakRewardCreate, AdminStreakRewardEdit, AdminStreakRewards, AdminSubCategories, AdminSubCategoryCreate, AdminSubCategoryEdit, AdminSubCategoryView, AdminTopList, AdminTopListCreate, AdminUserCreate, AdminUserView, AdminUsers, AdminVideoCreate, AdminVideoView, AdminVideos, AdminWelayatCreate, AdminWelayatEdit, AdminWelayats} from "./pages/admin";
+import {Admin, AdminBannerCreate, AdminBannerEdit, AdminBannerView, AdminBanners, AdminCategories, AdminCategoryCreate, AdminCategoryEdit, AdminCategoryView, AdminCoinCreate, AdminCoinEdit, AdminCoinView, AdminCoins, AdminComments, AdminFollowRewardEdit, AdminFollowRewards, AdminLogin, AdminNotifications, AdminPageCategories, AdminPageCategoryCreate, AdminPageCategoryEdit, AdminPageCategoryView, AdminPages, AdminPaymentHistory, AdminPhotoAdd, AdminPhotoCreate, AdminPhotoEdit, AdminPhotoRemove, AdminPhotoView, AdminPhotos, AdminPostCreate, AdminPostEdit, AdminPostView, AdminPosts, AdminPublicationTypeCreate, AdminPublicationTypeEdit, AdminPublicationTypeView, AdminPublicationTypes, AdminServiceCreate, AdminServiceEdit, AdminServiceView, AdminServices, AdminStreakRewardCreate, AdminStreakRewardEdit, AdminStreakRewards, AdminSubCategories, AdminSubCategoryCreate, AdminSubCategoryEdit, AdminSubCategoryView, AdminTopList, AdminTopListCreate, AdminUserCreate, AdminUserView, AdminUsers, AdminVideoCreate, AdminVideoEdit, AdminVideoView, AdminVideos, AdminWelayatCreate, AdminWelayatEdit, AdminWelayats} from "./pages/admin";
 
 //OTHERS
 import {AuthContextProvider} from "./context/AuthContext";
@@ -84,12 +84,14 @@ const App = () => {
                                 <Route path="photos" element={<AdminPhotos />} />
                                 <Route path="photos/:photoId" element={<AdminPhotoView />} />
                                 <Route path="photos/create" element={<AdminPhotoCreate />} />
-                                {/* <Route path="photos/edit/:photoId" element={<AdminPhotoEdit />} /> */}
+                                <Route path="photos/edit/:photoId" element={<AdminPhotoEdit />} />
+                                <Route path="photos/add/:photoId" element={<AdminPhotoAdd />} />
+                                <Route path="photos/remove/:photoId" element={<AdminPhotoRemove />} />
 
                                 <Route path="videos" element={<AdminVideos />} />
                                 <Route path="videos/:videoId" element={<AdminVideoView />} />
                                 <Route path="videos/create" element={<AdminVideoCreate />} />
-                                {/* <Route path="videos/edit/:videoId" element={<AdminVideoEdit />} /> */}
+                                <Route path="videos/edit/:videoId" element={<AdminVideoEdit />} />
 
                                 <Route path="posts" element={<AdminPosts />} />
                                 <Route path="posts/:postId" element={<AdminPostView />} />
