@@ -70,12 +70,8 @@ const PhotoEdit = () => {
         setPhotoData((prev) => ({...prev, [e.target.name]: e.target.value}));
     };
 
-    const handleSelectPages = function (selectedItems) {
-        const pages = [];
-        for (let i = 0; i < selectedItems.length; i++) {
-            pages.push(Number(selectedItems[i].value));
-        }
-        setPageCategory(pages);
+    const handleSelectPages = function (selectedItem) {
+        setPageCategory(selectedItem);
     };
 
     useEffect(() => {
@@ -83,8 +79,10 @@ const PhotoEdit = () => {
             setPreview(undefined);
             return;
         }
+
         const objectUrl = URL.createObjectURL(selectedFile);
         setPreview(objectUrl);
+
         return () => URL.revokeObjectURL(objectUrl);
     }, [selectedFile]);
 
@@ -104,8 +102,7 @@ const PhotoEdit = () => {
         photoDataForm.append("gallery_id", photoId);
         photoDataForm.append("title", photoData.title);
         photoDataForm.append("user_id", selectedUser.selectValue.value);
-        photoDataForm.append("page_category_id", JSON.stringify(pageCategory));
-        photoDataForm.append("avatar_image", selectedFile);
+        photoDataForm.append("page_category_id", pageCategory);
         if (selectedFile !== undefined) {
             photoDataForm.append("avatar_image", selectedFile);
         }
@@ -162,7 +159,7 @@ const PhotoEdit = () => {
                                             <div className="position-relative">
                                                 <img alt="preview" src={preview} className="img-fluid w-100 rounded" />
                                                 <div className="delete-button">
-                                                    <span className="btn btn-danger" onClick={() => setSelectedFile(undefined)}>
+                                                    <span className="btn btn-danger" onClick={() => setSelectedFile(null)}>
                                                         <FontAwesomeIcon icon={faTrash} className="" />
                                                     </span>
                                                 </div>
@@ -180,10 +177,9 @@ const PhotoEdit = () => {
                                             className="custom-select"
                                             name="page_id"
                                             id="page_id"
-                                            multiple={true}
                                             value={pageCategory}
                                             onChange={(e) => {
-                                                handleSelectPages(e.target.selectedOptions);
+                                                handleSelectPages(e.target.value);
                                             }}
                                         >
                                             {categories?.map((pageCategory, index) => (
