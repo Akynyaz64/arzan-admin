@@ -28,10 +28,14 @@ export {default as AdminSubCategoryEdit} from "./subCategories/SubCategoryEdit";
 export {default as AdminPhotos} from "./photo/Photos";
 export {default as AdminPhotoCreate} from "./photo/PhotoCreate";
 export {default as AdminPhotoView} from "./photo/PhotoView";
+export {default as AdminPhotoEdit} from "./photo/PhotoEdit";
+export {default as AdminPhotoRemove} from "./photo/PhotoRemove";
+export {default as AdminPhotoAdd} from "./photo/PhotoAdd";
 
 export {default as AdminVideos} from "./video/Videos";
 export {default as AdminVideoCreate} from "./video/VideoCreate";
 export {default as AdminVideoView} from "./video/VideoView";
+export {default as AdminVideoEdit} from "./video/VideoEdit";
 
 export {default as AdminServices} from "./services/Services";
 export {default as AdminServiceCreate} from "./services/ServiceCreate";
