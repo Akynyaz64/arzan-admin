@@ -145,7 +145,7 @@ const PhotoCreate = () => {
                                                 <div className="text-green">Içki suratlary goş</div>
                                             </label>
 
-                                            <input type="file" disabled={file.length === 10} id="images" accept="image/*" multiple className="form-control" name="images" ref={imagesRef} onChange={uploadSingleFile} hidden />
+                                            <input type="file" disabled={file.length === 40} id="images" accept="image/*" multiple className="form-control" name="images" ref={imagesRef} onChange={uploadSingleFile} hidden />
                                         </>
                                     </div>
                                 ) : (

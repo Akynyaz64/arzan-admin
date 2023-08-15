@@ -4,7 +4,7 @@ import {toast} from "react-hot-toast";
 import Popup from "reactjs-popup";
 import ReactPaginate from "react-paginate";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faClose, faEye, faPen, faPlus, faSearch, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faClose, faEye, faFileCircleMinus, faPen, faPlus, faSearch, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Loader} from "../../../components";
 import useFetch from "../../../hooks/useFetch";
 
@@ -220,10 +220,15 @@ const Photos = () => {
                                                     </td> */}
                                                     <td>
                                                         <div className="d-flex align-items-center list-action">
+                                                            <Link to={`add/${gallery.id}`} className="btn bg-success btn-sm mr-2">
+                                                                <FontAwesomeIcon icon={faPlus} className="mr-0" />
+                                                            </Link>
+                                                            <Link to={`remove/${gallery.id}`} className="btn bg-danger btn-sm mr-2">
+                                                                <FontAwesomeIcon icon={faFileCircleMinus} className="mr-0" />
+                                                            </Link>
                                                             <Link to={`${gallery.id}`} className="btn bg-primary btn-sm mr-2">
                                                                 <FontAwesomeIcon icon={faEye} className="mr-0" />
                                                             </Link>
-
                                                             <Link to={`edit/${gallery.id}`} className="btn bg-warning btn-sm mr-2">
                                                                 <FontAwesomeIcon icon={faPen} className="mr-0" />
                                                             </Link>
