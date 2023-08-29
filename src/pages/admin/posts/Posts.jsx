@@ -5,7 +5,7 @@ import moment from "moment";
 import Popup from "reactjs-popup";
 import ReactPaginate from "react-paginate";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faClose, faEye, faPen, faPlus, faSearch, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faClose, faEye, faHeart, faPen, faPlus, faSearch, faTrash} from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../../../hooks/useFetch";
 import {Loader} from "../../../components";
 
@@ -140,8 +140,9 @@ const Posts = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="col-xl-2 mb-4">
-                        <div className="iq-search-bar device-search h-100">
+                    <div className="col-xl-2 mb-4 position-relative">
+                        <h6>Ady boýunça gözleg: </h6>
+                        <div className="iq-search-bar device-search h-50">
                             <form
                                 className="searchbox w-100 h-100"
                                 onSubmit={(e) => {
@@ -168,6 +169,7 @@ const Posts = () => {
                         </div>
                     </div>
                     <div className="col-xl-2 mb-4">
+                        <h6>Kategoriýa boýunça filter: </h6>
                         <select
                             className="custom-select"
                             name="category_id"
@@ -199,6 +201,7 @@ const Posts = () => {
                         </select>
                     </div>
                     <div className="col-xl-2 mb-4">
+                        <h6>Sub kategoriýa boýunça filter: </h6>
                         <select
                             className="custom-select"
                             name="sub_category_id"
@@ -230,6 +233,7 @@ const Posts = () => {
                         </select>
                     </div>
                     <div className="col-xl-2 mb-4">
+                        <h6>Görnüşi boýunça filter: </h6>
                         <select
                             className="custom-select"
                             name="publication_type_id"
@@ -273,10 +277,9 @@ const Posts = () => {
                                             <th>Suraty we ady</th>
                                             <th>Bahasy</th>
                                             <th>Arzanladyş</th>
-                                            <th>Görlen sany</th>
+                                            <th>Like we görlen sany</th>
                                             <th>Tassyklama statusy</th>
                                             <th>Garaşylýan statusy</th>
-                                            <th>Telefon belgi</th>
                                             <th>Görnüşi</th>
                                             <th>Goşulan wagty</th>
                                             <th>Amallar</th>
@@ -284,21 +287,24 @@ const Posts = () => {
                                     </thead>
 
                                     <tbody className="ligth-body">
-                                        {/* MAP ETMELI YERI */}
                                         {posts?.length > 0 ? (
                                             posts?.map((post, index) => (
                                                 <tr key={index}>
                                                     <td>{index + 1}</td>
                                                     <td>{post.id}</td>
                                                     <td>
-                                                        <div className="d-flex align-items-center">
-                                                            <img src={"/" + post.image} alt="post" style={{height: "65px"}} />
-                                                            <div className="ms-4 small fw-bold">{post.title}</div>
-                                                        </div>
+                                                        <Link to={`${post.id}`}>
+                                                            <div className="d-flex align-items-center">
+                                                                <img src={import.meta.env.VITE_MEDIA_URL_ACTIVE + post.image} alt="post" style={{height: "65px"}} />
+                                                                <div className="ms-4 small fw-bold text-dark">{post.title}</div>
+                                                            </div>
+                                                        </Link>
                                                     </td>
                                                     <td>{post.price}</td>
                                                     <td>{post.discount}</td>
-                                                    <td>{post.viewed_count}</td>
+                                                    <td>
+                                                        <FontAwesomeIcon icon={faHeart} className="mr-1" style={{fontSize: "18px", color: "red"}} /> {post.likes_count} / <FontAwesomeIcon icon={faEye} className="mr-1" style={{fontSize: "18px", color: "green"}} /> {post.viewed_count}
+                                                    </td>
                                                     <td>
                                                         {post.approved ? (
                                                             <button
@@ -323,7 +329,6 @@ const Posts = () => {
                                                         )}
                                                     </td>
                                                     <td>{post.waiting ? "Garaşylýar" : "Garaşylmaýar"}</td>
-                                                    <td>{post.phone}</td>
                                                     <td>
                                                         <select
                                                             className="custom-select"
@@ -392,7 +397,6 @@ const Posts = () => {
                                         ) : (
                                             <div>Maglumat ýok</div>
                                         )}
-                                        {/* MAP ETMELI YERI */}
                                     </tbody>
                                 </table>
                             </div>

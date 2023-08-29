@@ -57,7 +57,6 @@ const PaymentHistory = () => {
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
-                                        {/* MAP ETMELI YERI */}
                                         {histories?.length > 0 ? (
                                             histories?.map((history, index) => (
                                                 <tr key={index}>
@@ -72,7 +71,6 @@ const PaymentHistory = () => {
                                         ) : (
                                             <div>Maglumat ýok</div>
                                         )}
-                                        {/* MAP ETMELI YERI */}
                                     </tbody>
                                 </table>
                             </div>

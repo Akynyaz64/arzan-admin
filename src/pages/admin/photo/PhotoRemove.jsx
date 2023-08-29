@@ -106,7 +106,7 @@ const PhotoRemove = () => {
                                                             }
                                                         }}
                                                     />
-                                                    <img alt="preview" src={"/" + photo?.url} className="img-fluid w-100 rounded" />
+                                                    <img alt="preview" src={import.meta.env.VITE_MEDIA_URL_ACTIVE + photo?.url} className="img-fluid w-100 rounded" />
                                                 </label>
                                             </div>
                                         ))

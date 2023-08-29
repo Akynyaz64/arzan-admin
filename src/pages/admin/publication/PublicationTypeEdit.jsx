@@ -56,7 +56,7 @@ const PublicationTypeEdit = () => {
         };
         console.log(typeData);
 
-        const response = await fetch(`/admin-api/sub-category/edit/${typeId}`, {
+        const response = await fetch(`/admin-api/publication-type/edit/${typeId}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

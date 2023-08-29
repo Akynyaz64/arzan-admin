@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {toast} from "react-hot-toast";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faImage, faVideo} from "@fortawesome/free-solid-svg-icons";
 import {Loader} from "../../../components";
 
 const PageCategoryView = () => {
@@ -48,7 +50,7 @@ const PageCategoryView = () => {
                     <div className="col-lg-8 mt-3">
                         <div className="form-row">
                             <div className="col-xl-7 mb-4">
-                                <img alt="page_category" src={"/" + pageCategory.image?.url} className="img-fluid w-100 rounded" />
+                                <img alt="page_category" src={import.meta.env.VITE_MEDIA_URL_ACTIVE + pageCategory.image?.url} className="img-fluid w-100 rounded" />
                             </div>
                             <div className="col-lg-5">
                                 <div className="col-md-12 mb-3">
@@ -58,6 +60,12 @@ const PageCategoryView = () => {
                                 <div className="col-md-12 mb-3">
                                     <h4>Degişli sahypasy:</h4>
                                     <h3>{pageCategory.page?.name}</h3>
+                                </div>
+                                <div className="col-md-12 mb-3">
+                                    <h4>Albom we video sany:</h4>
+                                    <h3>
+                                        <FontAwesomeIcon icon={faImage} className="mr-0" /> {pageCategory.statistics?.gallery_count} / <FontAwesomeIcon icon={faVideo} className="mr-0" /> {pageCategory.statistics?.video_count}
+                                    </h3>
                                 </div>
                             </div>
                         </div>

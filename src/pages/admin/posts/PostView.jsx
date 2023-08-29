@@ -2,6 +2,8 @@ import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {toast} from "react-hot-toast";
 import {Loader} from "../../../components";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEye, faHeart} from "@fortawesome/free-solid-svg-icons";
 
 const PostView = () => {
     const {postId} = useParams();
@@ -34,12 +36,56 @@ const PostView = () => {
         fetchData();
     }, []);
 
+    const approvePost = async (id, status) => {
+        setIsLoading(true);
+        const response = await fetch(`/admin-api/post/${id}/approve`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("adACto")}`,
+            },
+            body: JSON.stringify({approve: status}),
+        });
+
+        if (!response.ok) {
+            setIsLoading(false);
+            toast.error("Error status: " + response.statusText);
+            return null;
+        }
+        const resData = await response.json();
+        toast.success(resData.message);
+        fetchData();
+        setIsLoading(false);
+    };
+
     return (
         <div className="container-fluid">
             <div className="row justify-content-center">
                 <div className="col-lg-8">
                     <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
                         <h3 className="mb-3">Arzanladyş barada</h3>
+
+                        {post.approved ? (
+                            <button
+                                className="btn btn-danger btn-sm"
+                                onClick={() => {
+                                    approvePost(post.id, false);
+                                }}
+                            >
+                                Ret etmek
+                            </button>
+                        ) : (
+                            <>
+                                <button
+                                    className="btn bg-success btn-sm m-1"
+                                    onClick={() => {
+                                        approvePost(post.id, true);
+                                    }}
+                                >
+                                    Tassyklamak
+                                </button>
+                            </>
+                        )}
                     </div>
                 </div>
                 {isLoading ? (
@@ -49,7 +95,7 @@ const PostView = () => {
                         <div className="form-row">
                             {post.images?.map((image, index) => (
                                 <div key={index} className="col-md-3 mb-4">
-                                    <img alt="post" src={"/" + image.url} className="img-fluid rounded" />
+                                    <img alt="post" src={import.meta.env.VITE_MEDIA_URL_ACTIVE + image.url} className="img-fluid rounded" />
                                 </div>
                             ))}
                             <div className="col-md-12 mb-3">
@@ -88,11 +134,15 @@ const PostView = () => {
                             </div>
                             <div className="col-md-4 mb-3">
                                 <h5>Like sany:</h5>
-                                <p>{post.likes_count}</p>
+                                <p>
+                                    <FontAwesomeIcon icon={faHeart} className="mr-1" style={{fontSize: "18px", color: "red"}} /> {post.likes_count}
+                                </p>
                             </div>
                             <div className="col-md-4 mb-3">
                                 <h5>Görlen sany:</h5>
-                                <p>{post.viewed_count}</p>
+                                <p>
+                                    <FontAwesomeIcon icon={faEye} className="mr-1" style={{fontSize: "18px", color: "green"}} /> {post.viewed_count}
+                                </p>
                             </div>
                             <div className="col-md-4 mb-3">
                                 <h5>Postuň görnüşi:</h5>
@@ -107,7 +157,7 @@ const PostView = () => {
                                 <div className="tags-container mt-3">
                                     {post.tags?.map((e, index) => (
                                         <span className="tag" key={index}>
-                                            {e.name + " "}
+                                            # {e.name + " "}
                                         </span>
                                     ))}
                                 </div>

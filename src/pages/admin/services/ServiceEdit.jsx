@@ -15,7 +15,10 @@ const ServiceEdit = () => {
         name: "",
         cost: "",
         count: false,
+        month: false,
+        month_cost: "",
     });
+    const [locationCosts, setLocationCosts] = useState();
     const [selectedFile, setSelectedFile] = useState();
     const [preview, setPreview] = useState();
 
@@ -30,7 +33,6 @@ const ServiceEdit = () => {
             });
 
             const resData = await response.json();
-            console.log(resData);
             if (resData.status === false) {
                 toast.error(resData.message);
                 setIsFetching(false);
@@ -40,10 +42,18 @@ const ServiceEdit = () => {
                 setIsFetching(false);
             }
 
-            console.log(resData.data);
             setIsFetching(false);
+            setLocationCosts(
+                resData.data[0].location_costs
+                    .map((v) => ({...v, id: v.location.id}))
+                    .map((v) => {
+                        delete v.created_at;
+                        return v;
+                    })
+            );
+            console.log(resData.data[0])
             setService(resData.data[0]);
-            setPreview("/" + resData.data[0].image);
+            setPreview(import.meta.env.VITE_MEDIA_URL_ACTIVE + resData.data[0].image);
         };
 
         fetchData();
@@ -52,6 +62,23 @@ const ServiceEdit = () => {
     const handleChange = (e) => {
         setService((prev) => ({...prev, [e.target.name]: e.target.value}));
     };
+
+    const handleChangeLocations = (e, id) => {
+        setLocationCosts(
+            [...locationCosts].map((object) => {
+                if (object.id === id) {
+                    return {
+                        ...object,
+                        [e.target.name]: Number(e.target.value),
+                    };
+                } else return object;
+            })
+        );
+    };
+
+    useEffect(() => {
+        console.log(locationCosts);
+    }, [locationCosts]);
 
     useEffect(() => {
         if (!selectedFile) {
@@ -81,6 +108,11 @@ const ServiceEdit = () => {
         categoryData.append("name", service.name);
         categoryData.append("cost", service.cost);
         categoryData.append("count", service.count);
+        // categoryData.append("month", service.month);
+        // if (service.month === true) {
+        //     categoryData.append("month_cost", service.month_cost);
+        // }
+        categoryData.append("location_costs", JSON.stringify(locationCosts));
         categoryData.append("image", selectedFile);
 
         const response = await fetch(`/admin-api/service/${serviceId}`, {
@@ -162,6 +194,38 @@ const ServiceEdit = () => {
                                             }}
                                         />
                                     </div>
+                                    {/* <div className="col-md-12 mb-3">
+                                        <label htmlFor="month">Aýlyk bahasy</label>
+                                        <div className="d-flex">
+                                            <input
+                                                type="checkbox"
+                                                className="mx-3 mt-1"
+                                                id="month"
+                                                name="month"
+                                                defaultChecked={service?.month}
+                                                onChange={(e) => {
+                                                    setService((prev) => ({...prev, month: e.target.checked}));
+                                                }}
+                                            />
+                                            <input type="number" className="form-control" id="month_cost" name="month_cost" defaultValue={service?.month_cost} onChange={handleChange} disabled={service?.month} />
+                                        </div>
+                                    </div> */}
+                                    {locationCosts?.map((location, index) => (
+                                        <div className="col-xl-12 row" key={index}>
+                                            <div className="col-md-2 mb-3">
+                                                <label htmlFor="name">Welaýat</label>
+                                                <h5>{location.location.display_name}</h5>
+                                            </div>
+                                            <div className="col-md-5 mb-3">
+                                                <label htmlFor="cost">Bahasy</label>
+                                                <input type="text" className="form-control" id="cost" name="cost" defaultValue={location.cost} onChange={(e) => handleChangeLocations(e, location.id)} />
+                                            </div>
+                                            <div className="col-md-5 mb-3">
+                                                <label htmlFor="month_cost">Aýlyk bahasy</label>
+                                                <input type="number" className="form-control" id="month_cost" name="month_cost" defaultValue={location.month_cost} onChange={(e) => handleChangeLocations(e, location.id)} />
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                                 <div className="form-group d-grid mt-3 mb-5">
                                     <button type="submit" className="btn btn-green" disabled={isSubmitting}>

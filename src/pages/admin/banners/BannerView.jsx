@@ -63,7 +63,7 @@ const BannerView = () => {
                     <div className="col-lg-8 mt-3">
                         <div className="form-row">
                             <div className="col-xl-12 mb-4">
-                                <img alt="banner" src={"/" + banner?.image?.url} className="img-fluid rounded" />
+                                <img alt="banner" src={import.meta.env.VITE_MEDIA_URL_ACTIVE + banner?.image?.url} className="img-fluid rounded" />
                             </div>
                             <div className="col-md-8 mb-3">
                                 <h2>{banner.title}</h2>

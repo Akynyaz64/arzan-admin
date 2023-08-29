@@ -63,11 +63,11 @@ const PhotoView = () => {
                     <div className="col-lg-8 mt-3">
                         <div className="form-row">
                             <div className="col-md-12 mb-4">
-                                <img alt="photo" src={"/" + photo?.avatar_image?.url} className="img-fluid rounded" />
+                                <img alt="photo" src={import.meta.env.VITE_MEDIA_URL_ACTIVE + photo?.avatar_image?.url} className="img-fluid rounded" />
                             </div>
                             {photo.images?.map((image, index) => (
                                 <div key={index} className="col-md-3 mb-4">
-                                    <img alt="photo" src={"/" + image.url} className="img-fluid rounded" />
+                                    <img alt="photo" src={import.meta.env.VITE_MEDIA_URL_ACTIVE + image.url} className="img-fluid rounded" />
                                 </div>
                             ))}
                             <div className="col-md-12 mb-3">
@@ -80,10 +80,6 @@ const PhotoView = () => {
                             <div className="col-md-4 mb-3">
                                 <h5>Ulanyjy görnüşi:</h5>
                                 <p>{photo.user?.role}</p>
-                            </div>
-                            <div className="col-md-4 mb-3">
-                                <h5>Publikasiýanyň görnüşi:</h5>
-                                <p>{photo.publication_type?.type}</p>
                             </div>
                             <div className="col-md-4 mb-3">
                                 <h5>Page / Category:</h5>

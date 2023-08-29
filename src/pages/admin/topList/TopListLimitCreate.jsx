@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {toast} from "react-hot-toast";
 import {filterNames} from "../../../data/data";
 
-const TopListCreate = () => {
+const TopListLimitCreate = () => {
     const navigate = useNavigate();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const name = useRef("");
@@ -82,4 +82,4 @@ const TopListCreate = () => {
     );
 };
 
-export default TopListCreate;
+export default TopListLimitCreate;

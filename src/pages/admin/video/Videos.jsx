@@ -116,7 +116,7 @@ const Videos = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="col-xl-2 mb-4">
+                    <div className="col-xl-4 mb-4">
                         <div className="iq-search-bar device-search h-100">
                             <form
                                 className="searchbox w-100 h-100"
@@ -164,7 +164,6 @@ const Videos = () => {
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
-                                        {/* MAP ETMELI YERI */}
                                         {videos?.length > 0 ? (
                                             videos?.map((video, index) => (
                                                 <tr key={index}>
@@ -172,7 +171,7 @@ const Videos = () => {
                                                     <td>{video.id}</td>
                                                     <td>
                                                         <div className="d-flex align-items-center">
-                                                            <img src={"/" + video.thumbnail.url} alt="video_thumbnail" style={{height: "65px"}} />
+                                                            <img src={import.meta.env.VITE_MEDIA_URL_ACTIVE + video.thumbnail.url} alt="video_thumbnail" style={{height: "65px"}} />
                                                             <div className="ms-4 small fw-bold">{video.title}</div>
                                                         </div>
                                                     </td>
@@ -210,9 +209,6 @@ const Videos = () => {
                                                     </td>
                                                     <td>
                                                         <a href={video.video.url}>Ýükle</a>
-                                                        {/* <video width="750" height="500" controls>
-                                                            <source src={"/" + video.video.url} type="video/mp4" />
-                                                        </video> */}
                                                     </td>
                                                     <td>
                                                         <div className="d-flex align-items-center list-action">
@@ -263,7 +259,6 @@ const Videos = () => {
                                         ) : (
                                             <div>Maglumat yok</div>
                                         )}
-                                        {/* MAP ETMELI YERI */}
                                     </tbody>
                                 </table>
                             </div>

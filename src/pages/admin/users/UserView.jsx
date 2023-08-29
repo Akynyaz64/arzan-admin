@@ -10,8 +10,6 @@ const UserView = () => {
     const [user, setUser] = useState({});
     const [isLoading, setIsLoading] = useState(false);
 
-    // const [locations] = useFetch("/api/v1/location/list", "data");
-
     function formatDate(data) {
         let date = new Date(data);
         let year = date.getFullYear();
@@ -76,7 +74,7 @@ const UserView = () => {
                             <div className="card-body">
                                 <div className="d-flex align-items-center mb-3">
                                     <div className="profile-img position-relative">
-                                        <img src={"/" + user?.avatar_image} className="img-fluid rounded avatar-110" alt="profile-image" />
+                                        <img src={import.meta.env.VITE_MEDIA_URL_ACTIVE + user?.avatar_image} className="img-fluid rounded avatar-110" alt="profile-image" />
                                     </div>
                                     <div className="ml-3">
                                         <h4 className="mb-1">{user?.name}</h4>

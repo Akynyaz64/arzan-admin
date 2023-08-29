@@ -62,7 +62,7 @@ const PageCategoryEdit = () => {
             setIsFetching(false);
             setPageCategory(resData.data);
             setPage(resData.data.page);
-            setPreview("/" + resData.data.image.url);
+            setPreview(import.meta.env.VITE_MEDIA_URL_ACTIVE + resData.data.image.url);
         };
 
         fetchData();

@@ -121,6 +121,7 @@ const Banners = () => {
                         </ul>
                     </div>
                     <div className="col-xl-3 mb-4">
+                        <h6>Sahypalar boýunça filter:</h6>
                         <select
                             className="custom-select"
                             name="page_category"
@@ -152,6 +153,7 @@ const Banners = () => {
                         </select>
                     </div>
                     <div className="col-xl-3 mb-4">
+                        <h6>Welaýat boýunça filter:</h6>
                         <select
                             className="custom-select"
                             name="location"
@@ -192,7 +194,7 @@ const Banners = () => {
                                         <div key={index} className="col-xl-3 col-sm-6 col-md-6">
                                             <div className="card">
                                                 <Link to={`${banner.id}`}>
-                                                    <img src={"/" + banner.image.url} className="card-img-top" alt="Banner img" />
+                                                    <img src={import.meta.env.VITE_MEDIA_URL_ACTIVE + banner.image.url} className="card-img-top" alt="Banner img" />
                                                 </Link>
                                                 <div className="card-body">
                                                     <Link to={`${banner.id}`}>
@@ -206,9 +208,6 @@ const Banners = () => {
                                                                 {banner.url}
                                                             </Link>
                                                         </li>
-                                                        {/* <li>
-                                                        <b>Priority</b> - {banner.priority}
-                                                    </li> */}
                                                         <li>
                                                             <b>Başlangyç senesi</b> - {banner.start_date?.slice(0, 10)}
                                                         </li>

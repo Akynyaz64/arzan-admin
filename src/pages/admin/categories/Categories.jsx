@@ -84,12 +84,10 @@ const Categories = () => {
                                             <th>ID</th>
                                             <th>Suraty</th>
                                             <th>Ady</th>
-                                            {/* <th>Priority</th> */}
                                             <th>Amallar</th>
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
-                                        {/* MAP ETMELI YERI */}
                                         {categories?.length > 0 ? (
                                             categories?.map((category, index) => (
                                                 <tr key={index}>
@@ -147,9 +145,10 @@ const Categories = () => {
                                                 </tr>
                                             ))
                                         ) : (
-                                            <div>Maglumat ýok</div>
+                                            <tr>
+                                                <td>Maglumat ýok</td>
+                                            </tr>
                                         )}
-                                        {/* MAP ETMELI YERI */}
                                     </tbody>
                                 </table>
                             </div>

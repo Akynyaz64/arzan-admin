@@ -63,7 +63,6 @@ const Welayats = () => {
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
-                                        {/* MAP ETMELI YERI */}
                                         {welayats?.length > 0 ? (
                                             welayats?.map((welayat, index) => (
                                                 <tr key={index}>
@@ -114,7 +113,6 @@ const Welayats = () => {
                                         ) : (
                                             <div>Maglumat ýok</div>
                                         )}
-                                        {/* MAP ETMELI YERI */}
                                     </tbody>
                                 </table>
                             </div>

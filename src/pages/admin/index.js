@@ -8,7 +8,8 @@ export {default as AdminUserCreate} from "./users/UserCreate";
 export {default as AdminUserEdit} from "./users/UserEdit";
 
 export {default as AdminTopList} from "./topList/TopList";
-export {default as AdminTopListCreate} from "./topList/TopListCreate";
+export {default as AdminTopListLimit} from "./topList/TopListLimit";
+export {default as AdminTopListLimitCreate} from "./topList/TopListLimitCreate";
 
 export {default as AdminBanners} from "./banners/Banners";
 export {default as AdminBannerView} from "./banners/BannerView";
@@ -29,6 +30,7 @@ export {default as AdminPhotos} from "./photo/Photos";
 export {default as AdminPhotoCreate} from "./photo/PhotoCreate";
 export {default as AdminPhotoView} from "./photo/PhotoView";
 export {default as AdminPhotoEdit} from "./photo/PhotoEdit";
+export {default as AdminPhotoInner} from "./photo/PhotoInner";
 export {default as AdminPhotoRemove} from "./photo/PhotoRemove";
 export {default as AdminPhotoAdd} from "./photo/PhotoAdd";
 

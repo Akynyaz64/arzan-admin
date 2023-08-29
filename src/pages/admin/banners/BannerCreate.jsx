@@ -197,10 +197,6 @@ const BannerCreate = () => {
                                         }}
                                     />
                                 </div>
-                                {/* <div className="col-md-6 mb-3">
-                                    <label htmlFor="validationDefault02">Priority</label>
-                                    <input type="number" className="form-control" id="validationDefault02" required />
-                                </div> */}
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="start_date">Başlangyç senesi</label>
                                     <input type="date" className="form-control" id="start_date" name="start_date" ref={start_date} />

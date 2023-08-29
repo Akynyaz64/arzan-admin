@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {toast} from "react-hot-toast";
 import Popup from "reactjs-popup";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faClose, faEye, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faClose, faEye, faImage, faPen, faPlus, faTrash, faVideo} from "@fortawesome/free-solid-svg-icons";
 import {Loader} from "../../../components";
 
 const PageCategories = () => {
@@ -85,22 +85,24 @@ const PageCategories = () => {
                                             <th>Suraty</th>
                                             <th>Ady</th>
                                             <th>Sahypa</th>
-                                            {/* <th>Priority</th> */}
+                                            <th>Albom we wideo sany</th>
                                             <th>Amallar</th>
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
-                                        {/* MAP ETMELI YERI */}
                                         {pageCategories?.length > 0 ? (
                                             pageCategories?.map((category, index) => (
                                                 <tr key={index}>
                                                     <td>{index + 1}</td>
                                                     <td>{category.id}</td>
                                                     <td>
-                                                        <img src={"/" + category.image.url} alt="category" style={{height: "65px"}} />
+                                                        <img src={import.meta.env.VITE_MEDIA_URL_ACTIVE + category.image.url} alt="category" style={{height: "65px"}} />
                                                     </td>
                                                     <td>{category.category.name}</td>
                                                     <td>{category.page.name}</td>
+                                                    <td>
+                                                        <FontAwesomeIcon icon={faImage} className="mr-0" /> {category.statistics.gallery_count} / <FontAwesomeIcon icon={faVideo} className="mr-0" /> {category.statistics.video_count}
+                                                    </td>
                                                     <td>
                                                         <div className="d-flex align-items-center list-action">
                                                             <Link to={`${category.id}`} className="btn bg-primary btn-sm mr-2">
@@ -110,40 +112,43 @@ const PageCategories = () => {
                                                             <Link to={`edit/${category.id}`} className="btn bg-warning btn-sm mr-2">
                                                                 <FontAwesomeIcon icon={faPen} className="mr-0" />
                                                             </Link>
-
-                                                            <Popup
-                                                                trigger={
-                                                                    <button className="btn btn-danger btn-sm">
-                                                                        <FontAwesomeIcon icon={faTrash} className="" />
-                                                                    </button>
-                                                                }
-                                                                modal
-                                                                nested
-                                                            >
-                                                                {(close) => (
-                                                                    <article className="modal-container">
-                                                                        <header className="modal-container-header">
-                                                                            <h3 className="modal-container-title">Üns beriň!</h3>
-                                                                            <button
-                                                                                className="close icon-button"
-                                                                                onClick={() => {
-                                                                                    close();
-                                                                                }}
-                                                                            >
-                                                                                <FontAwesomeIcon icon={faClose} />
-                                                                            </button>
-                                                                        </header>
-                                                                        <section className="modal-container-body">
-                                                                            <p>Siz hakykatdan hem pozmak isleýärsiňizmi?</p>
-                                                                        </section>
-                                                                        <footer className="modal-container-footer">
-                                                                            <button className="btn btn-danger" onClick={(e) => handleDelete(e, category.id)}>
-                                                                                Poz
-                                                                            </button>
-                                                                        </footer>
-                                                                    </article>
-                                                                )}
-                                                            </Popup>
+                                                            {category.page.name !== "HOME" && !category.category.name.includes("Hemmesi") ? (
+                                                                <Popup
+                                                                    trigger={
+                                                                        <button className="btn btn-danger btn-sm">
+                                                                            <FontAwesomeIcon icon={faTrash} className="" />
+                                                                        </button>
+                                                                    }
+                                                                    modal
+                                                                    nested
+                                                                >
+                                                                    {(close) => (
+                                                                        <article className="modal-container">
+                                                                            <header className="modal-container-header">
+                                                                                <h3 className="modal-container-title">Üns beriň!</h3>
+                                                                                <button
+                                                                                    className="close icon-button"
+                                                                                    onClick={() => {
+                                                                                        close();
+                                                                                    }}
+                                                                                >
+                                                                                    <FontAwesomeIcon icon={faClose} />
+                                                                                </button>
+                                                                            </header>
+                                                                            <section className="modal-container-body">
+                                                                                <p>Siz hakykatdan hem pozmak isleýärsiňizmi?</p>
+                                                                            </section>
+                                                                            <footer className="modal-container-footer">
+                                                                                <button className="btn btn-danger" onClick={(e) => handleDelete(e, category.id)}>
+                                                                                    Poz
+                                                                                </button>
+                                                                            </footer>
+                                                                        </article>
+                                                                    )}
+                                                                </Popup>
+                                                            ) : (
+                                                                ""
+                                                            )}
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -151,7 +156,6 @@ const PageCategories = () => {
                                         ) : (
                                             <div>Maglumat ýok</div>
                                         )}
-                                        {/* MAP ETMELI YERI */}
                                     </tbody>
                                 </table>
                             </div>

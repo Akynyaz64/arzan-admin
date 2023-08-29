@@ -5,6 +5,7 @@ import Popup from "reactjs-popup";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClose, faEye, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Loader} from "../../../components";
+import coin_img from "../../../assets/icons/coin.webp";
 
 const Services = () => {
     const [services, setServices] = useState([]);
@@ -86,22 +87,22 @@ const Services = () => {
                                             <th>Ady</th>
                                             <th>Bahasy</th>
                                             <th>Count</th>
-                                            {/* <th>Priority</th> */}
                                             <th>Amallar</th>
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
-                                        {/* MAP ETMELI YERI */}
                                         {services?.length > 0 ? (
                                             services?.map((service, index) => (
                                                 <tr key={index}>
                                                     <td>{index + 1}</td>
                                                     <td>{service.id}</td>
                                                     <td>
-                                                        <img src={"/" + service.image} alt="hyzmat" style={{height: "65px"}} />
+                                                        <img src={import.meta.env.VITE_MEDIA_URL_ACTIVE + service.image} alt="hyzmat" style={{height: "65px"}} />
                                                     </td>
                                                     <td>{service.name}</td>
-                                                    <td>{service.cost + " TMT"}</td>
+                                                    <td>
+                                                        {service.cost} <img src={coin_img} alt="coin" style={{marginLeft: "5px", height: "15px"}} />
+                                                    </td>
                                                     <td>{service.count === true ? "True" : "False"}</td>
                                                     <td>
                                                         <div className="d-flex align-items-center list-action">
@@ -153,7 +154,6 @@ const Services = () => {
                                         ) : (
                                             <div>Maglumat ýok</div>
                                         )}
-                                        {/* MAP ETMELI YERI */}
                                     </tbody>
                                 </table>
                             </div>

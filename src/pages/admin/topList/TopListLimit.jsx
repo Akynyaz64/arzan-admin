@@ -1,18 +1,19 @@
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {toast} from "react-hot-toast";
+import moment from "moment";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPen, faPlus} from "@fortawesome/free-solid-svg-icons";
-import {Loader} from "../../../../components";
-import coin_img from "../../../../assets/icons/coin.webp";
+import {filterNames} from "../../../data/data";
+import {Loader} from "../../../components";
 
-const StreakRewards = () => {
-    const [streakRewards, setStreakRewards] = useState([]);
+const TopListLimit = () => {
+    const [topListLimits, setTopListLimits] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     const fetchData = async () => {
         setIsLoading(true);
-        const response = await fetch(`/api/v1/user/profile/day-streak`, {
+        const response = await fetch(`/admin-api/user/top-list/limit`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -27,7 +28,7 @@ const StreakRewards = () => {
         }
         const resData = await response.json();
         console.log(resData.data);
-        setStreakRewards(resData.data);
+        setTopListLimits(resData.data);
         setIsLoading(false);
     };
 
@@ -41,10 +42,10 @@ const StreakRewards = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Streak rewards</h3>
+                            <h3 className="mb-3">Top list limitler</h3>
                             <Link to="create" className="btn btn-primary add-list">
                                 <FontAwesomeIcon icon={faPlus} className="mr-3" />
-                                Streak reward goş
+                                Top List limit goş
                             </Link>
                         </div>
                     </div>
@@ -57,23 +58,26 @@ const StreakRewards = () => {
                                     <thead className="bg-white text-uppercase">
                                         <tr className="ligth ligth-data">
                                             <th>№</th>
-                                            <th>Gün belgi</th>
-                                            <th>Coin mukdary</th>
+                                            <th>ID</th>
+                                            <th>Filteriň ady</th>
+                                            <th>Limit</th>
+                                            <th>Üýtgedilen wagty</th>
                                             <th>Amallar</th>
                                         </tr>
                                     </thead>
+
                                     <tbody className="ligth-body">
-                                        {streakRewards?.length > 0 ? (
-                                            streakRewards?.map((item, index) => (
+                                        {topListLimits?.length > 0 ? (
+                                            topListLimits?.map((item, index) => (
                                                 <tr key={index}>
                                                     <td>{index + 1}</td>
-                                                    <td>{item.day_id} gün</td>
-                                                    <td>
-                                                        {item.coin_amount} <img src={coin_img} alt="coin" style={{marginLeft: "5px", height: "15px"}} />
-                                                    </td>
+                                                    <td>{item.id}</td>
+                                                    <td>{filterNames.find((x) => x.name === item.name).value}</td>
+                                                    <td>{item.limit_count}</td>
+                                                    <td>{moment(item.last_time).utc().format("yyyy-MM-DD")}</td>
                                                     <td>
                                                         <div className="d-flex align-items-center list-action">
-                                                            <Link to={`edit/${item.day_id}`} className="btn bg-warning btn-sm mr-2">
+                                                            <Link to={`create`} className="btn bg-warning btn-sm mr-2">
                                                                 <FontAwesomeIcon icon={faPen} className="mr-0" />
                                                             </Link>
                                                         </div>
@@ -94,4 +98,4 @@ const StreakRewards = () => {
     );
 };
 
-export default StreakRewards;
+export default TopListLimit;

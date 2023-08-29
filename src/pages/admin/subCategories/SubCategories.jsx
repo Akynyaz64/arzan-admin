@@ -123,7 +123,6 @@ const SubCategories = () => {
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
-                                        {/* MAP ETMELI YERI */}
                                         {subCategories?.length > 0 ? (
                                             subCategories?.map((subCategory, index) => (
                                                 <tr key={index}>
@@ -180,7 +179,6 @@ const SubCategories = () => {
                                         ) : (
                                             <div>Maglumat ýok</div>
                                         )}
-                                        {/* MAP ETMELI YERI */}
                                     </tbody>
                                 </table>
                             </div>

@@ -4,9 +4,8 @@ import {toast} from "react-hot-toast";
 import Popup from "reactjs-popup";
 import ReactPaginate from "react-paginate";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faClose, faEye, faFileCircleMinus, faPen, faPlus, faSearch, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faClose, faEye, faFileCircleMinus, faHeart, faPen, faPlus, faSearch, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Loader} from "../../../components";
-import useFetch from "../../../hooks/useFetch";
 
 const Photos = () => {
     const search = useRef();
@@ -19,8 +18,6 @@ const Photos = () => {
     const [galleries, setGalleries] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    const [types] = useFetch("/admin-api/publication-type", "data", true);
-
     const changePage = ({selected}) => {
         setPage(selected + 1);
         console.log(page);
@@ -29,28 +26,6 @@ const Photos = () => {
             offset: selected * urlParams.limit,
         });
         table.current.scrollIntoView({behavior: "smooth"});
-    };
-
-    const setType = async (id, value) => {
-        setIsLoading(true);
-        const response = await fetch(`/admin-api/gallery/publication-type`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("adACto")}`,
-            },
-            body: JSON.stringify({id: id, publication_type_id: value}),
-        });
-
-        if (!response.ok) {
-            setIsLoading(false);
-            toast.error("Error status: " + response.statusText);
-            return null;
-        }
-        const resData = await response.json();
-        toast.success(resData.message);
-        fetchData(urlParams);
-        setIsLoading(false);
     };
 
     const fetchData = async (data) => {
@@ -103,19 +78,6 @@ const Photos = () => {
         }
     };
 
-    // const slider_settings = {
-    //     arrows: true,
-    //     dots: false,
-    //     infinite: true,
-    //     speed: 500,
-    //     slidesToShow: 1,
-    //     slidesToScroll: 1,
-    //     autoplay: true,
-    //     swipeToSlide: true,
-    //     pauseOnHover: true,
-    //     autoplaySpeed: 3000,
-    // };
-
     return (
         <>
             <div className="container-fluid">
@@ -129,7 +91,7 @@ const Photos = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="col-xl-2 mb-4">
+                    <div className="col-xl-4 mb-4">
                         <div className="iq-search-bar device-search h-100">
                             <form
                                 className="searchbox w-100 h-100"
@@ -169,13 +131,12 @@ const Photos = () => {
                                             <th>Suraty / Ady</th>
                                             <th>Goşan ulanyjy</th>
                                             <th>Page / kategoriýa</th>
-                                            {/* <th>Görnüşi</th> */}
-                                            {/* <th>Suratlar</th> */}
+                                            <th>Surat sany</th>
+                                            <th>Jemi like we görlen sany</th>
                                             <th>Amallar</th>
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
-                                        {/* MAP ETMELI YERI */}
                                         {galleries?.length > 0 ? (
                                             galleries?.map((gallery, index) => (
                                                 <tr key={index}>
@@ -183,7 +144,7 @@ const Photos = () => {
                                                     <td>{gallery.id}</td>
                                                     <td>
                                                         <div className="d-flex align-items-center">
-                                                            <img src={"/" + gallery.avatar_image.url} alt="gallery" style={{height: "65px"}} />
+                                                            <img src={import.meta.env.VITE_MEDIA_URL_ACTIVE + gallery.avatar_image.url} alt="gallery" style={{height: "65px"}} />
                                                             <div className="ms-4 small fw-bold">{gallery.title}</div>
                                                         </div>
                                                     </td>
@@ -193,31 +154,10 @@ const Photos = () => {
                                                             return e.page?.name + " / " + e.category?.name;
                                                         })}
                                                     </td>
-                                                    {/* <td className="position-relative">
-                                                        <Slider {...slider_settings} style={{width: "200px"}}>
-                                                            {gallery?.images?.map((e) => (
-                                                                <img key={e.id} src={e.url} alt="" style={{height: "65px"}} />
-                                                            ))}
-                                                        </Slider>
-                                                    </td> */}
-                                                    {/* <td>
-                                                        <select
-                                                            className="custom-select"
-                                                            name="publication_type_id"
-                                                            id="publication_type_id"
-                                                            style={{width: "110px"}}
-                                                            value={gallery.publication_type.id}
-                                                            onChange={(e) => {
-                                                                setType(gallery.id, Number(e.target.value));
-                                                            }}
-                                                        >
-                                                            {types?.map((type, index) => (
-                                                                <option key={index} value={type.id}>
-                                                                    {type.type}
-                                                                </option>
-                                                            ))}
-                                                        </select>
-                                                    </td> */}
+                                                    <td>{gallery.image_count}</td>
+                                                    <td>
+                                                        <FontAwesomeIcon icon={faHeart} className="mr-1" style={{fontSize: "18px", color: "red"}} /> {gallery.like_count} / <FontAwesomeIcon icon={faEye} className="mr-1" style={{fontSize: "18px", color: "green"}} /> {gallery.view_count}
+                                                    </td>
                                                     <td>
                                                         <div className="d-flex align-items-center list-action">
                                                             <Link to={`add/${gallery.id}`} className="btn bg-success btn-sm mr-2">
@@ -272,7 +212,6 @@ const Photos = () => {
                                         ) : (
                                             <div>Maglumat ýok</div>
                                         )}
-                                        {/* MAP ETMELI YERI */}
                                     </tbody>
                                 </table>
                             </div>

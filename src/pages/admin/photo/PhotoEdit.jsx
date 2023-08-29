@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import Select from "react-select";
 import {toast} from "react-hot-toast";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -60,7 +60,7 @@ const PhotoEdit = () => {
                 }),
             ];
             setPageCategory(page_categories[0]);
-            setPreview("/" + resData.data.avatar_image.url);
+            setPreview(import.meta.env.VITE_MEDIA_URL_ACTIVE + resData.data.avatar_image.url);
         };
 
         fetchData();
@@ -137,6 +137,9 @@ const PhotoEdit = () => {
                     <div className="col-lg-8">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
                             <h3 className="mb-3">Galereýany üýtget</h3>
+                            <Link to={`/admin/photos/inner/${photoId}`} className="btn btn-green add-list">
+                                Içerki suratlar
+                            </Link>
                         </div>
                     </div>
                     {isFetching ? (

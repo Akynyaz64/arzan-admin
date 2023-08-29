@@ -5,6 +5,7 @@ import Popup from "reactjs-popup";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClose, faEye, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Loader} from "../../../components";
+import coin_img from "../../../assets/icons/coin.webp";
 
 const Coins = () => {
     const [coinPokets, setCoinPokets] = useState([]);
@@ -89,16 +90,17 @@ const Coins = () => {
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
-                                        {/* MAP ETMELI YERI */}
                                         {coinPokets?.length > 0 ? (
                                             coinPokets?.map((coinPoket, index) => (
                                                 <tr key={index}>
                                                     <td>{index + 1}</td>
                                                     <td>{coinPoket.id}</td>
                                                     <td>
-                                                        <img src={"/" + coinPoket.image} alt="coin" style={{height: "65px"}} />
+                                                        <img src={import.meta.env.VITE_MEDIA_URL_ACTIVE + coinPoket.image} alt="coin" style={{height: "65px"}} />
                                                     </td>
-                                                    <td>{coinPoket.amount + " coin"}</td>
+                                                    <td>
+                                                        {coinPoket.amount} <img src={coin_img} alt="coin" style={{marginLeft: "5px", height: "15px"}} />
+                                                    </td>
                                                     <td>{coinPoket.price + " TMT"}</td>
                                                     <td>
                                                         <div className="d-flex align-items-center list-action">
@@ -149,7 +151,6 @@ const Coins = () => {
                                         ) : (
                                             <div>Maglumat ýok</div>
                                         )}
-                                        {/* MAP ETMELI YERI */}
                                     </tbody>
                                 </table>
                             </div>

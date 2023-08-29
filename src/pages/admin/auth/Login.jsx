@@ -37,7 +37,7 @@ const Login = () => {
             <section className="login-content">
                 <div className="container">
                     <div className="row align-items-center justify-content-center height-self-center">
-                        <div className="col-lg-8">
+                        <div className="col-lg-6">
                             <div className="card auth-card shadow">
                                 <div className="d-flex align-items-center auth-content">
                                     <div className="col-xl-12 align-self-center">

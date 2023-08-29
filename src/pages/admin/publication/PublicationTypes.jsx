@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClose, faEye, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {toast} from "react-hot-toast";
 import {Loader} from "../../../components";
+import coin_img from "../../../assets/icons/coin.webp";
 
 const PublicationTypes = () => {
     const [publicationTypes, setPublicationTypes] = useState([]);
@@ -35,29 +36,29 @@ const PublicationTypes = () => {
         fetchData();
     }, []);
 
-    const handleDelete = async (e, id) => {
-        e.preventDefault();
-        console.log(id);
-        const response = await fetch(`/admin-api/publication-type/${id}`, {
-            method: "DELETE",
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("adACto")}`,
-            },
-        });
+    // const handleDelete = async (e, id) => {
+    //     e.preventDefault();
+    //     console.log(id);
+    //     const response = await fetch(`/admin-api/publication-type/${id}`, {
+    //         method: "DELETE",
+    //         headers: {
+    //             Authorization: `Bearer ${localStorage.getItem("adACto")}`,
+    //         },
+    //     });
 
-        const resData = await response.json();
-        console.log(resData);
-        if (resData.status === false) {
-            toast.error(resData.message);
-            return null;
-        } else if (resData.status === true) {
-            toast.success(resData.message);
-            fetchData();
-        } else {
-            toast.error(resData.message);
-            return null;
-        }
-    };
+    //     const resData = await response.json();
+    //     console.log(resData);
+    //     if (resData.status === false) {
+    //         toast.error(resData.message);
+    //         return null;
+    //     } else if (resData.status === true) {
+    //         toast.success(resData.message);
+    //         fetchData();
+    //     } else {
+    //         toast.error(resData.message);
+    //         return null;
+    //     }
+    // };
 
     return (
         <>
@@ -84,19 +85,19 @@ const PublicationTypes = () => {
                                             <th>ID</th>
                                             <th>Type</th>
                                             <th>Mukdary</th>
-                                            {/* <th>Priority</th> */}
                                             <th>Amallar</th>
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
-                                        {/* MAP ETMELI YERI */}
                                         {publicationTypes?.length > 0 ? (
                                             publicationTypes?.map((publicationType, index) => (
                                                 <tr key={index}>
                                                     <td>{index + 1}</td>
                                                     <td>{publicationType.id}</td>
                                                     <td>{publicationType.type}</td>
-                                                    <td>{publicationType.like_amount.amount}</td>
+                                                    <td>
+                                                        {publicationType.like_amount.amount} <img src={coin_img} alt="coin" style={{marginLeft: "5px", height: "15px"}} />
+                                                    </td>
                                                     <td>
                                                         <div className="d-flex align-items-center list-action">
                                                             <Link to={`${publicationType.id}`} className="btn bg-primary btn-sm mr-2">
@@ -107,7 +108,7 @@ const PublicationTypes = () => {
                                                                 <FontAwesomeIcon icon={faPen} className="mr-0" />
                                                             </Link>
 
-                                                            <Popup
+                                                            {/* <Popup
                                                                 trigger={
                                                                     <button className="btn btn-danger btn-sm">
                                                                         <FontAwesomeIcon icon={faTrash} className="" />
@@ -139,7 +140,7 @@ const PublicationTypes = () => {
                                                                         </footer>
                                                                     </article>
                                                                 )}
-                                                            </Popup>
+                                                            </Popup> */}
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -147,7 +148,6 @@ const PublicationTypes = () => {
                                         ) : (
                                             <div>Maglumat ýok</div>
                                         )}
-                                        {/* MAP ETMELI YERI */}
                                     </tbody>
                                 </table>
                             </div>

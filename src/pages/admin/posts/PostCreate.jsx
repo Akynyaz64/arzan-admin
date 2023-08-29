@@ -696,14 +696,6 @@ const PostCreate = () => {
                                         ))}
                                     </select>
                                 </div>
-                                {/* <div className="col-xl-12">
-                                    <div className="form-check form-switch ms-3">
-                                        <input name="isActive" className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" />
-                                        <label className="form-check-label" htmlFor="flexSwitchCheckChecked">
-                                            Is Active
-                                        </label>
-                                    </div>
-                                </div> */}
                             </div>
                             <div className="form-group d-grid mt-3 mb-5">
                                 <button type="submit" className="btn btn-green mb-1" disabled={isSubmitting}>

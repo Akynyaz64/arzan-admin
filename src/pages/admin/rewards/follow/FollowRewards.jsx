@@ -4,6 +4,7 @@ import {toast} from "react-hot-toast";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPen, faStar, faUserAlt, faUserTimes} from "@fortawesome/free-solid-svg-icons";
 import {Loader} from "../../../../components";
+import coin_img from "../../../../assets/icons/coin.webp";
 
 const FollowRewards = () => {
     const [activeType, setActiveType] = useState();
@@ -108,14 +109,15 @@ const FollowRewards = () => {
                                         </tr>
                                     </thead>
                                     <tbody className="ligth-body">
-                                        {/* MAP ETMELI YERI */}
                                         {activeRewards?.length > 0 ? (
                                             activeRewards?.map((item, index) => (
                                                 <tr key={index}>
                                                     <td>{index + 1}</td>
                                                     <td>{item.location.id}</td>
                                                     <td>{item.location.display_name}</td>
-                                                    <td>{item.coin_amount}</td>
+                                                    <td>
+                                                        {item.coin_amount} <img src={coin_img} alt="coin" style={{marginLeft: "5px", height: "15px"}} />
+                                                    </td>
                                                     <td>
                                                         <div className="d-flex align-items-center list-action">
                                                             <Link to={`edit/${activeType}/${item.location.id}`} className="btn bg-warning btn-sm mr-2">
@@ -128,7 +130,6 @@ const FollowRewards = () => {
                                         ) : (
                                             <div>Maglumat ýok</div>
                                         )}
-                                        {/* MAP ETMELI YERI */}
                                     </tbody>
                                 </table>
                             </div>

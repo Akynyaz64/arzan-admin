@@ -48,7 +48,7 @@ const CoinView = () => {
                     <div className="col-lg-8 mt-3">
                         <div className="form-row">
                             <div className="col-xl-7 mb-4">
-                                <img alt="coin" src={"/" + coin?.image} className="img-fluid w-100 rounded" />
+                                <img alt="coin" src={import.meta.env.VITE_MEDIA_URL_ACTIVE + coin?.image} className="img-fluid w-100 rounded" />
                             </div>
                             <div className="col-xl-5 mb-4">
                                 <div className="col-12 mb-4">

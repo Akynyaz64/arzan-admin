@@ -66,7 +66,7 @@ const BannerEdit = () => {
             setDescription(resData.data.description);
             setSelectedPageCategories(page_categories[0]);
             setSelectedLocations(locations[0]);
-            setPreview("/" + resData.data.image.url);
+            setPreview(import.meta.env.VITE_MEDIA_URL_ACTIVE + resData.data.image.url);
         };
 
         fetchData();

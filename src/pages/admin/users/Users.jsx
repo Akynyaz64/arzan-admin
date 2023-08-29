@@ -7,13 +7,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClose, faEye, faPen, faPlus, faSearch, faStar, faTrash, faUserAlt} from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../../../hooks/useFetch";
 import {Loader} from "../../../components";
+import coin_img from "../../../assets/icons/coin.webp";
 
 const Users = () => {
-    // const page = req.querypage ? parseInt(req.query.page) : 1;
-    // const limit = req.query.limit ? parseInt(req.query.limit) : 20;
-    // const offset = (page - 1) * limit;
-    // var before = offset > 0 ? page - 1 : 1;
-    // var next = page + 1;
     const search = useRef();
     const table = useRef();
 
@@ -212,19 +208,6 @@ const Users = () => {
                         ))}
                     </select>
                 </div>
-                {/* <div className="col-xl-1 mb-4">
-                    <button
-                        className="btn btn-light h-100"
-                        onClick={() => {
-                            setUrlParams({
-                                limit: 50,
-                                offset: 0,
-                            });
-                        }}
-                    >
-                        Reset All
-                    </button>
-                </div> */}
                 {isLoading ? (
                     <Loader />
                 ) : (
@@ -246,7 +229,6 @@ const Users = () => {
                                     </tr>
                                 </thead>
                                 <tbody className="ligth-body">
-                                    {/* MAP ETMELI YERI */}
                                     {users?.length > 0 ? (
                                         users?.map((user, index) => (
                                             <tr key={index}>
@@ -254,7 +236,7 @@ const Users = () => {
                                                 <td>{user.id}</td>
                                                 <td>
                                                     <div className="d-flex align-items-center">
-                                                        <img src={"/" + user.avatar_image} alt="user_avatar" style={{height: "65px"}} />
+                                                        <img src={import.meta.env.VITE_MEDIA_URL_ACTIVE + user.avatar_image} alt="user_avatar" style={{height: "65px"}} />
                                                         <div className="ms-4 small fw-bold">{user.name}</div>
                                                     </div>
                                                 </td>
@@ -262,7 +244,9 @@ const Users = () => {
                                                 <td>{user.email ? user.email : "E-mail ýok"}</td>
                                                 <td>{user.start_date && user.expiry_date ? formatDate(user.start_date) + " - " + formatDate(user.expiry_date) : "Periody ýok"}</td>
                                                 <td>{user.type.type}</td>
-                                                <td>{user.balance === null ? "0" : user.balance}</td>
+                                                <td>
+                                                    {user.balance === null ? "0" : user.balance} <img src={coin_img} alt="coin" style={{marginLeft: "5px", height: "15px"}} />
+                                                </td>
                                                 <td>{user.locations?.map((location) => location.name + " ")}</td>
                                                 <td>
                                                     <div className="d-flex align-items-center list-action">
@@ -313,7 +297,6 @@ const Users = () => {
                                     ) : (
                                         <div>Maglumat ýok</div>
                                     )}
-                                    {/* MAP ETMELI YERI */}
                                 </tbody>
                             </table>
                         </div>

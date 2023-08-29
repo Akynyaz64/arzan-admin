@@ -94,14 +94,10 @@ const CategoryCreate = () => {
                                         </div>
                                     )}
                                 </div>
-                                <div className="col-md-6 mb-3">
+                                <div className="col-md-12 mb-3">
                                     <label htmlFor="name">Ady</label>
                                     <input type="text" className="form-control" id="name" name="name" ref={name} required />
                                 </div>
-                                {/* <div className="col-md-6 mb-3">
-                                    <label htmlFor="validationDefault02">Priority</label>
-                                    <input type="number" className="form-control" id="validationDefault02" required />
-                                </div> */}
                             </div>
                             <div className="form-group d-grid mt-3 mb-5">
                                 <button type="submit" className="btn btn-green" disabled={isSubmitting}>

@@ -1,4 +1,3 @@
-// src/components/TagsInput.js
 import {useState} from "react";
 
 function TagsInput() {

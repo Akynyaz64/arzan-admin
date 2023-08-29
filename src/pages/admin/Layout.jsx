@@ -1,7 +1,7 @@
 import {useContext, useState} from "react";
 import {Link, NavLink, Outlet} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAward, faBars, faBell, faCalendarWeek, faChevronDown, faChevronUp, faCog, faCoins, faFileText, faHandHoldingDollar, faHistory, faHome, faImage, faImages, faList, faMapLocationDot, faMessage, faSignOutAlt, faTags, faTh, faUserCheck, faUserPlus, faUsers, faVideo} from "@fortawesome/free-solid-svg-icons";
+import {faArrowRight, faAward, faBars, faBell, faCalendarWeek, faChevronDown, faChevronUp, faCog, faCoins, faFileText, faHandHoldingDollar, faHistory, faHome, faImage, faImages, faList, faMapLocationDot, faMessage, faSignOutAlt, faTags, faTh, faUserCheck, faUserPlus, faUsers, faUsersBetweenLines, faVideo} from "@fortawesome/free-solid-svg-icons";
 import AuthContext from "../../context/AuthContext";
 import "../../Admin.css";
 
@@ -97,7 +97,13 @@ const AdminLayout = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"top_list"} className="svg-icon">
+                                    <NavLink to={"top_list"} className="svg-icon" end>
+                                        <FontAwesomeIcon icon={faUsersBetweenLines} />
+                                        <span className="ml-4">TOP List</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"top_list/limit"} className="svg-icon">
                                         <FontAwesomeIcon icon={faUserCheck} />
                                         <span className="ml-4">TOP List limitler</span>
                                     </NavLink>
@@ -150,7 +156,7 @@ const AdminLayout = () => {
                                         <span className="ml-4">Bildirişler</span>
                                     </NavLink>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <NavLink to={"comments"} className="svg-icon">
                                         <FontAwesomeIcon icon={faMessage} />
                                         <span className="ml-4">Teswirler</span>
@@ -161,7 +167,7 @@ const AdminLayout = () => {
                                         <FontAwesomeIcon icon={faFileText} />
                                         <span className="ml-4">Sahypalar</span>
                                     </NavLink>
-                                </li>
+                                </li> */}
                                 <li>
                                     <NavLink to={"publication_types"} className="svg-icon">
                                         <FontAwesomeIcon icon={faCog} />
@@ -175,12 +181,20 @@ const AdminLayout = () => {
                 <div className="iq-top-navbar" style={{minHeight: "0"}}>
                     <div className="iq-navbar-custom">
                         <nav className="navbar navbar-light py-3 justify-content-between">
-                            <div
-                                onClick={() => {
-                                    setIsVisible(!isVisible);
-                                }}
-                            >
-                                <FontAwesomeIcon className="wrapper-menu" icon={faBars} />
+                            <div className="d-flex align-items-center">
+                                <div
+                                    onClick={() => {
+                                        setIsVisible(!isVisible);
+                                    }}
+                                >
+                                    <FontAwesomeIcon className="wrapper-menu" icon={faBars} />
+                                </div>
+                                <div className="d-flex align-items-center">
+                                    <Link to={"https://arzan.info"} target="_blank" className="btn btn-green">
+                                        Saýta geç
+                                        <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+                                    </Link>
+                                </div>
                             </div>
                             <div className="d-flex align-items-center">
                                 <button

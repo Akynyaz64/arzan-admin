@@ -9,9 +9,15 @@ const ServiceCreate = () => {
     const name = useRef("");
     const cost = useRef("");
     const count = useRef(false);
+    const [month, setMonth] = useState(false);
+    const month_cost = useRef("");
 
     const [selectedFile, setSelectedFile] = useState();
     const [preview, setPreview] = useState();
+
+    useEffect(() => {
+        console.log(month);
+    }, [month]);
 
     useEffect(() => {
         if (!selectedFile) {
@@ -39,6 +45,10 @@ const ServiceCreate = () => {
         categoryData.append("name", name.current.value);
         categoryData.append("cost", cost.current.value);
         categoryData.append("count", count.current.checked);
+        categoryData.append("month", month);
+        if (month === true) {
+            categoryData.append("month_cost", month_cost.current.checked);
+        }
         categoryData.append("image", selectedFile);
 
         for (var pair of categoryData.entries()) {
@@ -110,6 +120,22 @@ const ServiceCreate = () => {
                                 <div className="col-md-12 mb-3">
                                     <label htmlFor="count">Count</label>
                                     <input type="checkbox" className="ml-3 mt-1" id="count" name="count" ref={count} />
+                                </div>
+                                <div className="col-md-12 mb-3">
+                                    <label htmlFor="month">Aýlyk bahasy</label>
+                                    <div className="d-flex">
+                                        <input
+                                            type="checkbox"
+                                            className="mx-3 mt-1"
+                                            id="month"
+                                            name="month"
+                                            checked={month}
+                                            onChange={() => {
+                                                setMonth(!month);
+                                            }}
+                                        />
+                                        <input type="number" className="form-control" id="month_cost" name="month_cost" ref={month_cost} disabled={month} />
+                                    </div>
                                 </div>
                             </div>
                             <div className="form-group d-grid mt-3 mb-5">

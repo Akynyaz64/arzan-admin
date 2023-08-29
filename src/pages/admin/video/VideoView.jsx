@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {toast} from "react-hot-toast";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEye, faHeart} from "@fortawesome/free-solid-svg-icons";
 import {Loader} from "../../../components";
 
 const VideoView = () => {
@@ -63,16 +65,16 @@ const VideoView = () => {
                     <div className="col-lg-8 mt-3">
                         <div className="form-row">
                             <div className="col-md-6 mb-4">
-                                <img alt="photo" src={"/" + video?.thumbnail?.url} className="img-fluid rounded" />
+                                <img alt="photo" src={import.meta.env.VITE_MEDIA_URL_ACTIVE + video?.thumbnail?.url} className="img-fluid rounded" />
                             </div>
                             <div className="col-md-6 mb-4">
                                 <video className="w-100" controls>
-                                    <source src={"/" + video.video?.url} type="video/mp4" />
+                                    <source src={import.meta.env.VITE_MEDIA_URL_ACTIVE + video.video?.url} type="video/mp4" />
                                 </video>
                             </div>
                             {video.images?.map((image, index) => (
                                 <div key={index} className="col-md-3 mb-4">
-                                    <img alt="photo" src={"/" + image.url} className="img-fluid rounded" />
+                                    <img alt="photo" src={import.meta.env.VITE_MEDIA_URL_ACTIVE + image.url} className="img-fluid rounded" />
                                 </div>
                             ))}
                             <div className="col-md-12 mb-3">
@@ -102,11 +104,15 @@ const VideoView = () => {
                             </div>
                             <div className="col-md-4 mb-3">
                                 <h5>Like sany:</h5>
-                                <p>{video.likes_count}</p>
+                                <p>
+                                    <FontAwesomeIcon icon={faHeart} className="mr-1" style={{fontSize: "18px", color: "red"}} /> {video.likes_count}
+                                </p>
                             </div>
                             <div className="col-md-4 mb-3">
                                 <h5>Görlen sany:</h5>
-                                <p>{video.viewed_count}</p>
+                                <p>
+                                    <FontAwesomeIcon icon={faEye} className="mr-1" style={{fontSize: "18px", color: "green"}} /> {video.viewed_count}
+                                </p>
                             </div>
                             <div className="col-md-4 mb-3">
                                 <h5>Goşulan wagty:</h5>

@@ -67,8 +67,8 @@ const VideoEdit = () => {
                 }),
             ];
             setPageCategory(page_categories[0]);
-            setPreview("/" + resData.data.thumbnail.url);
-            setVideoPreview("/" + resData.data.video.url);
+            setPreview(import.meta.env.VITE_MEDIA_URL_ACTIVE + resData.data.thumbnail.url);
+            setVideoPreview(import.meta.env.VITE_MEDIA_URL_ACTIVE + resData.data.video.url);
         };
 
         fetchData();

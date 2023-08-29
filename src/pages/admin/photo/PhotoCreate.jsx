@@ -23,7 +23,6 @@ const PhotoCreate = () => {
     const [pageCategory, setPageCategory] = useState([]);
     const [categories] = useFetch("/admin-api/page-category", "data", true);
     const [users] = useFetch("/admin-api/user?limit=999999&offset=0", "data.users", true);
-    // const user_id = useRef("");
     useEffect(() => {
         setFilteredUsers(
             users?.map((user) => {
@@ -75,7 +74,6 @@ const PhotoCreate = () => {
         videoData.append("user_id", selectedUser.selectValue.value);
         videoData.append("page_category_id", selectedCategory.current.value);
         videoData.append("avatar_image", selectedFile);
-        // videoData.append("images", file);
 
         for (let i = 0; i < file.length; i++) {
             videoData.append("images", file[i]);
@@ -184,14 +182,6 @@ const PhotoCreate = () => {
                                         placeholder="Ulanyjy saýlaň .."
                                     />
                                 </div>
-                                {/* <div className="col-xl-12">
-                                    <div className="form-check form-switch ms-3">
-                                        <input name="isActive" className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" />
-                                        <label className="form-check-label" htmlFor="flexSwitchCheckChecked">
-                                            Is Active
-                                        </label>
-                                    </div>
-                                </div> */}
                             </div>
                             <div className="form-group d-grid mt-3 mb-5">
                                 <button type="submit" className="btn btn-green mb-1" disabled={isSubmitting}>

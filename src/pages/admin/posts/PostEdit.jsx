@@ -263,34 +263,34 @@ const PostEdit = () => {
                 })
             );
             if (resData.data.images[0].url) {
-                setPreview1("/" + resData.data.images[0].url);
+                setPreview1(import.meta.env.VITE_MEDIA_URL_ACTIVE + resData.data.images[0].url);
             }
             if (resData.data.images[1]?.url) {
-                setPreview2("/" + resData.data.images[1].url);
+                setPreview2(import.meta.env.VITE_MEDIA_URL_ACTIVE + resData.data.images[1].url);
             }
             if (resData.data.images[2]?.url) {
-                setPreview3("/" + resData.data.images[2].url);
+                setPreview3(import.meta.env.VITE_MEDIA_URL_ACTIVE + resData.data.images[2].url);
             }
             if (resData.data.images[3]?.url) {
-                setPreview4("/" + resData.data.images[3].url);
+                setPreview4(import.meta.env.VITE_MEDIA_URL_ACTIVE + resData.data.images[3].url);
             }
             if (resData.data.images[4]?.url) {
-                setPreview5("/" + resData.data.images[4].url);
+                setPreview5(import.meta.env.VITE_MEDIA_URL_ACTIVE + resData.data.images[4].url);
             }
             if (resData.data.images[5]?.url) {
-                setPreview6("/" + resData.data.images[5].url);
+                setPreview6(import.meta.env.VITE_MEDIA_URL_ACTIVE + resData.data.images[5].url);
             }
             if (resData.data.images[6]?.url) {
-                setPreview7("/" + resData.data.images[6].url);
+                setPreview7(import.meta.env.VITE_MEDIA_URL_ACTIVE + resData.data.images[6].url);
             }
             if (resData.data.images[7]?.url) {
-                setPreview8("/" + resData.data.images[7].url);
+                setPreview8(import.meta.env.VITE_MEDIA_URL_ACTIVE + resData.data.images[7].url);
             }
             if (resData.data.images[8]?.url) {
-                setPreview9("/" + resData.data.images[8].url);
+                setPreview9(import.meta.env.VITE_MEDIA_URL_ACTIVE + resData.data.images[8].url);
             }
             if (resData.data.images[9]?.url) {
-                setPreview10("/" + resData.data.images[9].url);
+                setPreview10(import.meta.env.VITE_MEDIA_URL_ACTIVE + resData.data.images[9].url);
             }
         };
 
