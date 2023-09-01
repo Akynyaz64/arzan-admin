@@ -4,7 +4,7 @@ import {toast} from "react-hot-toast";
 import Popup from "reactjs-popup";
 import ReactPaginate from "react-paginate";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faClose, faEye, faPen, faPlus, faSearch, faStar, faTrash, faUserAlt} from "@fortawesome/free-solid-svg-icons";
+import {faClose, faEye, faPen, faPlus, faSearch, faStar, faTrash, faUserAlt, faUserLock} from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../../../hooks/useFetch";
 import {Loader} from "../../../components";
 import coin_img from "../../../assets/icons/coin.webp";
@@ -134,6 +134,24 @@ const Users = () => {
                             >
                                 <FontAwesomeIcon icon={faStar} className="me-2" />
                                 Official ulanyjylar
+                            </button>
+                        </li>
+                        <li className="nav-item" role="presentation">
+                            <button
+                                style={{borderRadius: "0", fontWeight: "500"}}
+                                className={activeType === "EXPIRED" ? "text-dark nav-link active px-5 bg-light" : "text-dark nav-link px-5 bg-light"}
+                                type="button"
+                                onClick={() => {
+                                    setActiveType("EXPIRED");
+                                    setUrlParams({
+                                        ...urlParams,
+                                        offset: 0,
+                                        type: "EXPIRED",
+                                    });
+                                }}
+                            >
+                                <FontAwesomeIcon icon={faUserLock} className="me-2" />
+                                Expired ulanyjylar
                             </button>
                         </li>
                         <li className="nav-item" role="presentation">
