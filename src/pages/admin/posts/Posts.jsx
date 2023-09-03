@@ -4,6 +4,7 @@ import {toast} from "react-hot-toast";
 import moment from "moment";
 import Popup from "reactjs-popup";
 import ReactPaginate from "react-paginate";
+import Select from "react-select";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClose, faEye, faHeart, faPen, faPlus, faSearch, faTrash} from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../../../hooks/useFetch";
@@ -19,10 +20,20 @@ const Posts = () => {
     });
     const [posts, setPosts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [filteredUsers, setFilteredUsers] = useState();
+    const [selectedUser, setSelectedUser] = useState();
 
     const [categories] = useFetch("/admin-api/category", "data", true);
     const [types] = useFetch("/admin-api/publication-type", "data", true);
     const [subCategories] = useFetch("/admin-api/sub-category", "data", true);
+    const [users] = useFetch("/admin-api/user?limit=999999&offset=0", "data.users", true);
+    useEffect(() => {
+        setFilteredUsers(
+            users?.map((user) => {
+                return {label: user.name, value: user.id};
+            })
+        );
+    }, [users]);
 
     const changePage = ({selected}) => {
         setPage(selected + 1);
@@ -95,8 +106,8 @@ const Posts = () => {
         }
         const resData = await response.json();
         console.log(resData);
-        setPosts(resData.data);
-        setPages(resData.data[0].items_full_count / urlParams.limit);
+        setPosts(resData.data.posts);
+        setPages(resData.data.total_count / urlParams.limit);
         setIsLoading(false);
     };
 
@@ -167,6 +178,23 @@ const Posts = () => {
                                 <input type="search" className="text search-input" placeholder="Gözleg..." ref={search} />
                             </form>
                         </div>
+                    </div>
+                    <div className="col-xl-2 mb-4">
+                        <h6>Ulanyjy boýunça gözleg</h6>
+                        <Select
+                            name="user_id"
+                            id="user_id"
+                            options={filteredUsers}
+                            onChange={(selectValue) => {
+                                setSelectedUser({selectValue});
+                                setUrlParams({
+                                    ...urlParams,
+                                    user_auth_id: Number(selectValue.value),
+                                });
+                            }}
+                            value={selectedUser?.label}
+                            placeholder="Ulanyjy saýlaň .."
+                        />
                     </div>
                     <div className="col-xl-2 mb-4">
                         <h6>Kategoriýa boýunça filter: </h6>
@@ -303,7 +331,7 @@ const Posts = () => {
                                                     <td>{post.price}</td>
                                                     <td>{post.discount}</td>
                                                     <td>
-                                                        <FontAwesomeIcon icon={faHeart} className="mr-1" style={{fontSize: "18px", color: "red"}} /> {post.likes_count} / <FontAwesomeIcon icon={faEye} className="mr-1" style={{fontSize: "18px", color: "green"}} /> {post.viewed_count}
+                                                        <FontAwesomeIcon icon={faHeart} className="mr-1" style={{fontSize: "18px", color: "red"}} /> {post.like_count} / <FontAwesomeIcon icon={faEye} className="mr-1" style={{fontSize: "18px", color: "green"}} /> {post.viewed_count}
                                                     </td>
                                                     <td>
                                                         {post.approved ? (
