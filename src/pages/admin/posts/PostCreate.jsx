@@ -291,6 +291,12 @@ const PostCreate = () => {
         setIsSubmitting(true);
         event.preventDefault();
 
+        if (price?.current.value < discount.current.value) {
+            toast.error("Arzanladyş baha hakykydan uly bolmaly däl!");
+            setIsSubmitting(false);
+            return;
+        }
+
         const postData = new FormData();
         postData.append("title", title.current.value);
         postData.append("description", description);

@@ -22,6 +22,8 @@ const PostEdit = () => {
         discount: "",
         start_date: "",
         end_date: "",
+        category_id: "",
+        sub_category_id: "",
         phone: "",
     });
     const [selectedUser, setSelectedUser] = useState();
@@ -29,8 +31,15 @@ const PostEdit = () => {
     const [tags, setTags] = useState([]);
     const [isKeyReleased, setIsKeyReleased] = useState(false);
 
-    // const [categories] = useFetch("/admin-api/category", "data", true);
-    // const [subCategories] = useFetch("/admin-api/sub-category", "data", true);
+    const [activeSubcategories, setActiveSubCategory] = useState([]);
+
+    const changeCat = (e) => {
+        const activeSub = subCategories?.filter((tt) => tt.category.id == e.target.value);
+        setActiveSubCategory(activeSub);
+    };
+
+    const [categories] = useFetch("/admin-api/category", "data", true);
+    const [subCategories] = useFetch("/admin-api/sub-category", "data", true);
     const [users] = useFetch("/admin-api/user?name=arzan", "data.users", true);
 
     const [description, setDescription] = useState();
@@ -349,6 +358,8 @@ const PostEdit = () => {
         postData.append("end_date", post.end_date);
 
         postData.append("phone", post.phone);
+        postData.append("category_id", post.category_id);
+        postData.append("sub_category_id", post.sub_category_id);
         postData.append("tags", JSON.stringify(tags));
         postData.append("user_id", selectedUser);
 
@@ -663,9 +674,17 @@ const PostEdit = () => {
                                             ))}
                                         </div>
                                     </div>
-                                    {/* <div className="col-md-6 mb-3">
-                                        <label htmlFor="category">Kategoriýa</label>
-                                        <select className="custom-select" name="category" id="category" ref={selectedCategory} onChange={(e) => changeCat(e)}>
+                                    <div className="col-md-6 mb-3">
+                                        <label htmlFor="category_id">Kategoriýa</label>
+                                        <select
+                                            className="custom-select"
+                                            name="category_id"
+                                            id="category_id"
+                                            onChange={(e) => {
+                                                changeCat(e);
+                                                setPost((prev) => ({...prev, category_id: e.target.value}));
+                                            }}
+                                        >
                                             {categories?.map((category, index) => (
                                                 <option key={index} value={category.id}>
                                                     {category.name}
@@ -674,15 +693,15 @@ const PostEdit = () => {
                                         </select>
                                     </div>
                                     <div className="col-md-6 mb-3">
-                                        <label htmlFor="sub_category">Sub kategoriýa</label>
-                                        <select className="custom-select" name="sub_category" id="sub_category" ref={selectedSubCategory}>
+                                        <label htmlFor="sub_category_id">Sub kategoriýa</label>
+                                        <select className="custom-select" name="sub_category_id" id="sub_category_id" onChange={handleChange}>
                                             {activeSubcategories?.map((subCategory, index) => (
                                                 <option key={index} value={subCategory.id}>
                                                     {subCategory.name}
                                                 </option>
                                             ))}
                                         </select>
-                                    </div> */}
+                                    </div>
                                     <div className="col-md-6 mb-3">
                                         <label htmlFor="price">Bahasy</label>
                                         <input type="text" className="form-control" id="price" name="price" defaultValue={post?.price} onChange={handleChange} required />
