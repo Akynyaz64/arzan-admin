@@ -11,6 +11,7 @@ import coin_img from "../../../assets/icons/coin.webp";
 
 const Users = () => {
     const search = useRef();
+    const phone = useRef();
     const table = useRef();
 
     const [pages, setPages] = useState();
@@ -115,7 +116,7 @@ const Users = () => {
                         </Link>
                     </div>
                 </div>
-                <div className="col-xl-8 mb-4">
+                <div className="col-xl-6 mb-4">
                     <ul className="nav nav-pills" id="pills-tab" role="tablist">
                         <li className="nav-item" role="presentation">
                             <button
@@ -191,6 +192,26 @@ const Users = () => {
                                 <FontAwesomeIcon icon={faSearch} />
                             </a>
                             <input type="search" className="text search-input" placeholder="Gözleg..." ref={search} />
+                        </form>
+                    </div>
+                </div>
+                <div className="col-xl-2 mb-4">
+                    <div className="iq-search-bar device-search h-100">
+                        <form
+                            className="searchbox w-100 h-100"
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                setUrlParams({
+                                    ...urlParams,
+                                    offset: 0,
+                                    phone: phone.current.value,
+                                });
+                            }}
+                        >
+                            <a className="search-link" style={{top: "9px"}}>
+                                <FontAwesomeIcon icon={faSearch} />
+                            </a>
+                            <input type="search" className="text search-input" placeholder="Telefon belgi" ref={phone} />
                         </form>
                     </div>
                 </div>
