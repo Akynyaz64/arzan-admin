@@ -291,7 +291,7 @@ const PostCreate = () => {
         setIsSubmitting(true);
         event.preventDefault();
 
-        if (price?.current.value < discount.current.value) {
+        if (Number(price?.current.value) < Number(discount?.current.value)) {
             toast.error("Arzanladyş baha hakykydan uly bolmaly däl!");
             setIsSubmitting(false);
             return;
