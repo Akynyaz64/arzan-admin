@@ -22,6 +22,8 @@ const Posts = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [filteredUsers, setFilteredUsers] = useState();
     const [selectedUser, setSelectedUser] = useState();
+    const [activeSubCategories, setActiveSubCategories] = useState([]);
+    const [activeCategory, setActiveCategory] = useState();
 
     const [categories] = useFetch("/admin-api/category", "data", true);
     const [types] = useFetch("/admin-api/publication-type", "data", true);
@@ -34,6 +36,18 @@ const Posts = () => {
             })
         );
     }, [users]);
+
+    useEffect(() => {
+        console.log(activeCategory);
+    }, [activeCategory]);
+
+    useEffect(() => {
+        if (activeCategory === "Ählisi") {
+            setActiveSubCategories(subCategories);
+        } else {
+            setActiveSubCategories(subCategories?.filter((e) => e.category.id == activeCategory));
+        }
+    }, [activeCategory, subCategories]);
 
     const changePage = ({selected}) => {
         setPage(selected + 1);
@@ -216,6 +230,7 @@ const Posts = () => {
                                         category_id: Number(e.target.value),
                                     });
                                 }
+                                setActiveCategory(e.target.value);
                             }}
                         >
                             <option value={null} selected>
@@ -253,7 +268,7 @@ const Posts = () => {
                             <option value={null} selected>
                                 Ählisi
                             </option>
-                            {subCategories?.map((subCategory, index) => (
+                            {activeSubCategories?.map((subCategory, index) => (
                                 <option key={index} value={subCategory.id}>
                                     {subCategory.name}
                                 </option>
@@ -291,6 +306,18 @@ const Posts = () => {
                                 </option>
                             ))}
                         </select>
+                    </div>
+
+                    <div className="col-12 mb-4 text-end">
+                        <p
+                            onClick={() => {
+                                setUrlParams({limit: 100});
+                                search.current.value = "";
+                            }}
+                            style={{color: "#666666", cursor: "pointer", textDecoration: "underline"}}
+                        >
+                            Filtrleri arassala
+                        </p>
                     </div>
                     {isLoading ? (
                         <Loader />
