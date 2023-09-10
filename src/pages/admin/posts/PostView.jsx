@@ -171,7 +171,7 @@ const PostView = () => {
                                     <div className="tags-container mt-3">
                                         {post.tags?.map((e, index) => (
                                             <span className="tag" key={index}>
-                                                # {e.name + " "}
+                                                # {e?.name + " "}
                                             </span>
                                         ))}
                                     </div>

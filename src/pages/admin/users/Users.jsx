@@ -8,6 +8,7 @@ import {faClose, faEye, faPen, faPlus, faSearch, faStar, faTrash, faUserAlt, faU
 import useFetch from "../../../hooks/useFetch";
 import {Loader} from "../../../components";
 import coin_img from "../../../assets/icons/coin.webp";
+import default_avatar from "../../../assets/logo/default.webp";
 
 const Users = () => {
     const search = useRef();
@@ -247,6 +248,19 @@ const Users = () => {
                         ))}
                     </select>
                 </div>
+                <div className="col-12 mb-4 text-end">
+                    <p
+                        onClick={() => {
+                            setUrlParams({limit: 50});
+                            setActiveType("");
+                            search.current.value = "";
+                            phone.current.value = "";
+                        }}
+                        style={{color: "#666666", cursor: "pointer", textDecoration: "underline"}}
+                    >
+                        Filtrleri arassala
+                    </p>
+                </div>
                 {isLoading ? (
                     <Loader />
                 ) : (
@@ -275,7 +289,7 @@ const Users = () => {
                                                 <td>{user.id}</td>
                                                 <td>
                                                     <div className="d-flex align-items-center">
-                                                        <img src={import.meta.env.VITE_MEDIA_URL_ACTIVE + user.avatar_image} alt="user_avatar" style={{height: "65px"}} />
+                                                        <img src={user.avatar_image === null ? default_avatar : import.meta.env.VITE_MEDIA_URL_ACTIVE + user.avatar_image} alt="user_avatar" className="rounded" style={{height: "65px"}} />
                                                         <div className="ms-4 small fw-bold">{user.name}</div>
                                                     </div>
                                                 </td>

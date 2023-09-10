@@ -126,7 +126,7 @@ const Banners = () => {
                             className="custom-select"
                             name="page_category"
                             id="page_category"
-                            value={urlParams.page}
+                            value={urlParams.page_category}
                             onChange={(e) => {
                                 if (e.target.value === "Ählisi") {
                                     setUrlParams((current) => {
@@ -183,6 +183,17 @@ const Banners = () => {
                                 </option>
                             ))}
                         </select>
+                    </div>
+                    <div className="col-12 mb-4 text-end">
+                        <p
+                            onClick={() => {
+                                setUrlParams({});
+                                setActiveType("");
+                            }}
+                            style={{color: "#666666", cursor: "pointer", textDecoration: "underline"}}
+                        >
+                            Filtrleri arassala
+                        </p>
                     </div>
                     {isLoading ? (
                         <Loader />

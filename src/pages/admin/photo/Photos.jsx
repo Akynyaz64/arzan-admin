@@ -91,7 +91,7 @@ const Photos = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="col-xl-4 mb-4">
+                    <div className="col-xl-4">
                         <div className="iq-search-bar device-search h-100">
                             <form
                                 className="searchbox w-100 h-100"
@@ -117,6 +117,17 @@ const Photos = () => {
                                 <input type="search" className="text search-input" placeholder="Gözleg..." ref={search} />
                             </form>
                         </div>
+                    </div>
+                    <div className="col-12 my-4 text-end">
+                        <p
+                            onClick={() => {
+                                setUrlParams({limit: 100});
+                                search.current.value = "";
+                            }}
+                            style={{color: "#666666", cursor: "pointer", textDecoration: "underline"}}
+                        >
+                            Filtrleri arassala
+                        </p>
                     </div>
                     {isLoading ? (
                         <Loader />
