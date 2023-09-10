@@ -56,8 +56,8 @@ const PublicationTypeEdit = () => {
         };
         console.log(typeData);
 
-        const response = await fetch(`/admin-api/publication-type/edit/${typeId}`, {
-            method: "POST",
+        const response = await fetch(`/admin-api/publication-type/${typeId}`, {
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${localStorage.getItem("adACto")}`,
