@@ -1,7 +1,7 @@
 import {useContext, useState} from "react";
 import {Link, NavLink, Outlet} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowRight, faAward, faBars, faBell, faCalendarWeek, faChevronDown, faChevronUp, faCog, faCoins, faFileText, faHandHoldingDollar, faHistory, faHome, faImage, faImages, faList, faMapLocationDot, faMessage, faSignOutAlt, faTags, faTh, faUserCheck, faUserPlus, faUsers, faUsersBetweenLines, faVideo} from "@fortawesome/free-solid-svg-icons";
+import {faArrowRight, faAward, faBars, faBell, faCalendarWeek, faChevronDown, faChevronUp, faCog, faCoins, faHandHoldingDollar, faHistory, faHome, faImage, faImages, faList, faMapLocationDot, faSignOutAlt, faTags, faTh, faUserCheck, faUserPlus, faUsers, faUsersBetweenLines, faVideo} from "@fortawesome/free-solid-svg-icons";
 import AuthContext from "../../context/AuthContext";
 import "../../Admin.css";
 
@@ -88,6 +88,12 @@ const AdminLayout = () => {
                                     <NavLink to={"services"} className="svg-icon">
                                         <FontAwesomeIcon icon={faHandHoldingDollar} />
                                         <span className="ml-4">Hyzmatlar</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"service-requests"} className="svg-icon">
+                                        <FontAwesomeIcon icon={faHandHoldingDollar} />
+                                        <span className="ml-4">Hyzmat ýüz tutmalar</span>
                                     </NavLink>
                                 </li>
                                 <li>

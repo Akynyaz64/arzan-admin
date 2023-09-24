@@ -44,6 +44,9 @@ export {default as AdminServiceCreate} from "./services/ServiceCreate";
 export {default as AdminServiceView} from "./services/ServiceView";
 export {default as AdminServiceEdit} from "./services/ServiceEdit";
 
+export {default as AdminServiceRequests} from "./serviceRequests/ServiceRequests";
+export {default as AdminServiceRequestView} from "./serviceRequests/ServiceRequestView";
+
 export {default as AdminPageCategories} from "./categories/PageCategories";
 export {default as AdminPageCategoryCreate} from "./categories/PageCategoryCreate";
 export {default as AdminPageCategoryView} from "./categories/PageCategoryView";
