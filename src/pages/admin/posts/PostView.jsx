@@ -56,6 +56,13 @@ const PostView = () => {
         setIsLoading(false);
     };
 
+    const checkForButton = (approved, waiting, type) => {
+        if (waiting === true || (type.toLowerCase() === "submit" && approved === false) || (type.toLowerCase() === "cancel" && approved === true)) {
+            return false;
+        }
+        return true;
+    };
+
     return (
         <div className="container-fluid">
             <div className="row justify-content-center">
@@ -63,27 +70,28 @@ const PostView = () => {
                     <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
                         <h3 className="mb-3">Arzanladyş barada</h3>
 
-                        {post.approved ? (
+                        <div>
                             <button
-                                className="btn btn-danger btn-sm"
+                                style={{width: "max-content"}}
+                                className="btn bg-success btn mr-2"
+                                onClick={() => {
+                                    approvePost(post.id, true);
+                                }}
+                                disabled={checkForButton(post?.approved, post?.waiting, "submit")}
+                            >
+                                Tassyklamak
+                            </button>
+                            <button
+                                style={{width: "max-content"}}
+                                className="btn btn-danger btn ml-2"
                                 onClick={() => {
                                     approvePost(post.id, false);
                                 }}
+                                disabled={checkForButton(post?.approved, post?.waiting, "cancel")}
                             >
                                 Ret etmek
                             </button>
-                        ) : (
-                            <>
-                                <button
-                                    className="btn bg-success btn-sm m-1"
-                                    onClick={() => {
-                                        approvePost(post.id, true);
-                                    }}
-                                >
-                                    Tassyklamak
-                                </button>
-                            </>
-                        )}
+                        </div>
                     </div>
                 </div>
                 {isLoading ? (
@@ -92,7 +100,7 @@ const PostView = () => {
                     <div className="row">
                         <div className="col-lg-2 col-1 text-center">
                             {post?.next_id !== null && (
-                                <Link to={"/admin/posts/" + post?.next_id} className={`bg-green text-white rounded-circle d-inline fs-18 shadow position-fixed`} style={{padding: "5px 10px", top: "50vh", zIndex:"9999"}}>
+                                <Link to={"/admin/posts/" + post?.next_id} className={`bg-green text-white rounded-circle d-inline fs-18 shadow position-fixed`} style={{padding: "5px 10px", top: "50vh", zIndex: "9999"}}>
                                     <FontAwesomeIcon icon={faArrowLeft} />
                                 </Link>
                             )}
@@ -180,7 +188,7 @@ const PostView = () => {
                         </div>
                         <div className="col-lg-2 col-1 text-center">
                             {post?.prev_id !== null && (
-                                <Link to={"/admin/posts/" + post?.prev_id} className={`bg-green text-white rounded-circle d-inline fs-18 shadow position-fixed`} style={{padding: "5px 10px", top: "50vh", zIndex:"9999"}}>
+                                <Link to={"/admin/posts/" + post?.prev_id} className={`bg-green text-white rounded-circle d-inline fs-18 shadow position-fixed`} style={{padding: "5px 10px", top: "50vh", zIndex: "9999"}}>
                                     <FontAwesomeIcon icon={faArrowRight} />
                                 </Link>
                             )}

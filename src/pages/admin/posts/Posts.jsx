@@ -152,6 +152,13 @@ const Posts = () => {
         }
     };
 
+    const checkForButton = (approved, waiting, type) => {
+        if (waiting === true || (type.toLowerCase() === "submit" && approved === false) || (type.toLowerCase() === "cancel" && approved === true)) {
+            return false;
+        }
+        return true;
+    };
+
     return (
         <>
             <div className="container-fluid">
@@ -333,7 +340,7 @@ const Posts = () => {
                                             <th>Bahasy</th>
                                             <th>Arzanladyş</th>
                                             <th>Like we görlen sany</th>
-                                            <th>Tassyklama statusy</th>
+                                            <th colSpan={2}>Tassyklama statusy</th>
                                             <th>Garaşylýan statusy</th>
                                             <th>Görnüşi</th>
                                             <th>Goşulan wagty</th>
@@ -361,27 +368,28 @@ const Posts = () => {
                                                         <FontAwesomeIcon icon={faHeart} className="mr-1" style={{fontSize: "18px", color: "red"}} /> {post.like_count} / <FontAwesomeIcon icon={faEye} className="mr-1" style={{fontSize: "18px", color: "green"}} /> {post.viewed_count}
                                                     </td>
                                                     <td>
-                                                        {post.approved ? (
-                                                            <button
-                                                                className="btn btn-danger btn-sm"
-                                                                onClick={() => {
-                                                                    approvePost(post.id, false);
-                                                                }}
-                                                            >
-                                                                Ret etmek
-                                                            </button>
-                                                        ) : (
-                                                            <>
-                                                                <button
-                                                                    className="btn bg-success btn-sm m-1"
-                                                                    onClick={() => {
-                                                                        approvePost(post.id, true);
-                                                                    }}
-                                                                >
-                                                                    Tassyklamak
-                                                                </button>
-                                                            </>
-                                                        )}
+                                                        <button
+                                                            style={{width: "max-content"}}
+                                                            className="btn bg-success btn-sm"
+                                                            onClick={() => {
+                                                                approvePost(post.id, true);
+                                                            }}
+                                                            disabled={checkForButton(post?.approved, post?.waiting, "submit")}
+                                                        >
+                                                            Tassyklamak
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button
+                                                            style={{width: "max-content"}}
+                                                            className="btn btn-danger btn-sm"
+                                                            onClick={() => {
+                                                                approvePost(post.id, false);
+                                                            }}
+                                                            disabled={checkForButton(post?.approved, post?.waiting, "cancel")}
+                                                        >
+                                                            Ret etmek
+                                                        </button>
                                                     </td>
                                                     <td>{post.waiting ? "Garaşylýar" : "Garaşylmaýar"}</td>
                                                     <td>
