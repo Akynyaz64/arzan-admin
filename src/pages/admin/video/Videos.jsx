@@ -165,6 +165,7 @@ const Videos = () => {
                                             <th>№</th>
                                             <th>ID</th>
                                             <th>Suraty we ady</th>
+                                            <th>Mazmuny</th>
                                             <th>Goşan ulanyjy</th>
                                             <th>Page / kategoriýa</th>
                                             <th>Görnüşi</th>
@@ -186,6 +187,7 @@ const Videos = () => {
                                                             <div className="ms-4 small fw-bold">{video.title}</div>
                                                         </div>
                                                     </td>
+                                                    <td>{video.description ? <p dangerouslySetInnerHTML={{__html: video?.description?.slice(0, 75)}}></p> : "Mazmuny ýok"}</td>
                                                     <td>{video.user.name}</td>
                                                     <td>
                                                         {video?.page_category?.map((e) => {
@@ -219,7 +221,7 @@ const Videos = () => {
                                                         {video.viewed_count}
                                                     </td>
                                                     <td>
-                                                        <a href={video.video.url}>Ýükle</a>
+                                                        <a href={import.meta.env.VITE_VIDEO_URL_ACTIVE + video.video.url}>Ýükle</a>
                                                     </td>
                                                     <td>
                                                         <div className="d-flex align-items-center list-action">

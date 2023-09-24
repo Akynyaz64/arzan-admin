@@ -69,7 +69,7 @@ const VideoView = () => {
                             </div>
                             <div className="col-md-6 mb-4">
                                 <video className="w-100" controls>
-                                    <source src={import.meta.env.VITE_MEDIA_URL_ACTIVE + video.video?.url} type="video/mp4" />
+                                    <source src={import.meta.env.VITE_VIDEO_URL_ACTIVE + video.video?.url} type="video/mp4" />
                                 </video>
                             </div>
                             {video.images?.map((image, index) => (
@@ -79,6 +79,7 @@ const VideoView = () => {
                             ))}
                             <div className="col-md-12 mb-3">
                                 <h2>{video.title}</h2>
+                                <p dangerouslySetInnerHTML={{__html: video?.description}}></p>
                             </div>
                             <div className="col-md-4 mb-3">
                                 <h5>Ulanyjy:</h5>

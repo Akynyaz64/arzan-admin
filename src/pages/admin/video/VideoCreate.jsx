@@ -5,10 +5,13 @@ import axios from "axios";
 import Select from "react-select";
 import useFetch from "../../../hooks/useFetch";
 import img_icon from "../../../assets/icons/img.svg";
+import {CKEditor} from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const VideoCreate = () => {
     const navigate = useNavigate();
     const title = useRef("");
+    const [description, setDescription] = useState();
     const videoRef = useRef(null);
     const [progress, setProgress] = useState();
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -75,6 +78,7 @@ const VideoCreate = () => {
 
         const videoData = new FormData();
         videoData.append("title", title.current.value);
+        videoData.append("description", description);
         videoData.append("user_id", selectedUser.selectValue.value);
         videoData.append("page_category_ids", JSON.stringify([Number(selectedCategory.current.value)]));
         videoData.append("thumbnail", selectedFile);
@@ -156,6 +160,17 @@ const VideoCreate = () => {
                                 <div className="col-md-12 mb-3">
                                     <label htmlFor="title">Ady</label>
                                     <input type="text" className="form-control" id="title" name="title" ref={title} required />
+                                </div>
+                                <div className="col-md-12 mb-3">
+                                    <label htmlFor="">Mazmuny</label>
+                                    <CKEditor
+                                        editor={ClassicEditor}
+                                        data=""
+                                        onChange={(event, editor) => {
+                                            const data = editor.getData();
+                                            setDescription(data);
+                                        }}
+                                    />
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="category">Kategoriýa</label>

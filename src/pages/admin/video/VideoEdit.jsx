@@ -9,10 +9,14 @@ import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../../../hooks/useFetch";
 import img_icon from "../../../assets/icons/img.svg";
 import {Loader} from "../../../components";
+import {CKEditor} from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const VideoEdit = () => {
     const navigate = useNavigate();
     const {videoId} = useParams();
+    const [isFetching, setIsFetching] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [videoData, setVideoData] = useState({
         id: "",
         title: "",
@@ -20,9 +24,9 @@ const VideoEdit = () => {
         video: "",
         user: "",
     });
-    const [isFetching, setIsFetching] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [videoPreview, setVideoPreview] = useState(null);
+    const [description, setDescription] = useState();
+    const [selectedVideo, setSelectedVideo] = useState();
+    const [videoPreview, setVideoPreview] = useState();
     const [selectedFile, setSelectedFile] = useState();
     const [preview, setPreview] = useState();
     const [selectedUser, setSelectedUser] = useState();
@@ -61,6 +65,7 @@ const VideoEdit = () => {
             }
             setIsFetching(false);
             setVideoData(resData.data);
+            setDescription(resData.data.description);
             const page_categories = [
                 resData.data.page_category.map((e) => {
                     return e.id;
@@ -68,15 +73,15 @@ const VideoEdit = () => {
             ];
             setPageCategory(page_categories[0]);
             setPreview(import.meta.env.VITE_MEDIA_URL_ACTIVE + resData.data.thumbnail.url);
-            setVideoPreview(import.meta.env.VITE_MEDIA_URL_ACTIVE + resData.data.video.url);
+            setVideoPreview(import.meta.env.VITE_VIDEO_URL_ACTIVE + resData.data.video.url);
         };
 
         fetchData();
     }, [videoId]);
 
     useEffect(() => {
-        console.log(videoData);
-    }, [videoData]);
+        console.log(videoPreview);
+    }, [videoPreview]);
 
     const handleChange = (e) => {
         setVideoData((prev) => ({...prev, [e.target.name]: e.target.value}));
@@ -89,6 +94,16 @@ const VideoEdit = () => {
         }
         setPageCategory(pages);
     };
+
+    useEffect(() => {
+        if (!selectedVideo) {
+            setVideoPreview(undefined);
+            return;
+        }
+        const objectUrl = URL.createObjectURL(selectedVideo);
+        setVideoPreview(objectUrl);
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [selectedVideo]);
 
     useEffect(() => {
         if (!selectedFile) {
@@ -110,6 +125,14 @@ const VideoEdit = () => {
         setSelectedFile(e.target.files[0]);
     };
 
+    const onSelectVideo = (e) => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedVideo(undefined);
+            return;
+        }
+        setSelectedVideo(e.target.files[0]);
+    };
+
     async function submitHandler(event) {
         event.preventDefault();
         setIsSubmitting(true);
@@ -119,10 +142,14 @@ const VideoEdit = () => {
         const videoDataForm = new FormData();
         videoDataForm.append("id", videoData.id);
         videoDataForm.append("title", videoData.title);
+        videoDataForm.append("description", description);
         videoDataForm.append("user_id", selectedUser.selectValue.value);
         videoDataForm.append("page_category_ids", JSON.stringify(pageCategory));
         if (selectedFile !== undefined) {
             videoDataForm.append("thumbnail", selectedFile);
+        }
+        if (selectedVideo !== undefined) {
+            videoDataForm.append("video", selectedVideo);
         }
 
         for (var pair of videoDataForm.entries()) {
@@ -185,10 +212,41 @@ const VideoEdit = () => {
                                             </div>
                                         )}
                                     </div>
-                                    <div className="col-xl-6 mb-4">{videoPreview != null && <video style={{width: "100%"}} controls src={videoPreview}></video>}</div>
+                                    <div className="col-xl-6 mb-4">
+                                        {!selectedVideo && !videoPreview ? (
+                                            <>
+                                                <label className="label text-center d-flex justify-content-center align-items-center flex-column" htmlFor="video">
+                                                    <img src={img_icon} alt="add" className="img-fluid mb-2" />
+                                                    <div className="text-green">Video goş</div>
+                                                </label>
+
+                                                <input type="file" id="video" accept="video/mp4,video/x-m4v,video/*" className="form-control" name="video" onChange={onSelectVideo} hidden />
+                                            </>
+                                        ) : (
+                                            <div className="position-relative">
+                                                <video style={{width: "100%"}} controls src={videoPreview}></video>
+                                                <div className="delete-button">
+                                                    <span className="btn btn-danger" onClick={() => setSelectedVideo(null)}>
+                                                        <FontAwesomeIcon icon={faTrash} className="" />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
                                     <div className="col-md-12 mb-3">
                                         <label htmlFor="title">Ady</label>
-                                        <input type="text" className="form-control" id="title" name="title" defaultValue={videoData.title} onChange={handleChange} required />
+                                        <input type="text" className="form-control" id="title" name="title" defaultValue={videoData?.title} onChange={handleChange} required />
+                                    </div>
+                                    <div className="col-md-12 mb-3">
+                                        <label htmlFor="">Mazmuny</label>
+                                        <CKEditor
+                                            editor={ClassicEditor}
+                                            data={description}
+                                            onChange={(event, editor) => {
+                                                const data = editor.getData();
+                                                setDescription(data);
+                                            }}
+                                        />
                                     </div>
                                     <div className="col-md-6 mb-3">
                                         <label htmlFor="category">Kategoriýa</label>
