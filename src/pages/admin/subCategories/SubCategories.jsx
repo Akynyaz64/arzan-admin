@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import Popup from "reactjs-popup";
 import {toast} from "react-hot-toast";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faClose, faEye, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faClose, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Loader} from "../../../components";
 import useFetch from "../../../hooks/useFetch";
 
@@ -132,10 +132,6 @@ const SubCategories = () => {
                                                     <td>{subCategory.category.name}</td>
                                                     <td>
                                                         <div className="d-flex align-items-center list-action">
-                                                            <Link to={`${subCategory.id}`} className="btn bg-primary btn-sm mr-2">
-                                                                <FontAwesomeIcon icon={faEye} className="mr-0" />
-                                                            </Link>
-
                                                             <Link to={`edit/${subCategory.id}`} className="btn bg-warning btn-sm mr-2">
                                                                 <FontAwesomeIcon icon={faPen} className="mr-0" />
                                                             </Link>
