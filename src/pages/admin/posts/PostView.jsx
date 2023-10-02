@@ -3,7 +3,7 @@ import {Link, useParams} from "react-router-dom";
 import {toast} from "react-hot-toast";
 import {Loader} from "../../../components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowLeft, faArrowRight, faEye, faHeart} from "@fortawesome/free-solid-svg-icons";
+import {faArrowLeft, faArrowRight, faEye, faHeart, faPen} from "@fortawesome/free-solid-svg-icons";
 
 const PostView = () => {
     const {postId} = useParams();
@@ -73,7 +73,7 @@ const PostView = () => {
                         <div>
                             <button
                                 style={{width: "max-content"}}
-                                className="btn bg-success btn mr-2"
+                                className="btn bg-success btn"
                                 onClick={() => {
                                     approvePost(post.id, true);
                                 }}
@@ -91,6 +91,10 @@ const PostView = () => {
                             >
                                 Ret etmek
                             </button>
+
+                            <Link to={`/admin/posts/edit/${post?.id}`} className="btn bg-warning btn ml-2">
+                                <FontAwesomeIcon icon={faPen} className="mr-0" /> Üýtget
+                            </Link>
                         </div>
                     </div>
                 </div>
