@@ -39,7 +39,7 @@ const ServiceRequests = () => {
 
     const approveRequest = async (id, status) => {
         setIsLoading(true);
-        const response = await fetch(`/admin-api/service-request/${id}/approve`, {
+        const response = await fetch(`/admin-api/service-request/approve/${id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

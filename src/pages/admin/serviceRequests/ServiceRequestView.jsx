@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 import {toast} from "react-hot-toast";
 import moment from "moment";
 import {Loader} from "../../../components";
+// import default_avatar from "../../../assets/logo/default.webp";
 
 const ServiceRequestView = () => {
     const {requestId} = useParams();
@@ -48,6 +49,13 @@ const ServiceRequestView = () => {
                 ) : (
                     <div className="col-lg-8 mt-3">
                         <div className="form-row">
+                            {/* <div className="col-md-4 mb-3">
+                                <h4>Ulanyjy</h4>
+                                <div className="d-flex align-items-center">
+                                    <img src={serviceRequest?.user?.avatar_image === null ? default_avatar : import.meta.env.VITE_MEDIA_URL_ACTIVE + serviceRequest?.user?.avatar_image?.url} alt="user_avatar" className="rounded" style={{height: "65px"}} />
+                                    <h4 className="ms-4 small fw-bold">{serviceRequest?.user?.name}</h4>
+                                </div>
+                            </div> */}
                             <div className="col-md-4 mb-3">
                                 <h4>Mukdary:</h4>
                                 <h3>{serviceRequest?.count}</h3>
